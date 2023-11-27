@@ -21,7 +21,7 @@ const Register = () => {
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+    console.log(formData)
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match.');
