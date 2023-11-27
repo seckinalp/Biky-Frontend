@@ -1,0 +1,129 @@
+.navbar {
+    position: fixed;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: transparent;
+    
+    width: 100%;
+   
+  /*background-color: white; 
+  border-radius: 45px; */
+ 
+  }
+  .navbar__rectangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    margin-bottom: 20px;
+    border-radius: 45px;
+    background-color: white; /* Dikdörtgenin arka plan rengi */
+    opacity: 1; /* Dikdörtgenin opaklığı */
+    z-index: -1; /* Dikdörtgeni navbarın altında tutmak için */
+  }
+  @media (min-width: 768px) {
+    .navbar {
+      flex-direction: row;
+      position: fixed;
+      color: white;
+      display: flex;
+     
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      
+      
+    }
+  
+    .navbar__right{
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        flex: 0.4;
+        padding: 0;
+      }
+    .navbar__left{
+        flex-direction: row;
+        flex: 0.4;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        margin-top: 10px;
+      }
+    .navbar__middle {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex:0.2;
+      width: auto;
+        
+     
+    }
+  }
+  
+  .navbar__bikylogo {
+    width: 100px;
+    margin-right: 20px;
+    margin-left: 15px;
+  }
+  
+  .navbar__profile {
+    width: 50px;
+    margin-right: 10px;
+  }
+  .navbar__button {
+    position: relative;
+  }
+  
+
+  .navbar__button:hover img {
+    filter: contrast(70%);
+  }
+  .navbar__message{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .navbar__notification{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .navbar__settings{
+    width: 50px;
+    height: 50px;
+   
+  }
+  .navbar__home{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  .navbar__create{
+    width: 50x;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .navbar__store {
+    width: 40px;
+    height: 40px;
+    
+  }
+  
+  .navbar__button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+.navbar__button_home.hidden,
+.navbar__button_store.hidden {
+  display: none;
+}

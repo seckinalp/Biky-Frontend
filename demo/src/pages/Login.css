@@ -1,0 +1,125 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: url('../assets/homearkaplan.jpg') no-repeat center center;
+    background-size: cover;
+  }
+  
+  .login-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 10px; /* Adjust the gap between the boxes */
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+
+
+  }
+  .login-form h6 {
+    margin-bottom: 2px;
+    
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .login-form .continue-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .visitor-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .signup-link {
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+  
+  .login-form .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-form .forgot-link {
+    color: #000;
+    text-decoration: none;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .branding-container {
+    
+    width: 100%;
+    max-width: 400px;
+    margin: 0 20px; /* Adjust the gap between the boxes */
+    padding: 40px;
+    background: transparent;
+    border: none;
+    
+    box-shadow: none;
+    text-align: center;
+  } 
+  
+  .branding-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  .branding-container p {
+    font-size: 1.1em;
+  }
+  .biky-image {
+    /* This filter inverts the colors of the image */
+    filter: invert(100%);
+  }
+  
+  
+  /* Add responsiveness */
+  @media (max-width: 768px) {
+    .login-container {
+      flex-direction: column;
+    }
+    
+    .login-form,
+    .branding-container {
+      max-width: 90%;
+      margin: 20px 0; /* Stack them with space in between on smaller screens */
+    }
+  }
+  
