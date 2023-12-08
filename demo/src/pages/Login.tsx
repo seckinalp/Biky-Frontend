@@ -48,18 +48,20 @@ const Login = () => {
             required 
           />
           <div className="form-options">
-            <label>
-              <input type="checkbox" name="remember" />
-              Remember me
+          <label className="remember-me">
+                <input type="checkbox" name="remember" />
+                <span>Remember Me</span>
             </label>
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div>
+            <Link className="forgot-password-link" to="/forgot-password">Forgot Password?</Link>
+        </div>
           <button type="submit" className="continue-button">CONTINUE</button>
           <div className="alternative-options">
             <button type="button" onClick={() => navigate('/homepage')} className="visitor-button">
               Be Visitor and Just Look!
             </button>
-            <span>Or</span>
+            <div className="or-divider">
+              <span>Or</span>
+            </div>
           </div>
         </form>
         <p className="signup-link">

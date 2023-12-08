@@ -1,4 +1,4 @@
-.login-container {
+.forgot-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +8,7 @@
     background-size: cover;
   }
   
-  .login-form {
+  .forgot-form {
     background: #ffffff;
     padding: 30px;
     border-radius: 20px;
@@ -17,19 +17,22 @@
     max-width: 400px;
     margin: 0 10px; /* Adjust the gap between the boxes */
   }
-  
-  .login-form h2 {
+  .forgot-form h2 {
     margin-bottom: 20px;
 
 
   }
-  .login-form h6 {
+  .forgot-form h6 {
+    text-align: center;
     margin-top: 5px;
     margin-bottom: 2px;
     
   }
+
+
   
-  .login-form input {
+  .forgot-form input,
+  .forgot-form button {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -38,53 +41,13 @@
     box-sizing: border-box;
   }
   
-  .login-form .continue-button {
-    width: 100%;
+  .forgot-form button {
     padding: 15px;
     background-color: #000;
     color: #fff;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    margin-bottom: 20px;
   }
-  
-  .login-form .visitor-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 5px;
-  }
-  
-  .login-form .signup-link {
-    text-align: center;
-    color: #000;
-    text-decoration: none;
-    margin-top: 20px;
-  }
-  
-  .login-form .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .login-form .forgot-link {
-    color: #000;
-    text-decoration: none;
-  }
-  
-  .error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
   .branding-container {
     
     width: 100%;
@@ -109,13 +72,25 @@
     /* This filter inverts the colors of the image */
     filter: invert(100%);
   }
-
+  .reset-button {
+    padding: 15px;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Full width */
+    margin-bottom: 20px; /* Margin at the bottom */
+    box-sizing: border-box; /* Box sizing */
+    /* Add any additional styles you want for this button */
+  }
   .or-divider {
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Align items vertically */
     justify-content: center; /* Center the content horizontally */
     text-align: center; /* Center the text */
     margin: 20px 0; /* Adds some vertical spacing */
+    margin-top: 5px;
 }
 
 .or-divider span {
@@ -130,41 +105,3 @@
     background: rgba(0, 0, 0, 0.5); /* 50% transparent black line */
     margin: 0 5px; /* Add some spacing between the text and the lines */
 }
-
-.form-options {
-    display: flex; /* Enable flexbox */
-    justify-content: space-between; /* Space out the children */
-    align-items: center; /* Align items vertically */
-    margin-bottom: 20px; /* Add some bottom margin */
-}
-
-.remember-me {
-    text-align: center;
-    display: flex; /* Enable flexbox for label */
-    align-items: center; /* Align checkbox and text vertically */
-}
-
-.remember-me input[type="checkbox"] {
-    margin-right: 5px; /* Space between checkbox and label */
-}
-
-.forgot-password-link {
-    /* Style for your forgot password link */
-    text-decoration: none; /* Optional: removes underline */
-    color: #000; /* Or any color you prefer */
-}
-  
-  
-  /* Add responsiveness */
-  @media (max-width: 768px) {
-    .login-container {
-      flex-direction: column;
-    }
-    
-    .login-form,
-    .branding-container {
-      max-width: 90%;
-      margin: 20px 0; /* Stack them with space in between on smaller screens */
-    }
-  }
-  
