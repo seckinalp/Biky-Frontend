@@ -8,7 +8,7 @@ const Post: React.FC = () => {
       <div className="post-header">
         <img className="profile-pic" src="profile_pic_url.jpg" alt="Profile" />
         <div className="username-time">
-          <div className="username">marc.zucker31</div>
+          <div className="username">marc.zucker31axy</div>
           <div className="time-posted">12 Min</div>
         </div>
         <div className="more-options">...</div>
