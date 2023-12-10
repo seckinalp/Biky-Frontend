@@ -13,18 +13,51 @@ const Register = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const validateEmail = () => {
+    if (!formData.email.includes('@')) {
+      setEmailError('Please enter a valid email');
+      console.log("Email error:", emailError);
+
+      return false;
+    }
+    if (!formData.email.endsWith('bilkent.edu.tr')) {
+      setEmailError('Enter a Bilkent mail');
+      console.log("Email error:", emailError);
+      return false;
+    }
+    setEmailError('');
+    console.log("Email error:", emailError);
+    // Clear the error message
+    return true;
+  };
+  const validatePassword = () =>{
+    if (formData.password !== formData.confirmPassword ) {
+      setError('Passwords do not match.');
+      return false;
+    }
+    setError('');
+    return true;
+  }
+  
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    if (name === 'email') {
+      setEmailError('');
+    }
+    if (name === 'password' || name === 'confirmPassword') { // Adjust according to your field names
+      setError('');
+    }
   };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form Data: ",formData)
-    // Check if passwords match
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
+    const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
+    if (!(isEmailValid && isPasswordValid) ) {
       return; // Stop the form from submitting
     }
 
@@ -40,24 +73,26 @@ const Register = () => {
       <div className="register-form">
         <h6>LETS GET STARTED BILKENTERS</h6>
         <h2>Create Account</h2>
-        {error && <p className="error-message">{error}</p>} {/* Display error message if passwords do not match */}
         <form onSubmit={handleRegister}>
           <input 
             type="text" 
             name="name" 
-            placeholder="Your Name" 
+            placeholder="Your Username" 
             value={formData.name} 
             onChange={handleInputChange} 
             required 
           />
           <input 
-            type="email" 
+            type="text" 
             name="email" 
-            placeholder="Email" 
+            placeholder="Enter Your Bilkent Email" 
             value={formData.email} 
             onChange={handleInputChange} 
             required 
+            style={{ marginBottom: emailError !== '' ? '1px' : '20px' }} // Adjust the values as needed
+            className={emailError ? 'input-error' : ''} 
           />
+          {emailError !== '' && <div className="error-message">{emailError}</div>}
           <input 
             type="password" 
             name="password" 
@@ -65,7 +100,11 @@ const Register = () => {
             value={formData.password} 
             onChange={handleInputChange} 
             required 
+            style={{ marginBottom: error !== '' ? '1px' : '20px' }} // Adjust the values as needed
+
           />
+          {error && <p className="error-message">{error}</p>} {/* Display error message if passwords do not match */}
+
           <input 
             type="password" 
             name="confirmPassword" 
@@ -73,7 +112,11 @@ const Register = () => {
             value={formData.confirmPassword} 
             onChange={handleInputChange} 
             required 
+            style={{ marginBottom: error !== '' ? '1px' : '20px' }} // Adjust the values as needed
+
           />
+          {error && <p className="error-message">{error}</p>} {/* Display error message if passwords do not match */}
+
           <button type="submit">Get Started</button>
         </form>
         <p>

@@ -13,6 +13,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/homepage" element={<Homepage />} />
         <Route path="/" element={<Register />} />
         // Add other routes as needed
       </Routes>
