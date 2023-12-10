@@ -1,0 +1,99 @@
+/* Post.css */
+.post-container {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 16px;
+    width: 300px; /* Adjust width as necessary */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .profile-pic {
+    width: 40px; /* Adjust size as necessary */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .username-time {
+    flex-grow: 1;
+  }
+  
+  .username {
+    font-weight: bold;
+  }
+  
+  .time-posted {
+    color: #65676b;
+    font-size: 0.75rem;
+  }
+  
+  .more-options {
+    cursor: pointer;
+  }
+  
+  .post-content {
+    padding: 8px;
+  }
+  
+  .post-text {
+    margin-bottom: 8px;
+  }
+  
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .post-actions {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .like-count {
+    font-size: 0.875rem;
+    margin-top: 4px; /* Small space between the button and the number */
+  }
+  
+  .post-buttons {
+    display: flex;
+  }
+  
+  .post-buttons button {
+    background: none;
+    border: none;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  .like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .like-button:before {
+    content: "👍"; /* Emoji or icon */
+  }
+  
+  .comment-button:before {
+    content: "💬"; /* Emoji or icon */
+  }
+  
+  .share-button:before {
+    content: "🔗"; /* Emoji or icon */
+  }
+  
