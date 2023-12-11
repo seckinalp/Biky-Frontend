@@ -19,9 +19,9 @@ const Post: React.FC = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
-    '../../public/dedeler.jpg',
+    '../../public/profile.png',
     '../../public/homedark.png',
-    '../../public/gündüz.jpg',
+    '../../public/siyaharkaplansiz.png',
   ];
   const [socialMediaPost, setSocialMediaPost] = useState({
     username: 'marc.zucker31dsfasdfasdasdsadasdsadasdsadasdasdsadasd',
@@ -60,7 +60,7 @@ const Post: React.FC = () => {
   return (
     <div className="post-container">
       <div className="post-header">
-        <img className="profile-pic" src="../../public/dedeler.jpg" alt="Profile" />
+        <img className="profile-pic" src="../../public/profile.png" alt="Profile" />
         <div className="username-time">
           <div className="username">{socialMediaPost.username}</div>
           <div className="time-posted">{socialMediaPost.time}</div>
