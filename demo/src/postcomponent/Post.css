@@ -1,4 +1,16 @@
 /* Post.css */
+.username {
+  max-width: 240px; /* Adjust based on your layout */
+  overflow-wrap: break-word;
+  word-break: break-all;
+  /* ... other styles for username ... */
+}
+.post-text {
+  max-width: 300px; /* Adjust based on your layout */
+  overflow-wrap: break-word;
+  word-break: break-all;
+  /* ... other styles for post-text ... */
+}
 .post-container {
     background-color: #fff;
     border: 1px solid #e0e0e0;
@@ -36,9 +48,7 @@
     font-size: 0.75rem;
   }
   
-  .more-options {
-    cursor: pointer;
-  }
+
   
   .post-content {
     padding: 8px;
@@ -72,29 +82,162 @@
   
   .post-buttons {
     display: flex;
+    transition: transform 0.3s ease; /* Smooth transition for the transform property */
+
+  }
+  .post-buttons button:hover {
+    transform: scale(1.1); /* Increase the size of the button when hovered */
   }
   
   .post-buttons button {
     background: none;
     border: none;
-    margin-left: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    font-size: 1rem; /* Adjust the font size as needed */
+    padding: 8px; /* Padding for button */
   }
+  
   .like-button {
-    background: none;
+    flex-direction: row;
+    filter: grayscale(100%) brightness(70%); /* Makes the emoji white */
+  }
+  .like-button.liked {
+    filter: none;
+  }
+  
+  .comment-button,
+  .share-button {
+    filter: saturate(3) brightness(1.2); /* Increases saturation and brightness */
+    flex-direction: column; /* Keep column for these if you want text below the icon */
+  }
+  
+  .like-count {
+    font-size: 0.75rem; /* Smaller font size for the like count */
+    line-height: 1; /* Adjust line height for proper alignment */
+  }
+  .post-image-carousel {
+    position: relative;
+  }
+  
+  .post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* ... */
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
     border: none;
     cursor: pointer;
+    font-size: 1.5em;
+    padding: 3px;
+    z-index: 10;
   }
   
-  .like-button:before {
-    content: "👍"; /* Emoji or icon */
+  .carousel-arrow.left {
+    left: 10px;
   }
   
-  .comment-button:before {
-    content: "💬"; /* Emoji or icon */
+  .carousel-arrow.right {
+    right: 10px;
   }
   
-  .share-button:before {
-    content: "🔗"; /* Emoji or icon */
-  }
+
+
+
+
+
+
+.options-panel {
   
+  position: absolute;
+  top: calc(100% + 10px); /* Adjust as needed */
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 10;
+  width: 200px; /* Adjust width as necessary */
+}
+
+.options-panel::before {
+  content: '×'; /* Unicode for the close button */
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px; /* Increase font-size for larger close button */
+  padding: 10px; /* Adjust padding to ensure clickable area is large enough */
+  cursor: pointer;
+  /* Additional styles to ensure the button is clearly visible and aligned */
+  color: #000; /* Color of the close button */
+  z-index: 5; /* Ensure it's above other elements in .options-panel */
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  border-radius: 8px; /* Rounded corners for buttons */
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.option-button:first-child {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: #FF0000; /* Red color for the report option */
+  background-color: #A980FC;
+}
+
+.option-button:last-child {
+  color: #000000; /* Black color for the unfollow option */
+  background-color: #A980FC;
+
+}
+
+.option-button:hover {
+  background-color: #f0f0f0; /* Light hover effect */
+}
+.more-options-icon {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e0e0e0; /* or any other color you prefer */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding-bottom: 5px;
+}
+.more-options:hover .more-options-icon {
+  transform: scale(1.2); /* Scales up the size when hovered */
+}
+.more-options {
+  position: relative; /* Required for z-index to take effect */
+  z-index: 2; /* Higher z-index to ensure it's on top of other elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.more-options:hover {
+  transform: scale(1.2); /* Scales up the size when hovered */
+}
