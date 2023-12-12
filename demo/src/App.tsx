@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/Forgot';
 import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
+import Profile from './profilecomponent/Profile';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
         <Route path="/post" element={<Post />} /> {/* Updated this line */}
+        <Route path='/profile' element={<Profile/>}/>
         // Add other routes as needed
       </Routes>
     </Router>

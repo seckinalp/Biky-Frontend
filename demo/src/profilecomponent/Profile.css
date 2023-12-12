@@ -1,0 +1,165 @@
+/* Profile.css */
+.profile-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 430px; /* Make sure this matches the size of your Post component */
+    margin: auto;
+    overflow: hidden; /* Ensures the child elements adhere to the border radius */
+  }
+  
+  .profile-header {
+    content: "Profile";
+    background-color: #A980FC; /* Replace with actual background image if needed */
+    padding: 30px; /* Adjust as needed */
+    position: relative;
+  }
+  
+  
+  .profile-info {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid white; /* Creates a border around the profile picture */
+    position: relative;
+    top: -50px; /* Adjusts the position to overlap the header */
+    margin-bottom: -50px; /* Adjusts the space taken up by the overlap */
+  }
+  
+  .profile-name {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+
+  
+  .profile-bio {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .profile-stat strong {
+    display: block;
+    font-size: 1.2em;
+  }
+  
+  .profile-edit-button {
+    display: block;
+    background-color: #A980FC; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Transition for smooth scaling */
+
+  }
+  
+  .profile-edit-button:hover {
+    background-color: gray;
+    transform: scale(1.1); /* Increase the size of the button when hovered */
+    /* Darker shade for hover effect */
+  }
+  /* EditProfile.css */
+.register-form {
+    position: relative; /* Make this form a relative container */
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the form */
+  }
+  
+  .register-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .register-form h6 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+  
+  .register-form input,
+  .register-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .register-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .input-error {
+    border-color: red;
+  }
+
+  .register-form button {
+    /* ... other existing styles ... */
+    background-color: #A980FC; /* Set the button background color */
+  }
+  
+  .register-form button:hover {
+    transform: scale(1.1); /* Increase the size of the button when hovered */
+
+    background-color: gray; /* Optional: Darker shade for hover effect */
+  }
+  .close-button1 {
+    max-width: 5px;
+    width: 5px; /* Size of the button */
+    height: 5px;
+    padding: 0; /* Remove padding to reduce size */
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size for the × character */
+    line-height: 20px; /* Align the × character vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ccc;
+    box-sizing: border-box; /* Include padding and border in width and height */
+  }
+  .edit-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Adjust as needed */
+    /* Additional styling for the header */
+  }
+
+  
+  /* Additional styles if needed based on your provided CSS */
+  
