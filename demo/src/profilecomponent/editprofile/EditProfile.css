@@ -1,0 +1,90 @@
+/* EditProfile.css */
+.register-form {
+    position: relative; /* Make this form a relative container */
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the form */
+  }
+  
+  .register-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .register-form h6 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+  
+  .register-form input,
+  .register-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .register-form button {
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .input-error {
+    border-color: red;
+  }
+
+  .register-form button {
+    /* ... other existing styles ... */
+    background-color: #A980FC; /* Set the button background color */
+  }
+  
+  .register-form button:hover {
+    transform: scale(1.1); /* Increase the size of the button when hovered */
+
+    background-color: gray; /* Optional: Darker shade for hover effect */
+  }
+  .close-button1 {
+    max-width: 5px;
+    width: 5px; /* Size of the button */
+    height: 5px;
+    padding: 0; /* Remove padding to reduce size */
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size for the × character */
+    line-height: 20px; /* Align the × character vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ccc;
+    box-sizing: border-box; /* Include padding and border in width and height */
+  }
+  .edit-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Adjust as needed */
+    /* Additional styling for the header */
+  }
+
+  
+  /* Additional styles if needed based on your provided CSS */
+  
