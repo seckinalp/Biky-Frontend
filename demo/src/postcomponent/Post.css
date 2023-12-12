@@ -3,12 +3,14 @@
   max-width: 340px; /* Adjust based on your layout */
   overflow-wrap: break-word;
   word-break: break-all;
+  font-size: 18px;
   /* ... other styles for username ... */
 }
 .post-text {
-  max-width: 450px; /* Adjust based on your layout */
+  max-width: 430px; /* Adjust based on your layout */
   overflow-wrap: break-word;
   word-break: break-all;
+  font-size: 20px;
   /* ... other styles for post-text ... */
 }
 .post-container {
@@ -16,7 +18,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     margin: 16px;
-    width: 450px; /* Adjust width as necessary */
+    width: 430px; /* Adjust width as necessary */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
@@ -76,7 +78,7 @@
     align-items: center;
   }
   .like-count {
-    font-size: 0.875rem;
+    font-size: 15px;
     margin-top: 4px; /* Small space between the button and the number */
   }
   
@@ -129,10 +131,7 @@
     flex-direction: column; /* Keep column for these if you want text below the icon */
   }
   
-  .like-count {
-    font-size: 0.75rem; /* Smaller font size for the like count */
-    line-height: 1; /* Adjust line height for proper alignment */
-  }
+
   .post-image-carousel {
     position: relative;
   }

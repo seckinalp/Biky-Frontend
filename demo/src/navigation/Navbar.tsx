@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate, Link } from 'react-router-dom';
+
 import "./Navbar.css";
 
 interface NavbarProps {
@@ -6,6 +8,9 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ handleCreateClick }) => {
+
+  const navigate = useNavigate();
+
   const handleProfileClick = () => {
     // Profil düğmesi tıklama olayını burada işleyin
   };
@@ -23,6 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({ handleCreateClick }) => {
   };
 
   const handleHomeClick = () => {
+    navigate("/posts")
     // Ana sayfa düğmesi tıklama olayını burada işleyin
   };
 

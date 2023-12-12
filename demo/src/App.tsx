@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/Forgot';
 import Post from "./postcomponent/Post"
+import Posts from './pages/Posts';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/homepage" element={<Homepage />} />
+        <Route path="/posts" element={<Posts></Posts>} />
         <Route path="/post" element={<Post />} /> {/* Updated this line */}
         // Add other routes as needed
       </Routes>
