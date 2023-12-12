@@ -28,16 +28,25 @@ const Profile: React.FC<ProfileProps> = (props) => {
         password: props.item.password,
         bioInfo: props.item.bioInfo,
       });
+      const [editData, setEditData] = useState({
+        username: props.item.username,
+        password: props.item.password,
+        bioInfo: props.item.bioInfo,       
+      }); // Temporary state for editing
       // Function to toggle editing mode
       const toggleEdit = () => {
+        setEditData(profileData); // Reset edit data to original profile data
         setIsEditing((prev) => !prev);
       };
       const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
+        setProfileData(editData); // Update the main profile data
+        setIsEditing(false); // Close the EditProfile form
         // Validation and submit logic goes here
       };
-      const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setProfileData({ ...profileData, [event.target.name]: event.target.value });
+
+      const handleEditChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setEditData({ ...editData, [event.target.name]: event.target.value });
       };
     
       // If in editing mode, render the EditProfile component
@@ -53,31 +62,31 @@ const Profile: React.FC<ProfileProps> = (props) => {
             <input
                 type="text"
                 name="username"
-                value={profileData.username}
-                onChange={handleChange}
+                value={editData.username}
+                onChange={handleEditChange}
                 placeholder="New Username"
             />
             <input
                 type="password"
                 name="password"
-                value={profileData.password}
-                onChange={handleChange}
+                value={editData.password}
+                onChange={handleEditChange}
                 placeholder="New Password"
             />
             <input
                 type="password"
                 name="confirmPassword"
-                value={profileData.password}
-                onChange={handleChange}
+                value={editData.password}
+                onChange={handleEditChange}
                 placeholder="Confirm New Password"
             />
             <textarea
                 name="bioInfo"
-                value={profileData.bioInfo}
-                onChange={handleChange}
+                value={editData.bioInfo}
+                onChange={handleEditChange}
                 placeholder="New Bio"
             />
-            <button type="submit" onClick={toggleEdit}>Save Changes</button>
+            <button type="submit" onClick={() => setIsEditing(true)}>Save Changes</button>
         </form>
       ) : (
     <div className="profile-card">
