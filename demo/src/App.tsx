@@ -6,7 +6,12 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/Forgot';
 import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
+<<<<<<< HEAD
 import Profile from './profilecomponent/Profile';
+=======
+import CreatePost from './createPostComponent/createPost';
+
+>>>>>>> 23ca07c883024e9cb45cfaf912f30e49d0ebb17d
 
 
 const App = () => {
@@ -19,7 +24,11 @@ const App = () => {
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
         <Route path="/post" element={<Post />} /> {/* Updated this line */}
+<<<<<<< HEAD
         <Route path='/profile' element={<Profile/>}/>
+=======
+        <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
+>>>>>>> 23ca07c883024e9cb45cfaf912f30e49d0ebb17d
         // Add other routes as needed
       </Routes>
     </Router>
