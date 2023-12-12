@@ -1,0 +1,168 @@
+.create-post {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .category-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .category-buttons button {
+    flex: 1;
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+  }
+  
+  .category-buttons button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .category-buttons button:last-child {
+    margin-right: 0;
+  }
+  
+  .create-post .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .create-post .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .create-post .form-group textarea {
+    width: calc(100% - 20px); /* Adjusted width to account for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 150px; /* Fixed height */
+    resize: none;
+  }
+  
+  
+  .create-post .form-group input[type="file"] {
+    width: calc(100% - 20px); /* Assuming 10px padding on both sides */
+  }
+
+  .create-post .form-group:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  
+  .create-post .publish-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .create-post .publish-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .category-buttons button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .image-preview {
+    width: calc(100% - 20px); /* Assuming 10px padding on both sides */
+    height: auto; /* Keep the aspect ratio */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+
+  .create-post {
+    max-width: 800px; /* Increased the width of the form */
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .create-post {
+    max-width: 800px; /* Adjust as needed */
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+ 
+  .form-row-up {
+    display: flex;
+    justify-content: space-between; /* This will place space between your items */
+    align-items: flex-start; /* Align items to the start of the flex container */
+    gap: 10px; /* This adds a gap between your form elements */
+    margin-bottom: 15px;
+}
+
+.form-group-up {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    align-items: flex-start; /* Align items to the start for a natural form look */
+}
+
+.form-group-description {
+    flex: 3; /* description takes up 3 times more space than price */
+    max-width: calc(80% - 10px); /* Adjust this to change the width */
+}
+
+.form-group-price {
+    flex: 1;
+    max-width: calc(20% - 10px); /* Adjust this to change the width */
+}
+
+.form-group-up label {
+    margin-bottom: 5px; /* Add some space between the label and the input/textarea */
+}
+
+.form-group-up input,
+.form-group-up textarea {
+    width: 100%; /* Make the input/textarea take up the full width of the flex item */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.form-group-description textarea {
+    height: 55px; /* Fixed height */
+    resize: none; /* Disables resizing */
+}
+
+.form-group-up input[type="text"] {
+    height: 55px; /* Match the height to your design */
+}
+
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    flex-basis: calc(25% - 15px); /* Adjusted to fit 4 items in a row */
+    margin-right: 1%; /* Spacing between the select boxes */
+  }
+  
+  .form-group:last-child {
+    margin-right: 0; /* Remove margin for the last form group */
+  }
+  
+  /* Adjusting the file input to match the description box */
+  .create-post .form-group input[type="file"] {
+    width: calc(100% - 20px); /* Assuming 10px padding on both sides */
+    height: 40px; /* Adjust height to match other inputs */
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
