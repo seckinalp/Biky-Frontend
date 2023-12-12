@@ -1,12 +1,12 @@
 /* Post.css */
 .username {
-  max-width: 240px; /* Adjust based on your layout */
+  max-width: 340px; /* Adjust based on your layout */
   overflow-wrap: break-word;
   word-break: break-all;
   /* ... other styles for username ... */
 }
 .post-text {
-  max-width: 300px; /* Adjust based on your layout */
+  max-width: 450px; /* Adjust based on your layout */
   overflow-wrap: break-word;
   word-break: break-all;
   /* ... other styles for post-text ... */
@@ -16,7 +16,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     margin: 16px;
-    width: 300px; /* Adjust width as necessary */
+    width: 450px; /* Adjust width as necessary */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
@@ -82,7 +82,10 @@
   
   .post-buttons {
     display: flex;
-    transition: transform 0.3s ease; /* Smooth transition for the transform property */
+    justify-content: space-between; /* This will space out the buttons */
+    transition: transform 0.3s ease; 
+    width: 100%; /* Ensure the container takes full width */
+    /* Smooth transition for the transform property */
 
   }
   .post-buttons button:hover {
@@ -98,8 +101,13 @@
     font-size: 1rem; /* Adjust the font size as needed */
     padding: 8px; /* Padding for button */
   }
+ 
   
   .like-button {
+    justify-content: flex-start; /* Align content to the left */
+    flex: 1; /* Each button takes equal space */
+    display: flex;
+    justify-content: center; /* Center content within each button */
     flex-direction: row;
     filter: grayscale(100%) brightness(70%); /* Makes the emoji white */
   }
@@ -107,8 +115,16 @@
     filter: none;
   }
   
-  .comment-button,
+  .comment-button{
+    flex: 1; /* Each button takes equal space */
+    display: flex;
+    justify-content: center; /* Center content within each button */
+  }
   .share-button {
+    justify-content: flex-end; /* Align content to the right */
+    flex: 1; /* Each button takes equal space */
+    display: flex;
+    justify-content: center; /* Center content within each button */
     filter: saturate(3) brightness(1.2); /* Increases saturation and brightness */
     flex-direction: column; /* Keep column for these if you want text below the icon */
   }

@@ -79,8 +79,12 @@ const Post: React.FC = () => {
         <p className="post-text">{socialMediaPost.content}</p>
         <div className="post-image-carousel">
           <img className="post-image" src={images[currentImageIndex]} alt="Post content" />
+          {images.length > 1 && (
+          <>
           <button className="carousel-arrow left" onClick={goPrev}>‹</button>
           <button className="carousel-arrow right" onClick={goNext}>›</button>
+          </>
+          )}
         </div>
       </div>
       <div className="post-actions">
