@@ -7,7 +7,7 @@ import ForgotPassword from './pages/Forgot';
 import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
 import Profile from './profilecomponent/Profile';
-import CreatePost from './createPostComponent/createPost';
+import CreatePost from './createPostComponent/CreatePost';
 
 
 

@@ -1,7 +1,6 @@
 // Profile.tsx
 import React, { useState } from 'react';
 import './Profile.css';
-import EditProfile from './editprofile/EditProfile.tsx'; // Import the EditProfile component
 
 export interface ProfileProps {
     item: {
