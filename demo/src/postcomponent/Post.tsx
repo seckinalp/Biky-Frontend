@@ -2,8 +2,24 @@
 import React from 'react';
 import './Post.css';
 import { useState } from 'react';
+import { imageLink } from '../logic/backend';
 
-const Post: React.FC = () => {
+export interface PostProps {
+  item: {
+		postID: string
+		author: 
+			{
+			userID: string
+			userName: string
+			userProfileLink: string
+			}
+		imagesID: string[]
+		contentText: string
+		postTime: Date //UTC time
+		}
+}
+//assuming we pass the post as props.item
+const Post: React.FC<PostProps> = (props) => {
   const user = {}; // Placeholder for user object from backend
 
   // Empty function to handle report user action
@@ -18,11 +34,11 @@ const Post: React.FC = () => {
 
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
-    '../../public/profile.png',
-    '../../public/homedark.png',
-    '../../public/siyaharkaplansiz.png',
-  ];
+  const images: string[] = props.item.imagesID
+  ? props.item.imagesID.map((imageID) => `${imageLink}${imageID}`)
+  : [];
+  const dateTime: String = props.item.postTime.toLocaleDateString();
+
   const [socialMediaPost, setSocialMediaPost] = useState({
     username: 'marc.zucker31dsfasdfasdasdsadasdsadasdsadasdasdsadasd',
     content: 'Elon I will beat you !!! thjsd hflkaskfdlssadasdasdsdasdasdasasdasdas adşkfjsdşahf jadshfjadshfjşla dshfjasdhfjashdfljasdhfljk hsdalasdasdsadasdas',
@@ -62,8 +78,8 @@ const Post: React.FC = () => {
       <div className="post-header">
         <img className="profile-pic" src="../../public/profile.png" alt="Profile" />
         <div className="username-time">
-          <div className="username">{socialMediaPost.username}</div>
-          <div className="time-posted">{socialMediaPost.time}</div>
+          <div className="username">{props.item.author.userName}</div>
+          <div className="time-posted">{dateTime}</div>
         </div>
         <div className="more-options" onClick={toggleOptions}>
           <div className="more-options-icon">...</div>
@@ -76,8 +92,8 @@ const Post: React.FC = () => {
         </div>
       </div>
       <div className="post-content">
-        <p className="post-text">{socialMediaPost.content}</p>
-        <div className="post-image-carousel">
+        <p className="post-text">{props.item.contentText}</p>
+        {images && <div className="post-image-carousel">
           <img className="post-image" src={images[currentImageIndex]} alt="Post content" />
           {images.length > 1 && (
           <>
@@ -85,7 +101,7 @@ const Post: React.FC = () => {
           <button className="carousel-arrow right" onClick={goNext}>›</button>
           </>
           )}
-        </div>
+        </div>}
       </div>
       <div className="post-actions">
         <div className="post-buttons">
