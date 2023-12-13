@@ -116,5 +116,18 @@ const Post: React.FC<PostProps> = (props) => {
     </div>
   );
 };
+Post.defaultProps = {
+  item: {
+    postID: 'defaultPostID',
+    author: {
+      userID: 'defaultUserID',
+      userName: 'Default User',
+      userProfileLink: '/default-profile',
+    },
+    imagesID: [],
+    contentText: 'Default content text',
+    postTime: new Date(), // Current date-time as default
+  },
+};
 
 export default Post;

@@ -8,6 +8,7 @@ import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
 import Profile from './profilecomponent/Profile';
 import CreatePost from './createPostComponent/CreatePost';
+import { imageLink } from './logic/backend';
 
 
 
@@ -21,20 +22,9 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
-        <Route path="/post" element={<Post />} /> {/* Updated this line */}
+        <Route path="/post" element={<Post/>} /> {/* Updated this line */}
         <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
-        <Route path='/profile' element={<Profile item={{
-          userId: '54545',
-          universityId: '546546',
-          username: 'dedelermemo',
-          email: '.bilkent.edu.tr',
-          password: 'sdasd',
-          postNum: '9',
-          following: '20',
-          followers: '17',
-          likes: '3',
-          bioInfo: 'Cs Stundent'
-        }}/>}/>
+        <Route path='/profile' element={<Profile />}/>
       </Routes>
     </Router>
   );
