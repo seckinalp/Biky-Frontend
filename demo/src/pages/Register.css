@@ -98,7 +98,7 @@
       margin: 20px 0; /* Stack them with space in between on smaller screens */
     }
   }
-  .error-message {
+  .error-message1 {
     color: red;
     text-align: center; /* Center the text */
     font-size: 0.8em; /* Reduce the font size */
@@ -111,7 +111,18 @@
   
   .error-message {
     color: red;
-    /* other styling for error message */
+    text-align: center; /* Center the text */
+    font-size: 0.8em; /* Reduce the font size */
+    margin-top: 5px; /* Reduce the top margin */
+    margin-bottom: 5px; /* Adjust bottom margin as needed */
   }
- 
+  .register-form button {
+    /* ... other existing styles ... */
+    background-color: #A980FC; /* Set the button background color */
+  }
   
+  .register-form button:hover {
+    transform: scale(1.1); /* Increase the size of the button when hovered */
+
+    background-color: gray; /* Optional: Darker shade for hover effect */
+  }

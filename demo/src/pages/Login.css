@@ -41,7 +41,6 @@
   .login-form .continue-button {
     width: 100%;
     padding: 15px;
-    background-color: #000;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -52,7 +51,6 @@
   .login-form .visitor-button {
     width: 100%;
     padding: 15px;
-    background-color: #000;
     color: #fff;
     border: none;
     border-radius: 5px;

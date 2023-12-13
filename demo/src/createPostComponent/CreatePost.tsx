@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreatePost.css';
+import '../ButtonStyle.css'
 
   
 const CreatePost = () => {

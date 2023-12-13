@@ -43,7 +43,6 @@
   
   .forgot-form button {
     padding: 15px;
-    background-color: #000;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -74,7 +73,6 @@
   }
   .reset-button {
     padding: 15px;
-    background-color: #000; /* Black background */
     color: #fff; /* White text */
     border: none;
     border-radius: 5px;

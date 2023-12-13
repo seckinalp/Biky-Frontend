@@ -13,6 +13,8 @@ const Register = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [error1, setError1] = useState('');
+
   const [emailError, setEmailError] = useState('');
   const validateEmail = () => {
     if (!formData.email.includes('@')) {
@@ -32,12 +34,17 @@ const Register = () => {
     return true;
   };
   const validatePassword = () =>{
+    let isValid = true;
     if (formData.password !== formData.confirmPassword ) {
       setError('Passwords do not match.');
-      return false;
+      isValid = false;
     }
-    setError('');
-    return true;
+    if(formData.password.length < 8){
+      setError1('Password is less than 8 characters.');
+      isValid = false;
+    }
+
+    return isValid;
   }
   
 
@@ -47,8 +54,11 @@ const Register = () => {
     if (name === 'email') {
       setEmailError('');
     }
-    if (name === 'password' || name === 'confirmPassword') { // Adjust according to your field names
+    if (name === 'confirmPassword') { // Adjust according to your field names
       setError('');
+    }
+    if (name === 'password') { // Adjust according to your field names
+      setError1('');
     }
   };
 
@@ -100,10 +110,10 @@ const Register = () => {
             value={formData.password} 
             onChange={handleInputChange} 
             required 
-            style={{ marginBottom: error !== '' ? '1px' : '20px' }} // Adjust the values as needed
+            style={{ marginBottom: error1 !== '' ? '1px' : '20px' }} // Adjust the values as needed
 
           />
-          {error && <p className="error-message">{error}</p>} {/* Display error message if passwords do not match */}
+          {error1 && <p className="error-message1">{error1}</p>} {/* Display error message if passwords do not match */}
 
           <input 
             type="password" 

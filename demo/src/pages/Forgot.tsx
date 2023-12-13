@@ -3,6 +3,7 @@ import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Forgot.css'; // Ensure this path points to your Forgot.css file
 import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if necessary
+import '../ButtonStyle.css'; // This is the import statement for your CSS file
 
 
 const ForgotPassword: React.FC = () => {

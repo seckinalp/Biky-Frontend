@@ -74,7 +74,7 @@
     /* Darker shade for hover effect */
   }
   /* EditProfile.css */
-.register-form {
+.edit-form {
     position: relative; /* Make this form a relative container */
     background: #ffffff;
     padding: 30px;
@@ -85,17 +85,18 @@
     margin: 0 auto; /* Center the form */
   }
   
-  .register-form h2 {
+  .edit-form h2 {
     margin-bottom: 20px;
   }
   
-  .register-form h6 {
+  .edit-form h6 {
     margin-top: 5px;
     margin-bottom: 2px;
   }
   
-  .register-form input,
-  .register-form textarea {
+  .edit-form input,
+  .edit-form textarea {
+    max-width: 400px;
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -104,7 +105,7 @@
     box-sizing: border-box;
   }
   
-  .register-form button {
+  .edit-form button {
     width: 100%;
     padding: 15px;
     background-color: #000;
@@ -127,12 +128,12 @@
     border-color: red;
   }
 
-  .register-form button {
+  .edit-form button {
     /* ... other existing styles ... */
     background-color: #A980FC; /* Set the button background color */
   }
   
-  .register-form button:hover {
+  .edit-form button:hover {
     transform: scale(1.1); /* Increase the size of the button when hovered */
 
     background-color: gray; /* Optional: Darker shade for hover effect */

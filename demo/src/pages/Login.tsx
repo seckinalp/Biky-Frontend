@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'; // Ensure this path is correct
 import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if necessary
+import '../ButtonStyle.css'; // This is the import statement for your CSS file
 
 
 const Login = () => {

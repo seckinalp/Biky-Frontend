@@ -23,7 +23,7 @@
   }
   
   .category-buttons button.active {
-    background-color: #007bff;
+    background-color: #A980FC;
     color: white;
   }
   
@@ -59,7 +59,7 @@
   }
   
   .create-post .publish-button {
-    background-color: #007bff;
+    background-color: #A980FC;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -69,11 +69,11 @@
   }
   
   .create-post .publish-button:hover {
-    background-color: #0056b3;
+    background-color: gray;
   }
   
   .category-buttons button.active {
-    background-color: #007bff;
+    background-color: #A980FC;
     color: white;
   }
   
