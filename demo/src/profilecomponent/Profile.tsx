@@ -52,7 +52,10 @@ const Profile: React.FC<ProfileProps> = (props) => {
       };
 
       const toggleEdit = () => {
-        setEditData(profileData); // Reset edit data to original profile data
+        if(isEditing){
+          setEditData(profileData); // Reset edit data to original profile data
+        }
+        
         setIsEditing((prev) => !prev);
       };
       const handleSubmit = (event: React.FormEvent) => {
@@ -78,14 +81,16 @@ const Profile: React.FC<ProfileProps> = (props) => {
       const handleEditChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         if (name === 'password') {
+          editData.confirmPassword = "";
           setPasswordError("");
-   
+          setConfirmPasswordError("");
         }
         if (name === 'confirmPassword') { // Adjust according to your field names
+          setPasswordError("");
           setConfirmPasswordError("");
         }
         
-        setEditData({ ...editData, [event.target.name]: event.target.value });
+        setEditData({ ...editData, [name]: value });
       };
       console.log(profileData);
     

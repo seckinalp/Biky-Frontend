@@ -127,3 +127,11 @@
 .navbar__button_store.hidden {
   display: none;
 }
+
+
+/* Hover effect for all buttons */
+.navbar__button:hover {
+  background-color: white; /* Change background color on hover */
+  transform: scale(1.1); /* Increase the size of the button when hovered */
+  /* Additional hover effects can go here */
+}

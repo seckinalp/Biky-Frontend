@@ -162,7 +162,7 @@ const CreatePost = () => {
 
         <div className="form-group">
           <label htmlFor="imageUpload">Upload Image</label>
-          <input type="file" id="imageUpload" onChange={handleImageUpload} />
+          <input type="file" id="imageUpload" onChange={handleImageUpload} accept="image/*"/>
           {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
         </div>
 
