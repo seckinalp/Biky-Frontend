@@ -8,6 +8,7 @@ import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
 import Profile from './profilecomponent/Profile';
 import CreatePost from './createPostComponent/CreatePost';
+import Settings from './settingsComponent/Settings';
 import { imageLink } from './logic/backend';
 
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/posts" element={<Posts></Posts>} />
         <Route path="/post" element={<Post/>} /> {/* Updated this line */}
         <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
+        <Route path="/settings" element={<Settings/>} /> {/* Updated this line */}
         <Route path='/profile' element={<Profile />}/>
       </Routes>
     </Router>

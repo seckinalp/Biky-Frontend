@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './CreatePost.css';
-import '../ButtonStyle.css'
+
 
 const CreatePost = () => {
   const [description, setDescription] = useState<string>('');

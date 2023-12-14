@@ -1,7 +1,8 @@
 .create-post {
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 32px;
+  border-color: black;
+  border: 1px solid black;
   width: 60%; /* Adjust the width of the outer box to be narrower */
   margin: auto;
   padding: 20px;
@@ -30,7 +31,9 @@
   top: 20px; /* Adjust as needed */
   right: 20px; /* Adjust as needed */
 }
-
+.close-button:hover {
+  background-color: transparent; /* Keep the background transparent on hover */
+}
 .post-type-buttons {
   display: flex;
   justify-content: center; /* Center the buttons */
@@ -48,9 +51,9 @@
 }
 
 .post-type-button.active {
-  border-color: #007bff; /* Adjust to active color as needed */
-  background-color: #007bff;
-  color: #fff;
+  border-color: #ac39e0; /* Adjust to active color as needed */
+  background-color: #ec8cec;
+  color: #000000;
 }
 
 .form-group {
@@ -81,7 +84,7 @@
 }
 .image-upload-section {
   /* Align the upload button to the right */
-  text-align: right;
+  text-align: center;
   margin-bottom: 20px;
 }
 

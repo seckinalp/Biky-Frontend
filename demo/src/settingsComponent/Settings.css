@@ -1,0 +1,64 @@
+.settings-container {
+    background-color: white;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: absolute;
+    left: 20px; /* Changed from right to left */
+    top: 20px;
+    border: 1px solid black;
+    position: relative;
+  }
+  
+  .settings-header {
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .close-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute; /* Position the button absolutely relative to its parent */
+    top: -10px; /* Adjust this value to position the button above the line */
+    right: 0; /* Align to the right side */
+    padding: 5px; /* Add padding to make the touch area bigger */
+    
+  }
+
+  .close-button:hover {
+    background-color: transparent; /* Keep the background transparent on hover */
+  }
+
+.settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-item {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  .settings-item:hover {
+    background-color: #d4d3d3; /* Change this color to whatever you prefer */
+  }
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.icon {
+    margin-right: 10px;
+}
