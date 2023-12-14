@@ -52,9 +52,12 @@ const Profile: React.FC<ProfileProps> = (props) => {
       };
 
       const toggleEdit = () => {
-        if(isEditing){
+        setPasswordError("");
+        setConfirmPasswordError("");
+        editData.confirmPassword = profileData.password;
           setEditData(profileData); // Reset edit data to original profile data
-        }
+        
+
         
         setIsEditing((prev) => !prev);
       };
