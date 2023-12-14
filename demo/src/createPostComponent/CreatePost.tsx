@@ -1,176 +1,164 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './CreatePost.css';
 import '../ButtonStyle.css'
 
-  
 const CreatePost = () => {
-  const [description, setDescription] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [department, setDepartment] = useState('');
-  const [course, setCourse] = useState('');
-  const [book, setBook] = useState('');
-  const [type, setType] = useState('');
-  const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-  const shouldShowPriceField = (category: string): boolean => {
-    return ['Second Hand', 'Private Lesson'].includes(category);
-  };
+  const [description, setDescription] = useState<string>('');
+  const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
+  const [selectedType, setSelectedType] = useState<string>('')
+  const [price, setPrice] = useState<number | ''>('');
+  const [images, setImages] = useState<string[]>([]);
+  const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
 
-  const shouldShowTypeDropdown = (category: string): boolean => {
-    return ['Lost Property', 'Trade', 'Borrow'].includes(category);
-  };
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
 
+  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedType(event.target.value);
+  };
+
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
+    const value = event.target.value;
+    setPrice(value === '' ? '' : Number(value));
   };
-
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-  };
-
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreviewUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
+      setImages((prevImages) => {
+        const spaceForNewImages = 4 - prevImages.length;
+        const newImagesToAdd = fileArray.slice(0, spaceForNewImages);
+        return [...prevImages, ...newImagesToAdd];
+      });
+      event.target.value = ""; // Clear the file input
     }
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'department':
-        setDepartment(value);
-        break;
-      case 'course':
-        setCourse(value);
-        break;
-      case 'book':
-        setBook(value);
-        break;
-      case 'type':
-        setType(value);
-        break;
-      default:
-        break;
+  const handleDeleteImage = (index: number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    if (imagePreviewIndex >= index && imagePreviewIndex > 0) {
+      setImagePreviewIndex(prevIndex => prevIndex - 1);
     }
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Form submission logic goes here
+    // Submit form data logic here
+  };
+  const handleClose = () => {
+    // Logic to handle the closing of the post creation modal
+    console.log('Modal closed'); // Replace with actual close logic
+  };
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   return (
-    <div className="create-post">
-      <form onSubmit={handleSubmit}>
-        <div className="category-buttons">
-          {['Social Media', 'Second Hand', 'Lost Property', 'Trade', 'Borrow', 'Private Lesson'].map((category) => (
-            <button
-              key={category}
-              type="button"
-              className={selectedCategory === category ? 'active' : ''}
-              onClick={() => handleCategoryChange(category)}
-            >
-              {category}
-            </button>
-          ))}
+<div className="create-post">
+      <div className="modal-header">
+        <h2 className="modal-title">Create a Post</h2>
+        <button className="close-button" onClick={handleClose}>&times;</button>
+      </div>
+      <div className="post-type-buttons">
+        <button 
+          type="button" 
+          onClick={() => setPostType('socialMedia')} 
+          className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
+        >
+          Social Media Post
+        </button>
+        <button 
+          type="button" 
+          onClick={() => setPostType('sale')} 
+          className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
+        >
+          Sale Post
+        </button>
+      </div>
+      
+        <div className="form-group">
+          
+          <label htmlFor="description">Description</label>
+          <span className="character-count">{description.length}/256</span>
+          <textarea
+            id="description"
+            value={description}
+            maxLength={256}
+            onChange={handleDescriptionChange}
+          />
+          
         </div>
-        
-        <div className="form-row-up">
-          <div className="form-group-up form-group-description">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          {shouldShowPriceField(selectedCategory) && (
-            <div className="form-group-up form-group-price">
+       
+        {postType === 'sale' && (
+          <>
+            <div className="form-group">
+              <label htmlFor="type">Select a Type</label>
+              <select id="type" value={selectedType} onChange={handleTypeChange}>
+                {/* Option elements */}
+              </select>
+            </div>
+            <div className="form-group">
               <label htmlFor="price">Price</label>
               <input
-                type="text"
+                type="number"
                 id="price"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={handlePriceChange}
+                min="0" // Minimum value
+                step="1" // Only allow integer values
               />
             </div>
-          )}
-        </div>
-
-        {shouldShowTypeDropdown(selectedCategory) && (
-          <div className="form-row-up">
-            <div className="form-group-up">
-              <label htmlFor="type">Select a Type</label>
-              <select name="type" id="type" value={type} onChange={(e) => setType(e.target.value)}>
-                <option value="">Please select</option>
-                <option value="type1">Type 1</option>
-                <option value="type2">Type 2</option>
-                <option value="type3">Type 3</option>
-              </select>
-            </div>
-          </div>
+          </>
         )}
 
-        {selectedCategory === 'Second Hand' && (
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="department">Select a Department</label>
-              <select name="department" id="department" value={department} onChange={handleSelectChange}>
-              <option value="">Select a Department</option>
-                <option value="a">Option A</option>
-                <option value="b">Option B</option>
-                <option value="c">Option C</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="course">Course Code</label>
-              <select name="course" id="course" value={course} onChange={handleSelectChange}>
-              <option value="">Select a Department</option>
-                <option value="a">Option A</option>
-                <option value="b">Option B</option>
-                <option value="c">Option C</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="book">Select the Book</label>
-              <select name="book" id="book" value={book} onChange={handleSelectChange}>
-              <option value="">Select a Department</option>
-                <option value="a">Option A</option>
-                <option value="b">Option B</option>
-                <option value="c">Option C</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="type">Select a Type</label>
-              <select name="type" id="type" value={type} onChange={handleSelectChange}>
-              <option value="">Select a Department</option>
-                <option value="a">Option A</option>
-                <option value="b">Option B</option>
-                <option value="c">Option C</option>
-              </select>
-            </div>
-          </div>
-        )}
-
-        <div className="form-group">
-          <label htmlFor="imageUpload">Upload Image</label>
-          <input type="file" id="imageUpload" onChange={handleImageUpload} accept="image/*"/>
-          {imagePreviewUrl && <img src={imagePreviewUrl} alt="Preview" className="image-preview" />}
+        <div className="image-upload-section">
+          <button type="button" onClick={triggerFileInput}>
+            Upload Images!
+          </button>
+          <input
+            type="file"
+            id="imageUpload"
+            multiple
+            onChange={handleImageUpload}
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            accept="image/*" // Accept only images
+          />
         </div>
 
-        <button type="submit" className="publish-button">Publish!</button>
+        {images.length > 0 && (
+        <div className="image-preview-section">
+          <img src={images[imagePreviewIndex]} alt={`Preview ${imagePreviewIndex + 1}`} />
+          <div className="image-preview-info">
+            <div className="image-counter">
+              {`${imagePreviewIndex + 1}/${images.length}`}
+            </div>
+            <div className="image-preview-controls">
+              <button type="button" onClick={() => handleDeleteImage(imagePreviewIndex)}>Delete</button>
+              {images.length > 1 && (
+                <>
+                  <button type="button" onClick={() => setImagePreviewIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1))}>
+                    Previous
+                  </button>
+                  <button type="button" onClick={() => setImagePreviewIndex((prevIndex) => (prevIndex + 1) % images.length)}>
+                    Next
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+        <button type="submit">PUBLISH!</button>
+        <form onSubmit={handleSubmit}>
+        {/* ... */}
       </form>
+      
     </div>
   );
 };
 
 export default CreatePost;
-
