@@ -1,0 +1,50 @@
+/* Followed.css */
+.followed-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+  }
+  
+  .followed-item-seen {
+    background-color: #fff;
+  }
+  
+  .followed-item:last-child {
+    border-bottom: none;
+  }
+  
+  .followed-time {
+    font-size: 0.85em;
+    color: #666;
+  }
+  
+  .followed-username {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .followed-text {
+    flex-grow: 1;
+    padding: 0 10px;
+  }
+  
+  .follow-button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+  
+  .follow-button:hover {
+    background-color: #0056b3;
+  }
+  

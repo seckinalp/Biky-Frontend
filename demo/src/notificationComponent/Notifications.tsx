@@ -1,10 +1,14 @@
 // Notifications.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import Followed from './Followed';
+import './Notifications.css'; // Make sure this path is correct
 
 interface Notification {
-  name: string;
+  id: number;
   time: string;
+  userName: string;
+  text: string;
+  isSeen: boolean;
 }
 
 interface NotificationsProps {
@@ -12,14 +16,29 @@ interface NotificationsProps {
 }
 
 const Notifications: React.FC<NotificationsProps> = ({ notifications }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClose = () => {
+    setIsVisible(false);
+  };
+
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    <div className="notifications">
-      {notifications.map((notification, index) => (
+    <div className="notifications-box">
+      <div className="notifications-header">
+        Notifications
+        <button onClick={handleClose} className="notifications-close-button">✕</button>
+      </div>
+      {notifications.map((notification) => (
         <Followed
-          key={index}
-          name={notification.name}
+          key={notification.id}
           time={notification.time}
-          onFollowBack={() => console.log(`Followed back ${notification.name}`)}
+          userName={notification.userName}
+          text={notification.text}
+          isSeen={notification.isSeen}
         />
       ))}
     </div>

@@ -27,7 +27,9 @@ const App = () => {
         <Route path="/post" element={<Post/>} /> {/* Updated this line */}
         <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
         <Route path="/settings" element={<Settings/>} /> {/* Updated this line */}
-        <Route path="/notifications" element={<Notifications notifications={[{ name: 'Ahmet', time: '9:01 am' }]}/>} /> {/* Updated this line */}
+        <Route path="/notifications" element={<Notifications notifications={[  { id: 1, time: '9:01 am', userName: 'Ahmet', text: 'followed you.', isSeen: false },
+    { id: 2, time: '9:03 am', userName: 'Ayşe', text: 'liked your post.', isSeen: true },
+    { id: 3, time: '9:07 am', userName: 'Mehmet', text: 'commented: Great work!', isSeen: false },]}/>} /> {/* Updated this line */}
         <Route path='/profile' element={<Profile />}/>
       </Routes>
     </Router>

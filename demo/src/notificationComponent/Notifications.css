@@ -1,0 +1,48 @@
+/* Notifications.css */
+.notifications-box {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 450px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .notifications-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .notifications-close-button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 24px;
+  }
+  
+  .followed-item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #f0f0f0;
+  }
+  
+  .followed-item:last-child {
+    border-bottom: none;
+  }
+  
+  .followed-item-seen {
+    background-color: #fff;
+  }
+  
+  .notifications-close-button:hover {
+    background-color: transparent; /* Keep the background transparent on hover */
+    color: red;
+  }
