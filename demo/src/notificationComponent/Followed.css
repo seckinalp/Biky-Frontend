@@ -21,6 +21,7 @@
   .followed-time {
     font-size: 0.85em;
     color: #666;
+    margin-right: 5px;
   }
   
   .followed-username {
@@ -47,4 +48,4 @@
   .follow-button:hover {
     background-color: #0056b3;
   }
-  
+
