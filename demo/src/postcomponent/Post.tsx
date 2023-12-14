@@ -39,20 +39,6 @@ const Post: React.FC<PostProps> = (props) => {
   : [];
   const dateTime: String = props.item.postTime.toLocaleDateString();
 
-  const [socialMediaPost, setSocialMediaPost] = useState({
-    username: 'marc.zucker31dsfasdfasdasdsadasdsadasdsadasdasdsadasd',
-    content: 'Elon I will beat you !!! thjsd hflkaskfdlssadasdasdsdasdasdasasdasdas adşkfjsdşahf jadshfjadshfjşla dshfjasdhfjashdfljasdhfljk hsdalasdasdsadasdas',
-    time: '12 Min',
-    likeCount: 1125, // Initialize like count
-    liked: false, // State to track if the user has liked the post
-  });
-  const toggleLike = () => {
-    setSocialMediaPost((prevPost) => ({
-      ...prevPost,
-      liked: !prevPost.liked,
-      likeCount: prevPost.liked ? prevPost.likeCount - 1 : prevPost.likeCount + 1,
-    }));
-  };
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptions = () => {
     setShowOptions(prevShow => !prevShow);
@@ -63,14 +49,6 @@ const Post: React.FC<PostProps> = (props) => {
 
   const goNext = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-  const handleComment = () => {
-    // Placeholder for comment logic
-  };
-
-  // Empty function for handling share action
-  const handleShare = () => {
-    // Placeholder for share logic
   };
 
   return (
@@ -103,16 +81,7 @@ const Post: React.FC<PostProps> = (props) => {
           )}
         </div>}
       </div>
-      <div className="post-actions">
-        <div className="post-buttons">
-        <button className={`like-button ${socialMediaPost.liked ? 'liked' : ''}`} onClick={toggleLike}>
-            👍
-            <span className="like-count">{socialMediaPost.likeCount}</span>
-          </button>
-          <button className="comment-button" onClick={handleComment}>💬 Comment</button>
-          <button className="share-button" onClick={handleShare}>🔗 Share</button>
-        </div>
-      </div>
+
     </div>
   );
 };
