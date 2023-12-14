@@ -10,6 +10,7 @@ import Profile from './profilecomponent/Profile';
 import CreatePost from './createPostComponent/CreatePost';
 import Settings from './settingsComponent/Settings';
 import { imageLink } from './logic/backend';
+import Notifications from './notificationComponent/Notifications';
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/post" element={<Post/>} /> {/* Updated this line */}
         <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
         <Route path="/settings" element={<Settings/>} /> {/* Updated this line */}
+        <Route path="/notifications" element={<Notifications notifications={[{ name: 'Ahmet', time: '9:01 am' }]}/>} /> {/* Updated this line */}
         <Route path='/profile' element={<Profile />}/>
       </Routes>
     </Router>
