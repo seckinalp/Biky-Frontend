@@ -28,8 +28,10 @@
   font-size: 1.5rem; /* Adjust the font size of the close button to match the title */
   cursor: pointer;
   position: absolute;
-  top: 20px; /* Adjust as needed */
-  right: 20px; /* Adjust as needed */
+  top: 30px; /* Adjust as needed */
+  right: 30px; /* Adjust as needed */
+  margin-top: 10px;
+  margin-right: 10px;
 }
 .close-button:hover {
   background-color: transparent; /* Keep the background transparent on hover */
@@ -108,9 +110,10 @@
 }
 
 
-.publish-button {
-  width: 100%;
-  /* ...other styles... */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* İsteğe bağlı olarak butonun üstünden boşluk bırakır */
 }
 .image-preview-section {
   display: flex;

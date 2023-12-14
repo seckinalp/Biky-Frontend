@@ -9,7 +9,7 @@ const CreatePost = () => {
   const [price, setPrice] = useState<number | ''>('');
   const [images, setImages] = useState<string[]>([]);
   const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
-
+  const [isVisible, setIsVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -49,12 +49,12 @@ const CreatePost = () => {
   };
   const handleClose = () => {
     // Logic to handle the closing of the post creation modal
-    console.log('Modal closed'); // Replace with actual close logic
+    setIsVisible(false);
   };
   const triggerFileInput = () => {
     fileInputRef.current?.click();
   };
-
+  if (!isVisible) return null;
   return (
 <div className="create-post">
       <div className="modal-header">
@@ -151,12 +151,13 @@ const CreatePost = () => {
           </div>
         </div>
       )}
-
-        <button type="submit">PUBLISH!</button>
-        <form onSubmit={handleSubmit}>
-        {/* ... */}
-      </form>
       
+      <div className="button-container">
+  <button className='publish-button' type="submit">PUBLISH!</button>
+</div>
+<form onSubmit={handleSubmit}>
+  {/* ... */}
+</form>
     </div>
   );
 };
