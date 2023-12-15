@@ -1,11 +1,36 @@
-button, .btn {
+button{
     background-color: #A980FC; /* Bootstrap primary color */
     /* Other styling for buttons can go here */
   }
   
   /* Hover effect for all buttons */
-  button:hover, .btn:hover {
+  button:hover{
     background-color: gray; /* Change background color on hover */
     transform: scale(1.1); /* Increase the size of the button when hovered */
     /* Additional hover effects can go here */
   }
+.btn {
+ width: 130px;
+ height: 40px;
+ cursor: pointer;
+ background-color: #171717;
+ color: #fff;
+ border: none;
+ border-radius: 5px;
+ transition: all .3s;
+}
+
+.btn:hover {
+ border-radius: 10px;
+ transform: translateY(-7px);
+ box-shadow: 10px 7px 0 -2px #f85959,
+  -10px 15px 0 -4px #39a2db;
+}
+
+.btn:active {
+ transition: all 0.2s;
+ transform: translateY(-5px);
+ box-shadow: 0 2px 0 -2px #f85959,
+  0 8px 0 -4px #39a2db,
+  0 12px 10px -3px #39a2db;
+}
