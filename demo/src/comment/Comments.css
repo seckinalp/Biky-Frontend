@@ -1,0 +1,55 @@
+.comment-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Increased padding */
+    width: 430px; /* Adjusted width */
+    position: relative; /* Set position relative for absolute child positioning */
+
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px; /* Slightly increased margin */
+  }
+  
+  .comment-header .close-button {
+    position: absolute; /* Absolute positioning */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .comment-list {
+    max-height: 360px; /* Slightly increased max-height */
+    overflow-y: auto;
+    margin-bottom: 24px; /* Increased margin between list and input */
+  }
+  
+  
+  .comment-input {
+    display: flex;
+    align-items: center; /* Ensure vertical alignment */
+  }
+  
+  .comment-input input {
+    flex-grow: 1;
+    border: 1px solid #ccc; /* Added border for clarity */
+    border-radius: 4px;
+    padding: 12px; /* Increased padding */
+  }
+  
+  .comment-input .send-button {
+    border: none;
+    color: white;
+    padding: 12px 20px; /* Increased padding for a larger button */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Adjusted font size */
+  }
+  

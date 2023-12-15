@@ -1,0 +1,59 @@
+/* Comment.css */
+.comment-item {
+    max-width: 430px;
+    display: flex;
+    align-items: flex-start; /* Align items to the start of the flex container */
+    margin-bottom: 12px; /* Adjust spacing between comments as needed */
+    overflow: hidden;
+    position: relative; /* Needed for absolute positioning of the delete button */
+
+  }
+  
+  .comment-avatar {
+    
+    width: 40px; /* Adjust size as necessary */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px; /* Adjust spacing between avatar and text as needed */
+  }
+  
+  .comment-content {
+    flex-grow: 1;
+    display: flex;
+    padding-left: 10px;
+    flex-direction: column;
+    overflow: hidden;
+    margin-right: 40px; /* Provide space for the delete button */
+
+  }
+  
+  .comment-author {
+    font-weight: bold;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+  
+  .comment-text {
+    color: #333;
+    word-wrap: break-word;
+
+  }
+  .time-posted {
+    color: #65676b;
+    font-size: 0.75rem;
+  }
+
+  .delete-comment {
+    position: absolute; /* Position the delete button absolutely */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    padding: 5px; /* Adjust padding as needed */
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 4px;
+
+  }
+  
