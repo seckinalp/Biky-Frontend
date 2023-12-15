@@ -11,7 +11,7 @@ import CreatePost from './createPostComponent/CreatePost';
 import Settings from './settingsComponent/Settings';
 import { imageLink } from './logic/backend';
 import Notifications from './notificationComponent/Notifications';
-
+import Comments from "./comment/Comments"
 
 
 
@@ -31,6 +31,8 @@ const App = () => {
     { id: 2, time: '9:03 am', userName: 'Ayşe', text: 'liked your post.', isSeen: true },
     { id: 3, time: '9:07 am', userName: 'Mehmet', text: 'commented: Great work!', isSeen: false },]}/>} /> {/* Updated this line */}
         <Route path='/profile' element={<Profile />}/>
+        <Route path='/comments' element={<Comments/>}/>
+
       </Routes>
     </Router>
   );
