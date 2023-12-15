@@ -15,8 +15,8 @@ interface SocialMediaPostProps {
           imagesID: string[]
           contentText: string
           postTime: Date //UTC time
-          isLiked : string //to show it is liked by viewing user
-          isAnonymous: string
+          isLiked : boolean //to show it is liked by viewing user
+          isAnonymous: boolean
           }
   }
   const convertToPostProps = (socialMediaPost: SocialMediaPostProps): PostProps => {
@@ -66,3 +66,26 @@ interface SocialMediaPostProps {
       </div>
     </>
   }
+
+  SocialMediaPost.defaultProps = {
+    item: {
+      postID: "sdasd",
+      author: 
+          {
+          userID: "dsasdfa",
+          userName: "sddsads",
+          userProfileLink: "dasas",
+          },
+      imagesID: [
+        "asdasdadsf","sfasdasdD"
+      ],
+      contentText: "sdfasdfasdfa",
+      postTime: new Date(), //UTC time,
+      isLiked : false, //to show it is liked by viewing user,
+      isAnonymous: true,
+      }
+
+
+
+  }
+  export default SocialMediaPost;
