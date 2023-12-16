@@ -4,108 +4,14 @@ import Homepage from './Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/Forgot';
-import Post from "./postcomponent/Post"
 import Posts from './pages/Posts';
-import Profile from './profilecomponent/Profile';
-import CreatePost from './createPostComponent/CreatePost';
-import Settings from './settingsComponent/Settings';
-import { imageLink } from './logic/backend';
-import Notifications from './notificationComponent/Notifications';
 import Comments from "./comment/Comments"
-import SocialMediaPost from './postcomponent/SocialMediaPost';
-import SocialMediaPosts, { SocialMediaPostsProps } from './postcomponent/SocialMediaPosts';
-import SalePost from './postcomponent/SalePost';
+import SocialMediaPosts, {} from './postcomponent/SocialMediaPosts';
 import { SalePostProps } from './postcomponent/SalePost';
-import SalePosts, { SalePostsProps } from './postcomponent/SalePosts';
 import { Provider } from 'react-redux';
 import store from './store'; 
-import CategoryFilter from './categoryFilterCompononet/CategoryFilter';
-
-import SearchComponent from './SearchComponent/SearchComponent';
-import ShowRow from './showRowComponent/ShowRow';
-
-import bikyImage from './indir.jpg';
-import Deneme from './categoryFilterCompononet/deneme';
-import Navbar from './navigation/Navbar';
-import BackgroundContainer from './BackgroundContainer/BackgroundContainer';
 import CategorySelect from './assets/categoryComponent/CategorySelect';
-const exampleSalePostsProps: SalePostsProps = {
-  initialPosts: [
-    {
-      item: {
-        postID: "post1",
-        author: {
-          userID: "1234",
-          userName: "John Doe",
-          userProfileLink: "https://example.com/profile/user1"
-        },
-        imagesID: ["image1", "image2"],
-        contentText: "This is the first post content",
-        postTime: new Date("2023-12-16T12:00:00Z"),
-        isAnonymous: false,
-        initialComments: [
-          {
-            item: {
-              commentId: "comment1",
-              postId: "post1",
-              author: {
-                userID: "user2",
-                userName: "Jane Doe",
-                userProfileLink: "https://example.com/profile/user2"
-              },
-              contentText: "Great post!",
-              commentTime: new Date("2023-12-16T12:30:00Z")
-            },
-            showDelete: false,
-            onDelete: () => {
-              console.log("Comment deleted");
-            }
-          },
-          // ... more comments
-        ],
-        postType: 5,
-        price: "13"
-      }
-    },
-    {
-      item: {
-        postID: "post1",
-        author: {
-          userID: "1234",
-          userName: "John Doe",
-          userProfileLink: "https://example.com/profile/user1"
-        },
-        imagesID: ["image1", "image2"],
-        contentText: "This is the first post content",
-        postTime: new Date("2023-12-16T12:00:00Z"),
-        isAnonymous: false,
-        initialComments: [
-          {
-            item: {
-              commentId: "comment1",
-              postId: "post1",
-              author: {
-                userID: "user2",
-                userName: "Jane Doe",
-                userProfileLink: "https://example.com/profile/user2"
-              },
-              contentText: "Great post!",
-              commentTime: new Date("2023-12-16T12:30:00Z")
-            },
-            showDelete: false,
-            onDelete: () => {
-              console.log("Comment deleted");
-            }
-          },
-          // ... more comments
-        ],
-        postType: 5,
-        price: "13"
-      }
-    },
-    // ... more social media posts
-  ]
-};
+import SalePosts from './postcomponent/SalePosts';
 
 interface Category {
   categoryID: number;
@@ -113,83 +19,7 @@ interface Category {
   children: Category[];
 }
 
-const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
-  initialPosts: [
-    {
-      item: {
-        postID: "post1",
-        author: {
-          userID: "1234",
-          userName: "John Doe",
-          userProfileLink: "https://example.com/profile/user1"
-        },
-        imagesID: ["image1", "image2"],
-        contentText: "This is the first post content",
-        postTime: new Date("2023-12-16T12:00:00Z"),
-        isLiked: true,
-        isAnonymous: false,
-        likecount: 150,
-        initialComments: [
-          {
-            item: {
-              commentId: "comment1",
-              postId: "post1",
-              author: {
-                userID: "user2",
-                userName: "Jane Doe",
-                userProfileLink: "https://example.com/profile/user2"
-              },
-              contentText: "Great post!",
-              commentTime: new Date("2023-12-16T12:30:00Z")
-            },
-            showDelete: false,
-            onDelete: () => {
-              console.log("Comment deleted");
-            }
-          },
-          // ... more comments
-        ]
-      }
-    },
-    {
-      item: {
-        postID: "post1",
-        author: {
-          userID: "1234",
-          userName: "John Doe",
-          userProfileLink: "https://example.com/profile/user1"
-        },
-        imagesID: ["image1", "image2"],
-        contentText: "This is the first post content",
-        postTime: new Date("2023-12-16T12:00:00Z"),
-        isLiked: true,
-        isAnonymous: false,
-        likecount: 150,
-        initialComments: [
-          {
-            item: {
-              commentId: "comment1",
-              postId: "post1",
-              author: {
-                userID: "user2",
-                userName: "Jane Doe",
-                userProfileLink: "https://example.com/profile/user2"
-              },
-              contentText: "Great post!",
-              commentTime: new Date("2023-12-16T12:30:00Z")
-            },
-            showDelete: false,
-            onDelete: () => {
-              console.log("Comment deleted");
-            }
-          },
-          // ... more comments
-        ]
-      }
-    },
-    // ... more social media posts
-  ]
-};
+
 const sampleSalePosts: SalePostProps[] = [
   {
     item: {
@@ -276,14 +106,6 @@ return (
     <Router>
     
       <div>
-      
-        {/* Include the Navbar component here */}
-       
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <div>
         <Routes>
         <Route path='/socailmediaposts' element={<SocialMediaPosts   initialPosts={[
@@ -321,6 +143,36 @@ return (
         isAnonymous: false,
         likecount: 100
       }
+    },   {
+      item: {
+        postID: "12345",
+        author: {
+          userID: "user123",
+          userName: "JohnDoe",
+          userProfileLink: "https://example.com/profile/user123"
+        },
+        imagesID: ["image1.jpg", "image2.jpg"],
+        contentText: "This is an example post",
+        postTime: "2023-12-16T12:00:00Z",
+        isLiked: false,
+        isAnonymous: false,
+        likecount: 100
+      }
+    },   {
+      item: {
+        postID: "12345",
+        author: {
+          userID: "user123",
+          userName: "JohnDoe",
+          userProfileLink: "https://example.com/profile/user123"
+        },
+        imagesID: ["image1.jpg", "image2.jpg"],
+        contentText: "This is an example post",
+        postTime: "2023-12-16T12:00:00Z",
+        isLiked: false,
+        isAnonymous: false,
+        likecount: 100
+      }
     },
     // ... additional posts
   ]}/>}/>
@@ -330,26 +182,10 @@ return (
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
-        <Route path="/post" element={<Post/>} /> {/* Updated this line */}
-        <Route path="/create-post" element={<CreatePost/>} /> {/* Updated this line */}
-        <Route path="/settings" element={<Settings/>} /> {/* Updated this line */}
-        <Route path="/notifications" element={<Notifications notifications={[  { id: 1, time: '9:01 am', userName: 'Ahmet', text: 'followed you.', isSeen: false },
-    { id: 2, time: '9:03 am', userName: 'Ayşe', text: 'liked your post.', isSeen: true },
-    { id: 3, time: '9:07 am', userName: 'Mehmet', text: 'commented: Great work!', isSeen: false },]}/>} /> {/* Updated this line */}
-        <Route path='/profile' element={<Profile />}/>
-        <Route path='/saleposts' element={<SalePosts initialPosts ={exampleSalePostsProps.initialPosts}/>}/>
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
-        <Route path="/category" element={<CategoryFilter data={categoryData} />} />
         <Route path="/category-select" element={<CategorySelect data={categoryData}/>} />
-        <Route path="/search" element={<SearchComponent />} />
-        
-        <Route path="/show-row" element={<ShowRow item={{
-            id: 1,
-            name: 'Elon Musk',
-            avatarUrl: bikyImage
-          }} onItemClick={function (id: number): void {
-            throw new Error('Function not implemented.');
-          } }/>} />
+    
+     
         </Routes>
         </div>
 

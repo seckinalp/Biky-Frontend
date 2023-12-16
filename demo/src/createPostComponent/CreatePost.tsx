@@ -1,10 +1,43 @@
 import React, { useState, useRef } from 'react';
 import './CreatePost.css';
+import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
 interface CreatePostProps {
  
   onClose: () => void;
 }
+
+export interface Category {
+  categoryID: number;
+  name: string;
+  children: Category[];
+}
+
+const categoryData: Category[] = [
+  {
+    categoryID: 1,
+    name: "string",
+    children: [
+      {
+        categoryID: 2,
+        name: "lesson",
+        children: [
+          {
+            categoryID: 3,
+            name: "cs",
+            children: [
+              { categoryID: 4, name: "cs223", children: [] },
+              { categoryID: 5, name: "cs315", children: [] },
+              { categoryID: 6, name: "cs319", children: [] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  // ... other categories
+];
+
 const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
@@ -96,10 +129,9 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
         {postType === 'sale' && (
           <>
             <div className="form-group">
-              <label htmlFor="type">Select a Type</label>
-              <select id="type" value={selectedType} onChange={handleTypeChange}>
-                {/* Option elements */}
-              </select>
+            
+             
+             
             </div>
             <div className="form-group">
               <label htmlFor="price">Price</label>
@@ -112,6 +144,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
                 step="0.01" // Only allow integer values
               />
             </div>
+            <CategorySelect data={categoryData}/>
           </>
         )}
 

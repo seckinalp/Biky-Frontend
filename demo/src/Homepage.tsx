@@ -95,7 +95,10 @@ const Homepage: React.FC = () => {
       onSearchClick={handleSearchClick} onChatClick={handleChatClick}
         />
      
-       
+       <br />
+       <br />
+       <br />
+       <br />
       <div className="homepage">
         <div className="app__homepage">
           <div className="homepage__timeline">
