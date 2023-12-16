@@ -1,17 +1,31 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-export const tokenSlice = createSlice({
-  name: 'auth_token',
-  initialState: { token: "" },
+// Define your auth slice
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState: { token: '', userID: '' },
   reducers: {
-    change(state,action) {
-      state.token = action.payload;
-    }
+    setTokenAndUserId: (state, action) => {
+      state.token = action.payload.token;
+      state.userID = action.payload.userId;
+    },
+    clearTokenAndUserId: (state) => {
+      state.token = '';
+      state.userID = '';
+    },
   },
 });
 
+export const { setTokenAndUserId, clearTokenAndUserId } = authSlice.actions;
+
+// Define RootState type
+export type RootState = {
+  auth: ReturnType<typeof authSlice.reducer>;
+};
+
+// Configure the Redux store
 const store = configureStore({
-  reducer: { token: tokenSlice.reducer},
+  reducer: { auth: authSlice.reducer },
 });
 
 export default store;

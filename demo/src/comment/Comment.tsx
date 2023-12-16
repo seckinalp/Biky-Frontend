@@ -2,40 +2,41 @@ import React from 'react';
 import './Comment.css';
 
 export interface CommentProps {
-  item: {
-    commentId: string;
-    postId: string;
-    author: {
-      userID: string;
-      userName: string;
-      userProfileLink: string;
-    };
-    contentText: string;
-    commentTime: Date //UTC time
-
-  };
+  item: CommentClass,
   showDelete: boolean;
   onDelete: () => void;
 }
 
-const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
-  const { author, contentText } = item;
-  const dateTime: String = item.commentTime.toLocaleDateString();
+export interface CommentClass {
+  commentID: string;
+    postID: string;
+    authorID: string;
+    author: {
+      userID: string;
+      nickname: string;
+      profileImage: string;
+    };
+    content: string;
+    postTime: string //UTC time
+}
 
+
+const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
+  const { author, content, postTime } = item;
 
   return (
     <div className="comment-item">
-      <img className="comment-avatar" src={author.userProfileLink} alt={author.userName} />
+      <img className="comment-avatar" src={author.profileImage} alt={author.nickname} />
       <div className="comment-content">
-        <span className="comment-author">{author.userName}</span>
-        <div className="time-posted">{dateTime}</div>
-        <span className="comment-text">{contentText}</span>
+        <span className="comment-author">{author.nickname}</span>
+        <div className="time-posted">{postTime}</div>
+        <span className="comment-text">{content}</span>
         {showDelete && <button onClick={onDelete} className="delete-comment">🗑️</button>}      </div>
     </div>
   );
 };
 
-Comment.defaultProps = {
+/*Comment.defaultProps = {
     item: {
         commentId: "1111",
         postId: "2222",
@@ -50,5 +51,5 @@ Comment.defaultProps = {
       },
       showDelete : true,
 
-    }
+    }*/
 export default Comment;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Post from "./Post";
 import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
+import  { useSelector } from 'react-redux';
 
 export interface SocialMediaPostProps {
   item: {
@@ -17,7 +18,6 @@ export interface SocialMediaPostProps {
     isLiked: boolean; // to show it is liked by viewing user
     isAnonymous: boolean;
     likecount: number;
-    initialComments: CommentProps[];
   };
 }
 
@@ -37,10 +37,15 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   };
 
   const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState<CommentProps[]>([]);
 
   const toggleComments = () => {
     setShowComments(!showComments);
   };
+
+  const reloadComments = () => {
+    
+  }
   return (
 
     <>
@@ -55,7 +60,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
-    {showComments && <Comments initialcomments={props.item.initialComments} author={props.item.author} />}
+    {showComments && <Comments postID={props.item.postID}/>}
     </>
   );
 }

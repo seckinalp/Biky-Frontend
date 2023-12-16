@@ -13,10 +13,12 @@ import { imageLink } from './logic/backend';
 import Notifications from './notificationComponent/Notifications';
 import Comments from "./comment/Comments"
 import SocialMediaPost from './postcomponent/SocialMediaPost';
-import SocialMediaPosts, { SocialMediaPostsProps } from './postcomponent/SocailMediaPosts';
+import SocialMediaPosts, { SocialMediaPostsProps } from './postcomponent/SocialMediaPosts';
 import SalePost from './postcomponent/SalePost';
 import { SalePostProps } from './postcomponent/SalePost';
 import SalePosts, { SalePostsProps } from './postcomponent/SalePosts';
+import { Provider } from 'react-redux';
+import store from './store'; 
 const exampleSalePostsProps: SalePostsProps = {
   initialPosts: [
     {
@@ -177,6 +179,7 @@ const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
 
 const App = () => {
   return (
+    <Provider store={store}>
     <Router>
       <Routes>
       <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
@@ -193,12 +196,14 @@ const App = () => {
     { id: 3, time: '9:07 am', userName: 'Mehmet', text: 'commented: Great work!', isSeen: false },]}/>} /> {/* Updated this line */}
         <Route path='/profile' element={<Profile />}/>
         <Route path='/saleposts' element={<SalePosts initialPosts ={exampleSalePostsProps.initialPosts}/>}/>
+        <Route path='/comments' element={<Comments postID={"7f3e30a5-cc09-4501-82e0-feb7136e22bb"}/>}/>
         
       
       
 
       </Routes>
     </Router>
+    </Provider>
   );
 };
 

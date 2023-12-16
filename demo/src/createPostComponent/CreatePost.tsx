@@ -107,7 +107,7 @@ const CreatePost = () => {
                 value={price}
                 onChange={handlePriceChange}
                 min="0" // Minimum value
-                step="1" // Only allow integer values
+                step="0.01" // Only allow integer values
               />
             </div>
           </>

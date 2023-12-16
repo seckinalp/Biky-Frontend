@@ -1,30 +1,51 @@
 // Comments.tsx
-import React from 'react';
-import { useState } from 'react';
-import Comment, { CommentProps } from './Comment';
+import React, { useEffect } from 'react';
+import { useState} from 'react';
+import Comment, { CommentProps, CommentClass } from './Comment';
 import './Comments.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/index';
+import { AddComment, FetchComment } from '../logic/backend';
 
 
 export interface CommentsProps {
-  initialcomments: CommentProps[]
-  author: 
-    {
-    userID: string
-    userName: string
-    userProfileLink: string
-    }
+  postID: String
+  //initialcomments: CommentProps[]
 }
 
 
-const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
-    const [comments, setComments] = useState(initialcomments);
+const Comments: React.FC<CommentsProps> = ({postID}) => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [reload, setReload] = useState<boolean>(true);
+  const [comments, setComments] = useState<CommentClass[]>([]);
     
-    const [isVisible, setIsVisible] = useState(true); // State to control visibility
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedComments = await FetchComment(postID);
+        setComments(fetchedComments);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (reload) {
+      
+      fetchData();
+      setReload(false); 
+    }
+  }, [reload]); 
+
+  const reloadComments = () => {
+    setReload(true);
+  };
     
     const [newCommentText, setNewCommentText] = useState('');
     const [isInputValid, setIsInputValid] = useState(true); // State to track input validation
-    
-
+    const jwtToken = useSelector((state : RootState) => state.auth.token);
+    const userID = useSelector((state : RootState) => state.auth.userID);
 
     const handleNewCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewCommentText(e.target.value);
@@ -32,44 +53,30 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
 
     };
     const handleSendComment = () => {
-        const newComment: CommentProps = {
-            item: {
-                commentId: '1234', // `${new Date().getTime()}` Generate a unique ID (for example, based on timestamp)
-                postId: '123', // You need to provide the correct post ID here
-                author: author,
-                contentText: newCommentText,
-                commentTime: new Date(), // Current date-time as default
-
-            },
-            showDelete: false,//true or false it does not matter in the return statement aboove it checks 
-            onDelete: function (): void {
-                throw new Error('Function not implemented.');
-            }
-        };
-        setComments([...comments, newComment]);
+        AddComment(postID, newCommentText, jwtToken);
+        reloadComments();
         setNewCommentText('');// Clear input field after sending comment
      } 
 
 
       const handleDelete = (commentId: string) => {
-        // Filter out the comment that needs to be deleted
-        const updatedComments = comments.filter(comment => comment.item.commentId !== commentId);
-        setComments(updatedComments);
+        
+        reloadComments();
       };
-  
-    const displayedComments = [...comments].reverse();
-    return (
+
+    //const displayedComments = [...comments].reverse();
+    return (  loading ? <div>reloading </div> :
     <div className="comment-section">
       <div className="comment-header">
         <strong>Comments</strong>
       </div>
       <div className="comment-list">
-      {displayedComments.map((comment) => (
+      {comments.map((comment) => (
         <Comment 
-        key={comment.item.commentId} 
-        item={comment.item} 
-        showDelete={comment.item.author.userID === author.userID}
-        onDelete={() => handleDelete(comment.item.commentId)}
+        key={comment.commentID} 
+        item={comment} 
+        showDelete={comment.author.userID === userID}
+        onDelete={() => handleDelete(comment.commentID)}
         />
         ))}
       </div>
@@ -83,77 +90,7 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
         <button className="send-button"onClick={handleSendComment}>📤</button>
       </div>
     </div>
-  );
+      );
 };
-
-
-
-
-
-
-
-
-Comments.defaultProps = {
-    initialcomments: [
-      {
-        item: {
-          commentId: "defaultCommentId0",
-          postId: "defaultPostId",
-          author: {
-            userID: "defaultUserId",
-            userName: "Default User",
-            userProfileLink: "../public/profile.png", // Ensure this path is correct
-          },
-          contentText: "This is a defaultSDFD",
-          commentTime: new Date(), // Current date-time as default
-
-        },
-        showDelete: true,
-        onDelete: () => { console.log('Default delete function'); },
-      },
-      {
-        item: {
-          commentId: "defaultCommentId1",
-          postId: "defaultPostId",
-          author: {
-            userID: "1234",
-            userName: "Default User",
-            userProfileLink: "../public/profile.png", // Ensure this path is correct
-          },
-          contentText: "This is a default comment.",
-          commentTime: new Date(), // Current date-time as default
-
-        },
-        showDelete: true,
-        onDelete: () => { console.log('Default delete function'); },
-
-      },
-      {
-        item: {
-          commentId: "defaultCommentId2",
-          postId: "defaultPostId",
-          author: {
-            userID: "1234",
-            userName: "Default User",
-            userProfileLink: "../public/profile.png", // Ensure this path is correct
-          },
-          contentText: "This is a default coasdmment.",
-          commentTime: new Date(), // Current date-time as default
-
-        },
-        showDelete: false,
-        onDelete: () => { console.log('Default delete function'); },
-      },
-      
-      // You can add more default comments in similar structure
-    ],
-    author: 
-    {
-    userID: "1234",
-    userName: "dedecom",
-    userProfileLink: "../public/profile.png",
-    }
-  };
-
 
 export default Comments;
