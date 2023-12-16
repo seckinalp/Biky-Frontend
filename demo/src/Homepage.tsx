@@ -8,6 +8,7 @@ import CreatePost from "./createPostComponent/CreatePost";
 import CategoryFilter from "./categoryFilterCompononet/CategoryFilter";
 import SearchComponent from "./SearchComponent/SearchComponent";
 import Chat from "./ChatComponent/Chat";
+import { getUserCredentials } from "./logic/cookie";
 
 
 const sampleProfileData = {
@@ -122,7 +123,7 @@ const Homepage: React.FC = () => {
               )}
             </div>
             <div className="timeline__middle">
-            {showProfile && <Profile item={sampleProfileData} />}
+            {showProfile && <Profile item={getUserCredentials().userID} />}
            {showCreatePost && <CreatePost onClose={handleCreatePostClick} />}
            {showChatComponent && <Chat onClose={handleChatClick} />}
             </div>

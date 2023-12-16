@@ -197,7 +197,7 @@ const handleFilterChange = () => {
         <option value="borrow">Borrow</option>
       </select>
     </div>
-    <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange} />
+    <CategorySelect data={data} onCategoryChange={handleItemCategoryChange} />
         </div>
         
       )}
