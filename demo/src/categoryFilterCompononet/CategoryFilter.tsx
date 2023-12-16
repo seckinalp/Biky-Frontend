@@ -48,10 +48,10 @@ const categoryData: Category[] = [
 ];
 const categoryMap: { [key: string]: number } = {
   lostAndFound: 1,
-  secondHand: 2,
-  privateLesson: 3,
+  secondHand: 3,
+  privateLesson: 2,
   trade: 4,
-  borrow: 5,
+  borrow: 0,
 };
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange }) => {
