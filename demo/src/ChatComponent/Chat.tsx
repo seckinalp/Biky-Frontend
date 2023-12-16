@@ -33,9 +33,9 @@ const Chat: React.FC = () => {
       </div>
       <div className="chat-messages">
         {messages.map((message) => (
-          <div key={message.id} className={`message ${message.author === 'me' ? 'mine' : 'theirs'}`}>
-            <div className="message-content">{message.content}</div>
-            <div className="message-timestamp">{message.timestamp}</div>
+          <div key={message.id} className={`chat-message ${message.author === 'me' ? 'mine' : 'theirs'}`}>
+            <div className="chat-message-content">{message.content}</div>
+            <div className="chat-message-timestamp">{message.timestamp}</div>
           </div>
         ))}
       </div>
@@ -45,10 +45,10 @@ const Chat: React.FC = () => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type a message..."
-          className="input-field"
+          className="chat-input-field"
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
         />
-        <button onClick={handleSendMessage} className="send-button">Send</button>
+        <button onClick={handleSendMessage} className="chat-send-button">Send</button>
       </div>
     </div>
   );

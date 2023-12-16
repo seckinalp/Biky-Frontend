@@ -114,7 +114,7 @@ const handleFilterChange = () => {
  
   return (
     <div className="category-filter-container">
-    <button className="close-button" onClick={handleClose}></button>
+    <button className="generic-close-button" onClick={handleClose}></button>
     <div className="category-filter-header">Filter the Post</div>
     <div className="button-group">
       <div className='button1'> <button 

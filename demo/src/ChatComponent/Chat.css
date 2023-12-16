@@ -27,7 +27,7 @@
   overflow-y: auto;
 }
 
-.message {
+.chat-message {
   margin-bottom: 12px;
   line-height: 1.4;
   width: fit-content;
@@ -35,22 +35,22 @@
   word-wrap: break-word;
 }
 
-.message.mine {
+.chat-message.mine {
   align-self: flex-end;
   background-color: #dcf8c6;
 }
 
-.message.theirs {
+.chat-message.theirs {
   align-self: flex-start;
   background-color: #e5e5ea;
 }
 
-.message-content {
+.chat-message-content {
   padding: 10px 15px;
   border-radius: 18px;
 }
 
-.message-timestamp {
+.chat-message-timestamp {
   display: block;
   font-size: 0.8em;
   margin-top: 5px;
@@ -65,7 +65,7 @@
   align-items: center;
 }
 
-.input-field {
+.chat-input-field {
   flex-grow: 1;
   padding: 10px;
   margin-right: 10px;
@@ -74,7 +74,7 @@
   outline: none;
 }
 
-.send-button {
+.chat-send-button {
   padding: 10px 20px;
   background-color: #5b36ac;
   color: white;
@@ -84,12 +84,12 @@
   transition: background-color 0.2s;
 }
 
-.send-button:hover {
+.chat-send-button:hover {
   background-color: #473093;
 }
 
 /* Extra styles for character count and anonymous checkbox */
-.character-count {
+.chat-character-count {
   position: absolute;
   right: 20px;
   top: -25px; /* Adjust as necessary */
@@ -98,17 +98,17 @@
   border-radius: 10px;
 }
 
-.checkbox-group {
+.chat-checkbox-group {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 10px 0;
 }
 
-.checkbox-group input[type="checkbox"] {
+.chat-checkbox-group input[type="checkbox"] {
   margin-right: 10px;
 }
 
-.checkbox-group label {
+.chat-checkbox-group label {
   margin: 0;
 }

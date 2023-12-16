@@ -30,7 +30,7 @@ const Notifications: React.FC<NotificationsProps & { onClose: () => void }> = ({
     <div className="notifications-box">
       <div className="notifications-header">
         Notifications
-        <button onClick={handleClose} className="close-button"></button>
+        <button onClick={handleClose} className="generic-close-button"></button>
       </div>
       {notifications.map((notification) => (
         <Followed

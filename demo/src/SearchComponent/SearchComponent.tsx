@@ -57,7 +57,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems
     <div className="search-component">
       <div className="search-header">
         <span className="search-title">Search</span>
-        <button className="close-button" onClick={handleCloseClick}></button>
+        <button className="generic-close-button" onClick={handleCloseClick}></button>
       </div>
       <div className="search-body">
         <input 

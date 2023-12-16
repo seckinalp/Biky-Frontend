@@ -54,7 +54,7 @@ const Settings: React.FC<Props> = ({ onClose }) => {
         ) : (
           <>
          <span>Settings</span>
-          <span><button className='close-button' onClick={handleClose}></button></span>
+          <span><button className='generic-close-button' onClick={handleClose}></button></span>
            
           </>
         )}
