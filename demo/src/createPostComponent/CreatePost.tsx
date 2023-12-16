@@ -3,8 +3,13 @@ import './CreatePost.css';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
 interface CreatePostProps {
- 
   onClose: () => void;
+  onSubmit: (postData: {
+    description: string;
+    postType: 'socialMedia' | 'sale';
+    price: number | '';
+    itemCategory: number | undefined;
+  }) => void;
 }
 
 export interface Category {
@@ -38,23 +43,36 @@ const categoryData: Category[] = [
   // ... other categories
 ];
 
-const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
+const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
-  const [selectedType, setSelectedType] = useState<string>('')
+  
   const [price, setPrice] = useState<number | ''>('');
   const [images, setImages] = useState<string[]>([]);
   const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
   const [isVisible, setIsVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
 
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value);
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmit({
+      description,
+      postType,
+      price,
+      itemCategory,
+    });
   };
+
+  const handleItemCategoryChange = (categoryId: number) => {
+    setItemCategory(categoryId);
+  };
+
+ ;
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -79,10 +97,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Submit form data logic here
-  };
+
   const handleClose = () => {
     onClose(); 
   };
@@ -96,6 +111,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
         <h2 className="modal-title">Create a Post</h2>
         <button className="close-button" onClick={handleClose}>&times;</button>
       </div>
+      <form onSubmit={handleSubmit}>
       <div className="post-type-buttons">
         <button 
           type="button" 
@@ -144,7 +160,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
                 step="0.01" // Only allow integer values
               />
             </div>
-            <CategorySelect data={categoryData}/>
+             <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange} />
           </>
         )}
 
@@ -190,7 +206,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
       <div className="button-container">
   <button className='publish-button' type="submit">PUBLISH!</button>
 </div>
-<form onSubmit={handleSubmit}>
+
   {/* ... */}
 </form>
     </div>

@@ -14,6 +14,7 @@ const initialItems: SearchItem[] = [
   { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
   // More items...
 ];
+
 const SearchComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>(initialItems);
