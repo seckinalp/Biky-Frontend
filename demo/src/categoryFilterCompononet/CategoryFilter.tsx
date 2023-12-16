@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CategoryFilter.css'; // Make sure the path is correct
 
 interface Category {
   categoryID: number;
@@ -22,10 +23,11 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
 
   const renderSelect = (categories: Category[], level: number) => {
     return (
-      <div>
+      <div key={level}>
         <label>
           {level === 0 ? 'Category:' : `Subcategory Level ${level}:`}
           <select
+            className="category-filter-select"
             value={selectedCategories[level]?.categoryID || ''}
             onChange={(e) =>
               handleCategoryChange(
@@ -54,7 +56,14 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
     currentCategories = selectedCategories[i]?.children || [];
   }
 
-  return <div>{selects}</div>;
+  return (
+    <div className="category-filter-container">
+      <button className="category-filter-close-btn">X</button>
+      <div className="category-filter-header">Filter the Post</div>
+      {selects}
+      <button className="category-filter-apply-btn">Filter</button>
+    </div>
+  );
 };
 
 export default CategoryFilter;

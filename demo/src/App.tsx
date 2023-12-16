@@ -19,6 +19,8 @@ import { SalePostProps } from './postcomponent/SalePost';
 import SalePosts, { SalePostsProps } from './postcomponent/SalePosts';
 import { Provider } from 'react-redux';
 import store from './store'; 
+import CategoryFilter from './categoryFilterCompononet/CategoryFilter';
+import SearchComponent from './SearchComponent/SearchComponent';
 const exampleSalePostsProps: SalePostsProps = {
   initialPosts: [
     {
@@ -97,7 +99,11 @@ const exampleSalePostsProps: SalePostsProps = {
   ]
 };
 
-
+interface Category {
+  categoryID: number;
+  name: string;
+  children: Category[];
+}
 
 const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
   initialPosts: [
@@ -178,6 +184,30 @@ const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
 };
 
 const App = () => {
+  const categoryData: Category[] = [
+    {
+      categoryID: 1,
+      name: "string",
+      children: [
+        {
+          categoryID: 2,
+          name: "lesson",
+          children: [
+            {
+              categoryID: 3,
+              name: "cs",
+              children: [
+                { categoryID: 4, name: "cs223", children: [] },
+                { categoryID: 5, name: "cs315", children: [] },
+                { categoryID: 6, name: "cs319", children: [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    // ... other categories
+  ];
   return (
     <Provider store={store}>
     <Router>
@@ -197,8 +227,8 @@ const App = () => {
         <Route path='/profile' element={<Profile />}/>
         <Route path='/saleposts' element={<SalePosts initialPosts ={exampleSalePostsProps.initialPosts}/>}/>
         <Route path='/comments' element={<Comments postID={"7f3e30a5-cc09-4501-82e0-feb7136e22bb"}/>}/>
-        
-      
+        <Route path="/category" element={<CategoryFilter data={categoryData} />} />
+        <Route path="/search" element={<SearchComponent />} />
       
 
       </Routes>
