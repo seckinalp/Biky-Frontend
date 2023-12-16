@@ -60,7 +60,6 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
 
 
       const handleDelete = (commentId: string) => {
-        
         reloadComments();
       };
 

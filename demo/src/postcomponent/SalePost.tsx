@@ -4,21 +4,25 @@ import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
   
   export interface SalePostProps {
-    item: {
-      postType: Number
-      postID: string;
+    item: SalePostClass,
+    isAnonymous?: false;
+  }
+
+  export interface SalePostClass{
+    
+      postType: number,
+      price: number,
+      categoryID: number,
+      postID: string,
+      authorID: string,
+      contentText: string,
+      images: [],
       author: {
-        userID: string;
-        userName: string;
-        userProfileLink: string;
-      };
-      imagesID: string[];
-      contentText: string;
-      postTime: Date; // UTC time
-      price: String
-      isAnonymous: false;
-      initialComments: CommentProps[];
-    };
+        userID: string,
+        nickname: string,
+        profileImage: string,
+      },
+      postTime: string
   }
   
   const SalePost: React.FC<SalePostProps> = (props) => {
@@ -32,7 +36,7 @@ import  { CommentProps } from '../comment/Comment';
     return (
   
       <>
-      <Post item={props.item} />
+      <Post item={props.item}  />
         <div className="post-container">
         <div className="post-actions">
           <div className="post-buttons">

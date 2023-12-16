@@ -3,28 +3,33 @@ import React from 'react';
 import './Post.css';
 import { useState } from 'react';
 import { imageLink } from '../logic/backend';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/index';
+import { AddComment, FetchComment } from '../logic/backend';
 
 export interface PostProps {
   item: {
-		postID: string
-		author: 
-			{
-			userID: string
-			userName: string
-			userProfileLink: string
-			}
-		imagesID: string[]
-		contentText: string
-		postTime: Date //UTC time
-    isAnonymous: boolean // Added isAnonymous flag
-		}
-    
+		postType: number,
+      price: number,
+      categoryID: number,
+      postID: string,
+      authorID: string,
+      contentText: string,
+      images: [],
+      author: {
+        userID: string,
+        nickname: string,
+        profileImage: string,
+      },
+      postTime: string
+  isAnonymous: boolean // Added isAnonymous flag 
+  }
 }
 //assuming we pass the post as props.item
 const Post: React.FC<PostProps> = (props) => {
-  const [globalId, setGlobalId] = useState("1234");
+  const userID = useSelector((state : RootState) => state.auth.userID);
 
-  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == globalId);
+  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == userID);
 
 
   const user = {}; // Placeholder for user object from backend
@@ -41,10 +46,9 @@ const Post: React.FC<PostProps> = (props) => {
 
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images: string[] = props.item.imagesID
-  ? props.item.imagesID.map((imageID) => `${imageLink}${imageID}`)
+  const images: string[] = props.item.images
+  ? props.item.images.map((images) => `${imageLink}${images}`)
   : [];
-  const dateTime: String = props.item.postTime.toLocaleDateString();
 
   const [showOptions, setShowOptions] = useState(false);
   const toggleOptions = () => {
@@ -63,10 +67,11 @@ const Post: React.FC<PostProps> = (props) => {
   return (
     <div className="post-container">
       <div className="post-header">
-        <img className="profile-pic" src={props.item.isAnonymous ? "../public/ppdefault.jpg" : props.item.author.userProfileLink} alt="Profile"/>
+        <img className="profile-pic" src={props.item.isAnonymous ? "../public/ppdefault.jpg" : props.item.author.profileImage
+      } alt="Profile"/>
         <div className="username-time">
-          <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.userName}</div>
-          <div className="time-posted">{dateTime}</div>
+          <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.nickname}</div>
+          <div className="time-posted">{props.item.postTime}</div>
         </div>
         {showDeletePost && <button  className="delete-postc">🗑️</button>}
         <div className="more-options" onClick={toggleOptions}>
