@@ -20,6 +20,13 @@ const sampleProfileData = {
   nickname: 'coderJoe',
   profileImage: 'path_to_profile_image.jpg' // Replace with actual path to an image
 };
+
+const items = [
+  { id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
+  { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
+  // ... more items
+];
+
 const Homepage: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -121,7 +128,7 @@ const Homepage: React.FC = () => {
             </div>
             <div className="timeline__right">
           {showCategoryFilter && <CategoryFilter onClose={() => setShowCategoryFilter(false)} />}
-          {showSearchComponent && <SearchComponent onClose={() => setShowSearchComponent(false)} />}
+          {showSearchComponent && <SearchComponent initialItems={items} onClose={() => setShowSearchComponent(false)} />}
 </div>
             </div>
           </div>
