@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Register.css'; // Make sure the path to your CSS file is correct
 import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if necessary
+import { RegisterRequest } from '../logic/backend';
 
 
 const Register = () => {
@@ -74,16 +75,20 @@ const Register = () => {
   };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     console.log("Form Data: ",formData)
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
     const isStudentIdValid = validateStudentId();
 
     if (!(isEmailValid && isPasswordValid && isStudentIdValid) ) {
+      event.preventDefault();
       return; // Stop the form from submitting
     }
-
+    try {
+      RegisterRequest(formData.studentId, formData.name, formData.email, formData.password);
+    } catch (error) {
+      console.error('Error registering:', error);
+    }
     // TODO: Implement your registration logic here
     // If everything is okay, navigate to the homepage
     console.log(formData.password);

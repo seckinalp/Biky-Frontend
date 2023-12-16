@@ -55,7 +55,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
       liked: !prevState.liked,
       likeCount: prevState.liked ? prevState.likeCount - 1 : prevState.likeCount + 1,
     }));
-    if(likeState.liked) {
+    if(!likeState.liked) {
       try {
         AddLike(props.item.postID);
       }
