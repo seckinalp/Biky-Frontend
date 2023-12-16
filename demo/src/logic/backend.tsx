@@ -268,3 +268,39 @@ export async function GetSaleUser(authorID: String) : Promise<SalePostClass[]> {
     const resData = await response.json();
     return resData;
 }
+
+export async function AddLike(postID: String) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Like/Add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      {postID : postID}
+    )
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to add like');
+        }
+}
+
+export async function RemoveLike(postID: String) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Like/Remove`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      {postID : postID}
+    )
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to remove like');
+        }
+}
