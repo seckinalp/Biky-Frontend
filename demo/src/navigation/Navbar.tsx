@@ -6,18 +6,23 @@ import "./Navbar.css";
 interface NavbarProps {
   onSettingsClick: () => void;
   onNotificationsClick :() => void;
+  onProfileClick: () => void; 
+  onCreatePostClick: () => void;
+  onCategoryFilterClick:() => void;
+  onSearchClick :() =>void;
+  onChatClick: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSettingsClick, onNotificationsClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onChatClick, onSearchClick , onCategoryFilterClick,onSettingsClick, onNotificationsClick, onProfileClick,onCreatePostClick }) => {
 
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    // Profil düğmesi tıklama olayını burada işleyin
+    onProfileClick ();
   };
 
-  const handleMessageClick = () => {
-    // Mesaj düğmesi tıklama olayını burada işleyin
+  const handleChatClick = () => {
+    onChatClick();
   };
 
   const handleNotificationClick = () => {
@@ -33,14 +38,14 @@ const Navbar: React.FC<NavbarProps> = ({ onSettingsClick, onNotificationsClick }
     // Ana sayfa düğmesi tıklama olayını burada işleyin
   };
   const handleCreateClick = () => {
-    // Mağaza düğmesi tıklama olayını burada işleyin
+    onCreatePostClick();
   };
 
   const handleSearchClick = () => {
-    // Mağaza düğmesi tıklama olayını burada işleyin
+    onSearchClick ();
   };
   const handleFilterClick = () => {
-    // Mağaza düğmesi tıklama olayını burada işleyin
+    onCategoryFilterClick();
   };
   return (
     <div className="navbar">
@@ -57,7 +62,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSettingsClick, onNotificationsClick }
         <button className="navbar__button navbar__button_home" onClick={handleHomeClick}>
           <img className="navbar__home" src="../../home-buttonn.png" alt="" />
         </button>
-        <button className="navbar__button navbar__button_message" onClick={handleMessageClick}>
+        <button className="navbar__button navbar__button_message" onClick={handleChatClick}>
           <img className="navbar__message" src="../../message.png" alt="" />
         </button>
         <button className="navbar__button navbar__button_notification" onClick={handleNotificationClick}>

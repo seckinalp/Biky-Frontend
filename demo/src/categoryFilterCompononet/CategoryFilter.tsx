@@ -33,7 +33,7 @@ const categoryData: Category[] = [
   }
   // ... other categories
 ];
-const CategoryFilter: React.FC<void> = () => {
+const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
  
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
   const [postType, setPostType] = useState<'socialMedia' | 'sale' | null>(null);
@@ -62,7 +62,7 @@ const CategoryFilter: React.FC<void> = () => {
 
 
   const handleClose = () => {
-    setIsVisible(false); // Hide the component
+    onClose(); 
   };
 
   if (!isVisible) return null;

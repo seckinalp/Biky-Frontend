@@ -14,8 +14,7 @@ const initialItems: SearchItem[] = [
   { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
   // More items...
 ];
-
-const SearchComponent: React.FC = () => {
+const SearchComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>(initialItems);
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
@@ -43,7 +42,7 @@ const SearchComponent: React.FC = () => {
   };
 
   const handleCloseClick = () => {
-    setIsVisible(false); // Hide the entire component
+    onClose(); // Hide the entire component
   };
 
   if (!isVisible) return null; // Do not render the component if not visible

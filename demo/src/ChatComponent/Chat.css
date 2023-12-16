@@ -1,0 +1,27 @@
+.chat-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* İçeriği dikey olarak ortala */
+    justify-content: center; /* İçeriği yatay olarak ortala */
+    position: relative; /* Kapatma düğmesini mutlak konumlandırma için */
+  }
+  
+  .close-button {
+    position: absolute; /* Kapatma düğmesini mutlak konumlandırma için */
+    top: 10px; /* İstediğiniz yüksekliği ayarlayın */
+    right: 10px; /* İstediğiniz sağdan mesafeyi ayarlayın */
+  }
+  
+  
+  /* Kapatıldığında gizle */
+  .chat-container.closed {
+    display: none;
+  }
+  
+  /* Diğer stillendirme kuralları buraya eklenir */
+  

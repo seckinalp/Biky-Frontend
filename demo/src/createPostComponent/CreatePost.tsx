@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import './CreatePost.css';
 
-
-const CreatePost = () => {
+interface CreatePostProps {
+ 
+  onClose: () => void;
+}
+const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
   const [selectedType, setSelectedType] = useState<string>('')
@@ -48,8 +51,7 @@ const CreatePost = () => {
     // Submit form data logic here
   };
   const handleClose = () => {
-    // Logic to handle the closing of the post creation modal
-    setIsVisible(false);
+    onClose(); 
   };
   const triggerFileInput = () => {
     fileInputRef.current?.click();
