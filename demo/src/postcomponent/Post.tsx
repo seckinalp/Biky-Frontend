@@ -61,7 +61,7 @@ const Post: React.FC<PostProps> = (props) => {
   return (
     <div className="post-container">
       <div className="post-header">
-        <img className="profile-pic" src={props.item.isAnonymous ? "../public/ppdefault.jpg" : props.item.author.profileImage
+        <img className="profile-pic" src={props.item.isAnonymous || props.item.author.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${props.item.author.profileImage}`
       } alt="Profile"/>
         <div className="username-time">
           <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.nickname}</div>

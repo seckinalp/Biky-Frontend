@@ -1,10 +1,10 @@
 
 import React from 'react';
-import SalePost from './SalePost';
+import SalePost, { SalePostClass } from './SalePost';
 import { SalePostProps } from './SalePost';
 
 export interface SalePostsProps {
-  initialPosts: SalePostProps[];
+  initialPosts: SalePostClass[];
 }
 
 const SocialMediaPosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
@@ -12,7 +12,7 @@ const SocialMediaPosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
     <div>
       {initialPosts.map((post,index)=> (
         <div key={index} style={{ marginBottom: '16px' }}>
-          <SalePost item={post.item}  />
+          <SalePost item={post}  />
         </div>
       ))}
     </div>

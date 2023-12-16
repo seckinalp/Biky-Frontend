@@ -1,9 +1,9 @@
 
 import React from 'react';
-import SocialMediaPost, { SocialMediaPostProps } from './SocialMediaPost';
+import SocialMediaPost, { SocialMediaPostClass, SocialMediaPostProps } from './SocialMediaPost';
 
 export interface SocialMediaPostsProps {
-  initialPosts: SocialMediaPostProps[];
+  initialPosts: SocialMediaPostClass[];
 }
 
 const SocialMediaPosts: React.FC<SocialMediaPostsProps> = ({ initialPosts }) => {
@@ -11,7 +11,7 @@ const SocialMediaPosts: React.FC<SocialMediaPostsProps> = ({ initialPosts }) => 
     <div>
       {initialPosts.map((post ,index) => (
         <div key={index} style={{ marginBottom: '16px' }}>
-        <SocialMediaPost item={post.item} />
+        <SocialMediaPost item={post} />
         </div>
       ))}
     </div>
