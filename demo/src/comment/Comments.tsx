@@ -71,14 +71,14 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
     };
     
 
-    //const displayedComments = [...comments].reverse();
+    const displayedComments = [...comments].reverse();
     return (  loading ? <div>reloading </div> :
     <div className="comment-section">
       <div className="comment-header">
         <strong>Comments</strong>
       </div>
       <div className="comment-list">
-      {comments.map((comment) => (
+      {displayedComments.map((comment) => (
         <Comment 
         key={comment.commentID} 
         item={comment} 

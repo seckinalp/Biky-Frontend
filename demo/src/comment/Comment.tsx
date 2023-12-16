@@ -1,5 +1,8 @@
-import React from 'react';
 import './Comment.css';
+import React, { useState } from 'react';
+import Report from './Report'; // Import Report component here
+
+
 
 export interface CommentProps {
   item: CommentClass,
@@ -23,33 +26,50 @@ export interface CommentClass {
 
 const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
   const { author, content, postTime } = item;
+  const [isReportVisible,setIsReportVisible] = useState(false)
+  
+  const onReport = () => {
+    setIsReportVisible(!isReportVisible); // Toggle report visibility
+  };
+  const handleReportVisibilityChange = (visible: boolean) => {
+    setIsReportVisible(visible);
+  };
+
+
+  const reportItem = {
+    authorID: item.authorID,
+    reportedID: item.postID, // it should be global userId
+    reportType: 0, // You'll need to define this
+    reportCategory: "Comment", // Example category
+    reportData: item.content // or any relevant data
+  };
 
   return (
+    <div className="comment-container">
     <div className="comment-item">
       <img className="comment-avatar" src={author.profileImage} alt={author.nickname} />
       <div className="comment-content">
         <span className="comment-author">{author.nickname}</span>
         <div className="time-posted">{postTime}</div>
         <span className="comment-text">{content}</span>
-        {showDelete && <button onClick={onDelete} className="delete-comment">🗑️</button>}      </div>
+        {showDelete ? (
+            <button onClick={onDelete} className="shared-button-style">🗑️</button>
+        ) : (
+            <button onClick={onReport} className="shared-button-style2">🚩</button> 
+        )}   
+      </div>
     </div>
+    {isReportVisible && (
+        <div className="comment-report-container">
+          <Report
+            item={reportItem}
+            isVisable={isReportVisible}
+            onVisibilityChange={handleReportVisibilityChange}
+          />
+    </div>
+      )}
+  </div>
+
   );
 };
-
-/*Comment.defaultProps = {
-    item: {
-        commentId: "1111",
-        postId: "2222",
-        author: {
-          userID: "1234",
-          userName: "dedeler",
-          userProfileLink: "../public/profile.png",
-        },
-        contentText: "this is comment",
-        commentTime: new Date(), // Current date-time as default
-
-      },
-      showDelete : true,
-
-    }*/
 export default Comment;

@@ -1,4 +1,21 @@
 /* Comment.css */
+
+.comment-container {
+  align-items: flex-start; /* Aligns items to the top */
+  gap: 20px; /* Spacing between comment and report */
+  margin-bottom: 20px; /* Space between each comment */
+}
+
+.comment-item {
+  flex-grow: 1; /* Allows the comment section to grow and fill available space */
+  /* Add more styling as needed for the comment section */
+}
+
+.comment-report-container {
+  flex-basis: 50px; /* Sets a base width for the report container */
+  /* Adjust the width as needed or make it responsive */
+}
+
 .comment-item {
     max-width: 430px;
     display: flex;
@@ -43,8 +60,7 @@
     color: #65676b;
     font-size: 0.75rem;
   }
-
-  .delete-comment {
+  .shared-button-style {
     position: absolute; /* Position the delete button absolutely */
     top: 0; /* Align to the top */
     right: 0; /* Align to the right */
@@ -54,6 +70,29 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 4px;
+    margin-right: 3px;
 
+
+  }
+  .shared-button-style2 {
+    position: absolute; /* Position the delete button absolutely */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
+    padding: 5px; /* Adjust padding as needed */
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-right: 3px;
+
+  }
+  .shared-button-style:hover{
+    transform: scale(1.1);
+    background-color: grey;
+  }
+  .shared-button-style2:hover{
+    transform: scale(1.1);
+    background-color: grey;
   }
   
