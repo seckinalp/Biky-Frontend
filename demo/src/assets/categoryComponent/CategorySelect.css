@@ -1,12 +1,10 @@
 /* CategorySelect.css */
 .category-select-container {
-    width: 350px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 90%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
-    border: 1px solid black;
+   
   }
   
   .category-filter-select {
@@ -22,9 +20,9 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #000000;
   }
   
   .category-select-group {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }

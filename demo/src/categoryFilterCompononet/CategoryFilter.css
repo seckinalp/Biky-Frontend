@@ -8,6 +8,7 @@
     background-color: white;
     padding: 15px; /* Add padding */
     box-sizing: border-box; /
+    
   }
   
   .category-filter-header {
@@ -101,6 +102,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+    font-weight: bold;
   }
   
   .sale-options input[type="text"] {

@@ -15,11 +15,11 @@ interface NotificationsProps {
   notifications: Notification[];
 }
 
-const Notifications: React.FC<NotificationsProps> = ({ notifications }) => {
+const Notifications: React.FC<NotificationsProps & { onClose: () => void }> = ({ notifications, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleClose = () => {
-    setIsVisible(false);
+    onClose();   
   };
 
   if (!isVisible) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CategoryFilter.css'; // Make sure the path is correct
 import { FetchCategories } from '../logic/backend';
+import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
 export interface Category {
   categoryID: number;
@@ -8,15 +9,34 @@ export interface Category {
   children: Category[];
 }
 
-interface CategoryFilterProps {
-  data: Category[];
-}
-
+const categoryData: Category[] = [
+  {
+    categoryID: 1,
+    name: "string",
+    children: [
+      {
+        categoryID: 2,
+        name: "lesson",
+        children: [
+          {
+            categoryID: 3,
+            name: "cs",
+            children: [
+              { categoryID: 4, name: "cs223", children: [] },
+              { categoryID: 5, name: "cs315", children: [] },
+              { categoryID: 6, name: "cs319", children: [] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  // ... other categories
+];
 const CategoryFilter: React.FC<void> = () => {
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+ 
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
   const [postType, setPostType] = useState<'socialMedia' | 'sale' | null>(null);
-  const [showSaleOptions, setShowSaleOptions] = useState(false);
   const [loading, setLoading] = useState(true);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
@@ -24,14 +44,6 @@ const CategoryFilter: React.FC<void> = () => {
   const [socialMediaText, setSocialMediaText] = useState('');
   const [saleText, setSaleText] = useState('');
   const [data, setData] = useState<Category[]>([]);
-
-
-  const handleCategoryChange = (category: Category, level: number) => {
-    const newSelectedCategories = [...selectedCategories];
-    newSelectedCategories[level] = category;
-    // Remove any deeper selections when a higher level category is changed
-    setSelectedCategories(newSelectedCategories.slice(0, level + 1));
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,51 +60,13 @@ const CategoryFilter: React.FC<void> = () => {
   }, []); 
 
 
-  const renderSelect = (categories: Category[], level: number) => {
-    return (
-      <div key={level}>
-        <label>
-          {level === 0 ? 'Category:' : `Subcategory Level ${level}:`}
-          <select
-            className="category-filter-select"
-            value={selectedCategories[level]?.categoryID || ''}
-            onChange={(e) =>
-              handleCategoryChange(
-                categories.find(cat => cat.categoryID.toString() === e.target.value) as Category,
-                level
-              )
-            }
-          >
-            <option value="">Select a Category</option>
-            {categories.map((category) => (
-              <option key={category.categoryID} value={category.categoryID}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-    );
-  };
+
   const handleClose = () => {
     setIsVisible(false); // Hide the component
   };
-  const handlePostTypeChange = (type: 'socialMedia' | 'sale') => {
-    setPostType(type);
-    // Only show sale options if 'sale' is selected
-    setShowSaleOptions(type === 'sale');
-  };
-  if (!isVisible) return null;
-  let selects: JSX.Element[] = [];
-  if (postType === 'sale') {
-    selects = [renderSelect(data, 0)];
-    let currentCategories = selectedCategories[0]?.children || [];
 
-    for (let i = 1; i <= selectedCategories.length; i++) {
-      selects.push(renderSelect(currentCategories, i));
-      currentCategories = selectedCategories[i]?.children || [];
-    }
-  }
+  if (!isVisible) return null;
+ 
   return (
     <div className="category-filter-container">
     <button className="category-filter-close-btn" onClick={handleClose}>X</button>
@@ -149,20 +123,22 @@ const CategoryFilter: React.FC<void> = () => {
             />
           </div>
           <div className="category-select-group">
-            <label>Category:</label>
+            <label>Post Type:</label>
             <select
               className="category-select"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="">Select a Category</option>
+              <option value="">Select a Type</option>
               <option value="lostAndFound">Lost and Found</option>
               <option value="secondHand">Second Hand</option>
             </select>
           </div>
+          <CategorySelect data={categoryData}/>
         </div>
+        
       )}
-      {selects}
+      
       <button className="category-filter-apply-btn">Filter</button>
     </div>
   );

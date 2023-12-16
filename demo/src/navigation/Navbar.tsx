@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import "./Navbar.css";
 
 interface NavbarProps {
-
+  onSettingsClick: () => void;
+  onNotificationsClick :() => void;
 }
 
-const Navbar: React.FC<NavbarProps> = () => {
+const Navbar: React.FC<NavbarProps> = ({ onSettingsClick, onNotificationsClick }) => {
 
   const navigate = useNavigate();
 
@@ -20,22 +21,17 @@ const Navbar: React.FC<NavbarProps> = () => {
   };
 
   const handleNotificationClick = () => {
-    // Bildirim düğmesi tıklama olayını burada işleyin
+    onNotificationsClick(); 
   };
 
   const handleSettingsClick = () => {
-    // Ayarlar düğmesi tıklama olayını burada işleyin
+    onSettingsClick(); 
   };
 
   const handleHomeClick = () => {
     navigate("/posts")
     // Ana sayfa düğmesi tıklama olayını burada işleyin
   };
-
-  const handleStoreClick = () => {
-    // Mağaza düğmesi tıklama olayını burada işleyin
-  };
-  
   const handleCreateClick = () => {
     // Mağaza düğmesi tıklama olayını burada işleyin
   };

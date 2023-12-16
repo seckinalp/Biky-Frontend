@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './Settings.css';
 
-function Settings() {
+interface Props {
+  onClose: () => void; // Specify the type of onClose as a function that takes no arguments and returns void
+}
+
+const Settings: React.FC<Props> = ({ onClose }) => {
   const [statusMessage, setStatusMessage] = useState('');
   const [isVisible, setIsVisible] = useState(true); // state to control visibility
   const [isReportVisible, setIsReportVisible] = useState(false); // state to control report form visibility
@@ -30,6 +34,7 @@ function Settings() {
   };
 
   const handleClose = () => {
+    onClose();
     setIsVisible(false); // When the button is clicked, set the visibility to false
   };
 
@@ -39,29 +44,35 @@ function Settings() {
   return (
     <div className={containerClass}>
       <div className="settings-header">
-        <span>{isReportVisible ? "Report a Problem" : "Settings"}</span>
         {isReportVisible ? (
-             <button className="back-button" onClick={handleGoBack}>
-             <span className="material-icons">arrow_back</span>
-           </button>
+          <>
+            <span>Report a Problem</span>
+            <button className="back-button" onClick={handleGoBack}>
+              <span className="material-icons">arrow_back</span>
+            </button>
+          </>
         ) : (
-          <button className="close-button" onClick={handleClose}>✖</button>
+          <>
+         <span>Settings</span>
+          
+           
+          </>
         )}
       </div>
+   
       {isReportVisible ? (
         <div className="report-form">
-  <div className="textarea-container">
-    <textarea
-      value={reportMessage}
-      onChange={(e) => setReportMessage(e.target.value)}
-      placeholder="Describe the problem..."
-    ></textarea>
-  </div>
-  <div className="button-container">
-    <button className='btn' onClick={handleReportSubmit}>Submit Report</button>
-  </div>
-</div>
-  
+          <div className="textarea-container">
+            <textarea
+              value={reportMessage}
+              onChange={(e) => setReportMessage(e.target.value)}
+              placeholder="Describe the problem..."
+            ></textarea>
+          </div>
+          <div className="button-container">
+            <button className='btn' onClick={handleReportSubmit}>Submit Report</button>
+          </div>
+        </div>
       ) : (
         <ul className="settings-list">
           <li className="settings-item" onClick={handleReportOpen}>
@@ -70,9 +81,13 @@ function Settings() {
           <li className="settings-item" onClick={handleLogout}>
             <span className="icon">↩️</span> Log out
           </li>
+          <li className="closing" onClick={handleClose}>
+            <span className="icon"></span> Close
+          </li>
         </ul>
       )}
       {statusMessage && <div className="status-message">{statusMessage}</div>}
+   
     </div>
   );
 }
