@@ -6,6 +6,7 @@ import './Comments.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
 import { AddComment, FetchComment } from '../logic/backend';
+import { getUserCredentials } from '../logic/cookie';
 
 
 export interface CommentsProps {
@@ -44,8 +45,7 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
     
     const [newCommentText, setNewCommentText] = useState('');
     const [isInputValid, setIsInputValid] = useState(true); // State to track input validation
-    const jwtToken = useSelector((state : RootState) => state.auth.token);
-    const userID = useSelector((state : RootState) => state.auth.userID);
+    const {userID} = getUserCredentials();
 
     const handleNewCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewCommentText(e.target.value);
@@ -53,10 +53,15 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
 
     };
     const handleSendComment = () => {
-        AddComment(postID, newCommentText, jwtToken);
+      if(newCommentText != "") {
+      AddComment(postID, newCommentText).then(() => {
         reloadComments();
-        setNewCommentText('');// Clear input field after sending comment
-     } 
+        setNewCommentText(''); // Clear input field after sending comment
+      
+      });
+    }
+    };
+    
 
 
       const handleDelete = (commentId: string) => {
