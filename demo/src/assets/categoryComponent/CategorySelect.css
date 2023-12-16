@@ -1,0 +1,30 @@
+/* CategorySelect.css */
+.category-select-container {
+    width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid black;
+  }
+  
+  .category-filter-select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .category-select-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .category-select-group {
+    margin-bottom: 15px;
+  }

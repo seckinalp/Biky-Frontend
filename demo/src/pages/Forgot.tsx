@@ -31,14 +31,14 @@ const ForgotPassword: React.FC = () => {
         placeholder="Email"
         required
       />
-        <button type="submit" className="reset-button">Reset Your Password</button>
+        <button type="submit" className="reset-button btn ">Reset Your Password</button>
 
       <div className="or-divider">
         <span>Or</span>
       </div>
 
-      <button onClick={() => navigate('/homepage')}>Be Visitor and Just Look!</button>
-      <button onClick={() => navigate('/login')}>Login to Your Account</button>
+      <button className='btn' onClick={() => navigate('/homepage')}>Be Visitor and Just Look!</button>
+      <button  className='btn' onClick={() => navigate('/login')}>Login to Your Account</button>
     </form>
     <div className="branding-container">
         <img src={bikyImage} alt="biky" className="biky-image" />

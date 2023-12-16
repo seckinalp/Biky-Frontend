@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CategorySelect.css'; 
 
 interface Category {
   categoryID: number;
@@ -10,29 +11,35 @@ interface CategorySelectProps {
   data: Category[];
 }
 
-const CategorySelect: React.FC<CategorySelectProps>  = ({ data }) => {
+const CategorySelect: React.FC<CategorySelectProps> = ({ data }) => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
   const handleCategoryChange = (category: Category, level: number) => {
-    const newSelectedCategories = [...selectedCategories];
+    const newSelectedCategories = selectedCategories.slice(0, level);
     newSelectedCategories[level] = category;
-    setSelectedCategories(newSelectedCategories.slice(0, level + 1));
+    setSelectedCategories(newSelectedCategories);
   };
-
   const renderSelect = (categories: Category[], level: number) => {
+    // Determine the label based on the selected category or default text
+    const label = level === 0 ? 'Category:' : `${selectedCategories[level - 1]?.name} Options:`;
+
+    // Only render the select if there are categories to display
+    if (categories.length === 0) {
+      return null; // No children to display, so we don't render a select
+    }
     return (
-      <div key={level}>
-        <label>
-          {level === 0 ? 'Category:' : `Subcategory Level ${level}:`}
+      <div key={level} className="category-select-group">
+        <label className="category-select-label">
+          {label}
           <select
             className="category-filter-select"
             value={selectedCategories[level]?.categoryID || ''}
-            onChange={(e) =>
-              handleCategoryChange(
-                categories.find(cat => cat.categoryID.toString() === e.target.value) as Category,
-                level
-              )
-            }
+            onChange={(e) => {
+              const selectedCategory = categories.find(cat => cat.categoryID.toString() === e.target.value);
+              if (selectedCategory) {
+                handleCategoryChange(selectedCategory, level);
+              }
+            }}
           >
             <option value="">Select a Category</option>
             {categories.map((category) => (
@@ -45,21 +52,19 @@ const CategorySelect: React.FC<CategorySelectProps>  = ({ data }) => {
       </div>
     );
   };
+  let selects = [renderSelect(data, 0)];
 
-  let selects: JSX.Element[] = [];
-  selects = [renderSelect(data, 0)];
-  let currentCategories = selectedCategories[0]?.children || [];
-
-  for (let i = 1; i <= selectedCategories.length; i++) {
-    selects.push(renderSelect(currentCategories, i));
-    currentCategories = selectedCategories[i]?.children || [];
+  for (let i = 0; i < selectedCategories.length; i++) {
+    // Only add the next select if there are children in the current selection
+    const currentChildren = selectedCategories[i]?.children;
+    if (currentChildren && currentChildren.length > 0) {
+      selects.push(renderSelect(currentChildren, i + 1));
+    }
   }
 
-  return (
-    <div>
-      {selects}
-    </div>
-  );
+  return <div className="category-select-container">{selects}</div>;
 };
+
+
 
 export default CategorySelect;

@@ -116,11 +116,8 @@
     margin-top: 5px; /* Reduce the top margin */
     margin-bottom: 5px; /* Adjust bottom margin as needed */
   }
-  .register-form button {
-    /* ... other existing styles ... */
-    background-color: #A980FC; /* Set the button background color */
-  }
-  
+
+
   .register-form button:hover {
     transform: scale(1.1); /* Increase the size of the button when hovered */
 

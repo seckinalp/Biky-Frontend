@@ -67,9 +67,9 @@ const Login = () => {
             </label>
             <Link className="forgot-password-link" to="/forgot-password">Forgot Password?</Link>
         </div>
-          <button type="submit" className="continue-button">CONTINUE</button>
+          <button type="submit" className="continue-button btn">CONTINUE</button>
           <div className="alternative-options">
-            <button type="button" onClick={() => navigate('/homepage')} className="visitor-button">
+            <button  type="button" onClick={() => navigate('/homepage')} className="visitor-button btn">
               Be Visitor and Just Look!
             </button>
             <div className="or-divider">

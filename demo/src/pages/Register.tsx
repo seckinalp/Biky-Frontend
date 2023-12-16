@@ -150,7 +150,7 @@ const Register = () => {
           />
           {error && <p className="error-message">{error}</p>} {/* Display error message if passwords do not match */}
 
-          <button type="submit">Get Started</button>
+          <button className='btn' type="submit">Get Started</button>
         </form>
         <p>
           Already have an account? <Link to="/login" className="login-link">LOGIN HERE</Link>
