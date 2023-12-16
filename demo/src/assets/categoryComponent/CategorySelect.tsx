@@ -9,15 +9,17 @@ interface Category {
 
 interface CategorySelectProps {
   data: Category[];
+  onCategoryChange: (categoryId: number) => void; 
 }
 
-const CategorySelect: React.FC<CategorySelectProps> = ({ data }) => {
+const CategorySelect: React.FC<CategorySelectProps> = ({ data, onCategoryChange }) => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
   const handleCategoryChange = (category: Category, level: number) => {
     const newSelectedCategories = selectedCategories.slice(0, level);
     newSelectedCategories[level] = category;
     setSelectedCategories(newSelectedCategories);
+    onCategoryChange(category.categoryID);
   };
   const renderSelect = (categories: Category[], level: number) => {
     // Determine the label based on the selected category or default text

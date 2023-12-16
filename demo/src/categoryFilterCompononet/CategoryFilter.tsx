@@ -3,6 +3,19 @@ import './CategoryFilter.css'; // Make sure the path is correct
 import { FetchCategories } from '../logic/backend';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
+export interface CategoryFilterProps {
+  onClose: () => void;
+  onFilterChange: (filterData: {
+    postType?: 'socialMedia' | 'sale';
+    text?: string;
+    minPrice?: string;
+    maxPrice?: string;
+    category?: number;
+    itemCategory?: number;
+    feedType?: 'following' | 'allFeed';
+  }) => void;
+}
+
 export interface Category {
   categoryID: number;
   name: string;
@@ -33,22 +46,47 @@ const categoryData: Category[] = [
   }
   // ... other categories
 ];
-const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const categoryMap: { [key: string]: number } = {
+  lostAndFound: 1,
+  secondHand: 2,
+  privateLesson: 3,
+  trade: 4,
+  borrow: 5,
+};
+
+const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange }) => {
  
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
-  const [postType, setPostType] = useState<'socialMedia' | 'sale' | null>(null);
+  const [postType, setPostType] = useState<'socialMedia' | 'sale' | undefined>(undefined);
+  const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
+
   const [loading, setLoading] = useState(true);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState<number | undefined>(undefined);
+
   const [socialMediaText, setSocialMediaText] = useState('');
   const [saleText, setSaleText] = useState('');
   const [data, setData] = useState<Category[]>([]);
-  const [feedType, setFeedType] = useState<'following' | 'allFeed' | null>(null);
+
   const [selectedFilter, setSelectedFilter] = useState<'socialMedia' | 'sale' | 'following' | 'allFeed' | null>(null);
 
 // ...
+const handleItemCategoryChange = (categoryId: number) => {
+  setItemCategory(categoryId); // Update the state with the new category ID
+};
 
+const handleFilterChange = () => {
+  onFilterChange({
+    postType,
+    text: postType === 'socialMedia' ? socialMediaText : saleText,
+    minPrice,
+    maxPrice,
+    category,
+    itemCategory,
+    feedType: selectedFilter as 'following' | 'allFeed' // Make sure this casting is safe
+  });
+};
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,8 +101,11 @@ const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       fetchData();
   }, []); 
 
-
-
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // Update to use undefined instead of an empty string
+    const value = event.target.value;
+    setCategory(value ? categoryMap[value] : undefined);
+  };
   const handleClose = () => {
     onClose(); 
   };
@@ -142,23 +183,26 @@ const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             />
           </div>
           <div className="category-select-group">
-            <label>Post Type:</label>
-            <select
-              className="category-select"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">Select a Type</option>
-              <option value="lostAndFound">Lost and Found</option>
-              <option value="secondHand">Second Hand</option>
-            </select>
-          </div>
-          <CategorySelect data={categoryData}/>
+      <label>Post Type:</label>
+      <select
+        className="category-select"
+        value={category === undefined ? '' : category.toString()}
+        onChange={handleCategoryChange}
+      >
+        <option value="">Select a Type</option>
+        <option value="lostAndFound">Lost and Found</option>
+        <option value="secondHand">Second Hand</option>
+        <option value="privateLesson">Private Lesson</option>
+        <option value="trade">Trade</option>
+        <option value="borrow">Borrow</option>
+      </select>
+    </div>
+    <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange} />
         </div>
         
       )}
       
-      <button className="category-filter-apply-btn">Filter</button>
+      <button className="category-filter-apply-btn" onClick={handleFilterChange}>Filter</button>
     </div>
   );
   
