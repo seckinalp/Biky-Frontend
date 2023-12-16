@@ -3,8 +3,12 @@ import Post, { PostProps } from "./Post";
 import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
 
-
 export interface SocialMediaPostProps {
+  item: SocialMediaPostClass,
+}
+
+
+export interface SocialMediaPostClass {
     postID: string;
     author: {
       userID: string;
@@ -29,7 +33,7 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
       author: {
         userID: socialMediaPost.item.author.userID,
         nickname: socialMediaPost.item.author.userName,
-        profileImage: "", // No direct equivalent, set a default or handle accordingly
+        profileImage: socialMediaPost.item.author.userProfileLink, // No direct equivalent, set a default or handle accordingly
       },
       postTime: socialMediaPost.item.postTime, // Convert Date to string
       isAnonymous: socialMediaPost.item.isAnonymous
@@ -41,8 +45,8 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   
   
   const [likeState, setLikeState] = useState({
-    likeCount: props.likecount, // Initialize like count
-    liked: props.isLiked, // Initialize with the prop value
+    likeCount: props.item.likecount, // Initialize like count
+    liked: props.item.isLiked, // Initialize with the prop value
   });
 
   const toggleLike = () => {
@@ -65,11 +69,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   return (
 
     <>
-<<<<<<< HEAD
     <Post item={convertToPostProps(props).item} />
-=======
-    <Post item={props} />
->>>>>>> 74bfceefb534ac6204168267e595d6ff0444fd1a
       <div className="post-container">
       <div className="post-actions">
         <div className="post-buttons">
@@ -80,7 +80,6 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
-    {showComments && <Comments postID={props.postID}/>}
     </>
   );
 }
