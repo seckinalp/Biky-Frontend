@@ -123,6 +123,8 @@
   }
   .price-input {
     max-width: 110px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   .price-input-group input[type="text"] {
     flex: 1; /* Input fields take up equal space */
@@ -133,3 +135,19 @@
   .price-input-group input[type="text"]:last-child {
     margin-right: 0; /* No space after the last input field */
   }
+
+  .social-media-input{
+  width: 92%;
+  padding: 10px;
+  margin-bottom: 10px; /* Add some space below the input field */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.sale-input {
+  width: 92%;
+  padding: 10px;
+  margin-bottom: 10px; /* Add some space below the input field */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -19,6 +19,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [socialMediaText, setSocialMediaText] = useState('');
+  const [saleText, setSaleText] = useState('');
   const handleCategoryChange = (category: Category, level: number) => {
     const newSelectedCategories = [...selectedCategories];
     newSelectedCategories[level] = category;
@@ -73,27 +75,44 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
   }
   return (
     <div className="category-filter-container">
-      <div className="category-filter-header">
-        <span>Filter the Post</span>
-        <button className="category-filter-close-btn" onClick={handleClose}>X</button>
-      </div>
-      <div className="button-group">
-        <button 
-          className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
-          onClick={() => setPostType('socialMedia')}
-        >
-          Social Media Post
-        </button>
-        <button 
-          className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
-          onClick={() => setPostType('sale')}
-        >
-          Sale Post
-        </button>
-      </div>
+    <button className="category-filter-close-btn" onClick={handleClose}>X</button>
+    <div className="category-filter-header">Filter the Post</div>
+    <div className="button-group">
+      <button 
+        className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
+        onClick={() => setPostType('socialMedia')}
+      >
+        Social Media Post
+      </button>
+      <button 
+        className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
+        onClick={() => setPostType('sale')}
+      >
+        Sale Post
+      </button>
+    </div>
+    {postType === 'socialMedia' && (
+      <input
+        type="text"
+        className="social-media-input"
+        placeholder="Check Post Contains a Text"
+        value={socialMediaText}
+        onChange={(e) => setSocialMediaText(e.target.value)}
+      />
+    )}
       {postType === 'sale' && (
         <div className="sale-options">
-          <div className="price-input-group">
+          <div className='contains-input'>
+          <input 
+          type="text"
+          className="sale-input"
+          placeholder="Check Post Contains a Text"
+          value={saleText}
+          onChange={(e) => setSaleText(e.target.value)}
+        />
+          </div>
+       
+        <div className="price-input-group">
             <input
               type="text"
               className="price-input"
