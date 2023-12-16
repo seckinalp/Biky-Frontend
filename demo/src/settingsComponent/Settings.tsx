@@ -54,7 +54,7 @@ const Settings: React.FC<Props> = ({ onClose }) => {
         ) : (
           <>
          <span>Settings</span>
-          
+          <span><button className='close-button' onClick={handleClose}></button></span>
            
           </>
         )}
@@ -80,9 +80,6 @@ const Settings: React.FC<Props> = ({ onClose }) => {
           </li>
           <li className="settings-item" onClick={handleLogout}>
             <span className="icon">↩️</span> Log out
-          </li>
-          <li className="closing" onClick={handleClose}>
-            <span className="icon"></span> Close
           </li>
         </ul>
       )}

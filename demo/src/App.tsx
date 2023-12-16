@@ -183,8 +183,8 @@ return (
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
-        <Route path='/profile/:userID' element={<Profile />}/>
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
+        <Route path='/profile/:userID' element={<Profile />}/>
         <Route path="/category-select" element={<CategorySelect data={categoryData}/>} />
     
      

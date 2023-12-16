@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Post, { PostProps } from "./Post";
+import Comments from '../comment/Comments';
 
   
   export interface SalePostProps {
@@ -23,6 +24,7 @@ import Post, { PostProps } from "./Post";
       },
       postTime: string
   }
+  
   function convertToPostProps(salePost: SalePostProps): PostProps {
     return {
       item: {
@@ -62,6 +64,7 @@ import Post, { PostProps } from "./Post";
           </div>
         </div>
       </div>
+      {showComments && <Comments postID = {props.item.postID}/>}
       </>
     );
   }

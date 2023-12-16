@@ -3,8 +3,14 @@ import './CreatePost.css';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
 interface CreatePostProps {
- 
   onClose: () => void;
+  onSubmit: (postData: {
+    description: string;
+    postType: 'socialMedia' | 'sale';
+    price: number | '';
+    itemCategory: number | undefined;
+    isAnonymous: boolean; // Add this line
+  }) => void;
 }
 
 export interface Category {
@@ -38,23 +44,39 @@ const categoryData: Category[] = [
   // ... other categories
 ];
 
-const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
+const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
-  const [selectedType, setSelectedType] = useState<string>('')
+  const [isAnonymous, setIsAnonymous] = useState(false);
   const [price, setPrice] = useState<number | ''>('');
   const [images, setImages] = useState<string[]>([]);
   const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
   const [isVisible, setIsVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
-
-  const handleTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedType(event.target.value);
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAnonymous(event.target.checked);
   };
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmit({
+      description,
+      postType,
+      price,
+      itemCategory,
+      isAnonymous, // Include the checkbox value in the submitted data
+    });
+  };
+
+  const handleItemCategoryChange = (categoryId: number) => {
+    setItemCategory(categoryId);
+  };
+
+ ;
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -79,10 +101,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Submit form data logic here
-  };
+
   const handleClose = () => {
     onClose(); 
   };
@@ -94,8 +113,9 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
 <div className="create-post">
       <div className="modal-header">
         <h2 className="modal-title">Create a Post</h2>
-        <button className="close-button" onClick={handleClose}>&times;</button>
+        <button className="close-button" onClick={handleClose}></button>
       </div>
+      <form onSubmit={handleSubmit}>
       <div className="post-type-buttons">
         <button 
           type="button" 
@@ -113,19 +133,27 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
         </button>
       </div>
       
-        <div className="form-group">
-          
-          <label htmlFor="description">Description</label>
-          <span className="character-count">{description.length}/256</span>
-          <textarea
-            id="description"
-            value={description}
-            maxLength={256}
-            onChange={handleDescriptionChange}
-          />
-          
-        </div>
-       
+      <div className="form-group">
+  <label htmlFor="description">Description</label>
+  <div className="character-count">{description.length}/256</div>
+  <textarea
+    id="description"
+    value={description}
+    maxLength={256}
+    onChange={handleDescriptionChange}
+  />
+</div>
+
+<div className="form-group checkbox-group">
+  <input 
+    type="checkbox" 
+    id="anonymousCheckbox" 
+    name="anonymous"
+    checked={isAnonymous}
+    onChange={handleCheckboxChange}
+  />
+  <label htmlFor="anonymousCheckbox">Anonymous</label>
+</div>
         {postType === 'sale' && (
           <>
             <div className="form-group">
@@ -144,14 +172,14 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
                 step="0.01" // Only allow integer values
               />
             </div>
-            <CategorySelect data={categoryData}/>
+             <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange} />
           </>
         )}
 
         <div className="image-upload-section">
-          <button type="button" onClick={triggerFileInput}>
-            Upload Images!
-          </button>
+          
+
+          
           <input
             type="file"
             id="imageUpload"
@@ -187,10 +215,17 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose }) => {
         </div>
       )}
       
-      <div className="button-container">
-  <button className='publish-button' type="submit">PUBLISH!</button>
+      <div className="btn-container">
+      <button className="button" onClick={triggerFileInput}> 
+  <svg className="svgIcon" viewBox="0 0 384 512">
+    <path
+      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+    ></path>
+  </svg>
+</button>
+  <button className='btn' type="submit">Publish!</button>
 </div>
-<form onSubmit={handleSubmit}>
+
   {/* ... */}
 </form>
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Post, { PostProps } from "./Post";
 import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
+import { AddLike, RemoveLike } from '../logic/backend';
 
 export interface SocialMediaPostProps {
   item: SocialMediaPostClass,
@@ -20,7 +21,7 @@ export interface SocialMediaPostClass {
     postTime: string; // UTC time
     isLiked: boolean; // to show it is liked by viewing user
     isAnonymous: boolean;
-    likecount: number;
+    likes: number;
 }
 
 function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
@@ -45,7 +46,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   
   
   const [likeState, setLikeState] = useState({
-    likeCount: props.item.likecount, // Initialize like count
+    likeCount: props.item.likes, // Initialize like count
     liked: props.item.isLiked, // Initialize with the prop value
   });
 
@@ -54,6 +55,21 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
       liked: !prevState.liked,
       likeCount: prevState.liked ? prevState.likeCount - 1 : prevState.likeCount + 1,
     }));
+    if(likeState.liked) {
+      try {
+        AddLike(props.item.postID);
+      }
+      catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    } else {
+      try {
+        RemoveLike(props.item.postID);
+      }
+      catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
   };
 
   const [showComments, setShowComments] = useState(false);
@@ -80,6 +96,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
+    {showComments && <Comments postID = {props.item.postID}/>}
     </>
   );
 }

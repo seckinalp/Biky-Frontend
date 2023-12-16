@@ -1,6 +1,6 @@
 .create-post {
   background-color: #fff;
-  border-radius: 32px;
+  border-radius: 15px;
   border-color: black;
   border: 1px solid black;
   width: 60%; /* Adjust the width of the outer box to be narrower */
@@ -22,20 +22,7 @@
   flex-grow: 1; /* Allow the title to grow and push the close button to the end */
 }
 
-.close-button {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem; /* Adjust the font size of the close button to match the title */
-  cursor: pointer;
-  position: absolute;
-  top: 30px; /* Adjust as needed */
-  right: 30px; /* Adjust as needed */
-  margin-top: 10px;
-  margin-right: 10px;
-}
-.close-button:hover {
-  background-color: transparent; /* Keep the background transparent on hover */
-}
+
 .post-type-buttons {
   display: flex;
   justify-content: center; /* Center the buttons */
@@ -60,16 +47,18 @@
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
 .character-count {
-  float: right; /* Position character count to the right */
-  margin-top: -25px; /* Adjust as needed */
-  margin-right: 5px; /* Adjust as needed */
-  color: #999; /* Adjust text color as needed */
+  position: absolute; /* Position the character count absolutely */
+  top: 0; /* Align to the top of the form-group */
+  right: 0; /* Align to the right of the form-group */
+  margin-top: -20px; /* Adjust the top margin to place it above the textarea */
+  margin-right: 5px; /* Adjust the right margin as needed */
+  color: #999; /* Color of the character count */
 }
-
 .form-group textarea {
   width: 100%; 
   height: 70px;/* Make these elements full width */
@@ -88,7 +77,8 @@
 .image-upload-section {
   /* Align the upload button to the right */
   text-align: center;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .character-count {
@@ -97,6 +87,7 @@
   margin-top: -25px;
   margin-right: 5px;
   color: #999;
+ 
 }
 
 .modal-header h2 {
@@ -105,17 +96,29 @@
 }
 
 
-/* Style for the close button, for example: */
-.close-button:hover {
-  color: #f00; /* Color when hovered */
-}
-
-
-.button-container {
+.checkbox-group {
   display: flex;
-  justify-content: center;
-  margin-top: 20px; /* İsteğe bağlı olarak butonun üstünden boşluk bırakır */
+  align-items: center; /* Align the checkbox and label in the center */
+  justify-content: flex-start; /* Align items to the start (left side) */
+  margin-bottom: 10px; /* Reduce space below the checkbox group */
 }
+.checkbox-group label {
+  margin-left: 5px; /* Space between the checkbox and the label */
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin: 0;
+  width: 16px; /* Small size for checkbox */
+  height: 16px; /* Small size for checkbox */
+}
+
+/* Swap the order of checkbox and label to have label on the left */
+.checkbox-group label {
+  order: -1; /* Render label before the checkbox */
+  margin-right: 5px; /* Space between the label and the checkbox */
+  margin-left: 0; /* Reset margin-left */
+}
+
 .image-preview-section {
   display: flex;
   flex-direction: column;
@@ -155,4 +158,48 @@
   margin-top: 0px;
   color: #666;
   margin-bottom: 5px;
+}
+
+.button {
+  width: 40px; /* Increase width */
+  height: 40px; /* Increase height */
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20); /* Original background color */
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.button:hover {
+  background-color: rgb(61, 60, 60) ;
+  transform: scale(1.1);/* Change background color on hover */
+}
+
+.button, .btn {
+  flex: none; /* This ensures thaxt the buttons do not grow or shrink */
+  /* Add any additional styling for the buttons here */
+}
+
+.svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.svgIcon path {
+  fill: white;
+}
+
+
+.btn-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically (if needed) */
+  gap: 10px; /* Optional: adds space between the buttons */
+  margin-top: 20px; /* Optional: adds space above the button container */
 }

@@ -1,4 +1,5 @@
 import './Comment.css';
+import { imageLink } from '../logic/backend';
 import React, { useState } from 'react';
 import Report from './Report'; // Import Report component here
 
@@ -47,7 +48,7 @@ const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
   return (
     <div className="comment-container">
     <div className="comment-item">
-      <img className="comment-avatar" src={author.profileImage} alt={author.nickname} />
+      <img className="comment-avatar" src={`${imageLink}${author.profileImage}` ||"../../public/ppdefault.png"} alt={author.nickname} />
       <div className="comment-content">
         <span className="comment-author">{author.nickname}</span>
         <div className="time-posted">{postTime}</div>

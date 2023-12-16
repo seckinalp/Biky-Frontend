@@ -7,6 +7,7 @@ import { getUserCredentials } from '../logic/cookie';
 import { AddFollow, CheckFollow, FetchProfile, RemoveFollow, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
 import EditProfile from './editprofile/EditProfile';
+import ProfileFeed from './ProfileFeed';
 
 export interface ProfileProps {
     item: ProfileClass,
@@ -23,9 +24,7 @@ export interface ProfileProps {
     profileImage: string | null
   }
   
-c
-onst Profile: React.FC
-, = () => {
+const Profile: React.FC = () => {
   const[data, setData] = useState<ProfileClass>();
   const [followersCount, setFollowersCount] = useState(0);
   const[isFollowed, setisFollowed] = useState(true)//Backend Handled
@@ -246,8 +245,10 @@ onst Profile: React.FC
             )
           }
       </div>
+      {paramName && <ProfileFeed userID = {paramName}/> }
     </div>
     )}
+
     </>
   );
 };

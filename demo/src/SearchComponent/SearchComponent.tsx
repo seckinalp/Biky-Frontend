@@ -14,7 +14,13 @@ const initialItems: SearchItem[] = [
   { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
   // More items...
 ];
-const SearchComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+
+interface SearchComponentProps {
+  onClose: () => void;
+  initialItems: SearchItem[]; // Add this line to accept initialItems as a prop
+}
+
+const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredItems, setFilteredItems] = useState<SearchItem[]>(initialItems);
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
@@ -51,7 +57,7 @@ const SearchComponent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     <div className="search-component">
       <div className="search-header">
         <span className="search-title">Search</span>
-        <button className="search-close-btn" onClick={handleCloseClick}>×</button>
+        <button className="close-button" onClick={handleCloseClick}></button>
       </div>
       <div className="search-body">
         <input 
