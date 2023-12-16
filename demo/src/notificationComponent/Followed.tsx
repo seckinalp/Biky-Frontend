@@ -17,7 +17,7 @@ const Followed: React.FC<FollowedProps> = ({ time, userName, text, isSeen }) => 
       <div className="followed-time">{time}</div>
       <div className="followed-username">{userName}</div>
       <div className="followed-text">{text}</div>
-      <button className="follow-button">Follow Back</button>
+   
     </div>
   );
 };

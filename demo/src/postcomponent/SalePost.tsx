@@ -24,6 +24,7 @@ import Comments from '../comment/Comments';
       },
       postTime: string
   }
+  
   function convertToPostProps(salePost: SalePostProps): PostProps {
     return {
       item: {

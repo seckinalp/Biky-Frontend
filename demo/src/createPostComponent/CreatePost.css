@@ -1,6 +1,6 @@
 .create-post {
   background-color: #fff;
-  border-radius: 32px;
+  border-radius: 15px;
   border-color: black;
   border: 1px solid black;
   width: 60%; /* Adjust the width of the outer box to be narrower */
@@ -22,20 +22,7 @@
   flex-grow: 1; /* Allow the title to grow and push the close button to the end */
 }
 
-.close-button {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem; /* Adjust the font size of the close button to match the title */
-  cursor: pointer;
-  position: absolute;
-  top: 30px; /* Adjust as needed */
-  right: 30px; /* Adjust as needed */
-  margin-top: 10px;
-  margin-right: 10px;
-}
-.close-button:hover {
-  background-color: transparent; /* Keep the background transparent on hover */
-}
+
 .post-type-buttons {
   display: flex;
   justify-content: center; /* Center the buttons */

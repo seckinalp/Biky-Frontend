@@ -15,7 +15,7 @@ const Chat: React.FC<ChatProps> = ({ onClose }) => {
     <div className={`chat-container ${isOpen ? 'open' : 'closed'}`}>
       <h1>Chat Uygulaması</h1>
       {isOpen && (
-        <button className="close-button" onClick={handleClose}>Close</button>
+        <button className="close-button" onClick={handleClose}></button>
       )}
       {/* Chat içeriği buraya eklenebilir */}
     </div>
