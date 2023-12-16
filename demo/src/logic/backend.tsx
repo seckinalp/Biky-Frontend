@@ -1,6 +1,7 @@
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
 import { CommentClass, CommentProps } from "../comment/Comment";
-import { SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
+import { SalePostClass } from "../postcomponent/SalePost";
+import { SocialMediaPostClass, SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
 import { ProfileClass } from "../profilecomponent/Profile";
 import { getUserCredentials } from "./cookie";
 
@@ -230,4 +231,40 @@ export async function RemoveFollow(followingID: String) : Promise<void> {
       if (!response.ok) {
           throw new Error('Failed to fetch profile');
       }
+}
+
+export async function GetSocialUser(authorID: String) : Promise<SocialMediaPostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SocialMediaPost/GetPostByUser?authorID=${authorID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    console.log(response);
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+      }
+
+    const resData = await response.json();
+    return resData;
+}
+
+export async function GetSaleUser(authorID: String) : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SalePost/GetPostByUser?authorID=${authorID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
 }

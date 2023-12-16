@@ -7,6 +7,7 @@ import { getUserCredentials } from '../logic/cookie';
 import { AddFollow, CheckFollow, FetchProfile, RemoveFollow, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
 import EditProfile from './editprofile/EditProfile';
+import ProfileFeed from './ProfileFeed';
 
 export interface ProfileProps {
     item: ProfileClass,
@@ -244,9 +245,9 @@ const Profile: React.FC = () => {
             )
           }
       </div>
+      {paramName && <ProfileFeed userID = {paramName}/> }
     </div>
-    )}<button className="profile-edit-button" onClick={toggleEdit}>Social Media Posts</button>
-    <button className="profile-edit-button" onClick={toggleEdit}>Sale Posts</button>
+    )}
 
     </>
   );

@@ -80,6 +80,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
+    {showComments && <Comments postID = {props.item.postID}/>}
     </>
   );
 }

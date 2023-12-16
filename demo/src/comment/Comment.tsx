@@ -1,5 +1,6 @@
 import React from 'react';
 import './Comment.css';
+import { imageLink } from '../logic/backend';
 
 export interface CommentProps {
   item: CommentClass,
@@ -26,7 +27,7 @@ const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
 
   return (
     <div className="comment-item">
-      <img className="comment-avatar" src={author.profileImage} alt={author.nickname} />
+      <img className="comment-avatar" src={`${imageLink}${author.profileImage}` ||"../../public/ppdefault.png"} alt={author.nickname} />
       <div className="comment-content">
         <span className="comment-author">{author.nickname}</span>
         <div className="time-posted">{postTime}</div>
