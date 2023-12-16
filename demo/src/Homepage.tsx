@@ -90,17 +90,18 @@ const Homepage: React.FC = () => {
   return (
     <div className='app'>
       <div className='background'></div>
-      <Navbar onSettingsClick={handleSettingsClick}
+     
+       
+      <div className="homepage">
+          <div className="homepage__nav">
+
+          <Navbar onSettingsClick={handleSettingsClick}
       onNotificationsClick={handleNotificationsClick} onProfileClick= {handleProfileClick} onCreatePostClick={handleCreatePostClick} onCategoryFilterClick={handleCategoryFilterClick}
       onSearchClick={handleSearchClick} onChatClick={handleChatClick}
         />
-     
-       <br />
-       <br />
-       <br />
-       <br />
-      <div className="homepage">
-        <div className="app__homepage">
+
+          </div>
+
           <div className="homepage__timeline">
             <div className="timeline__left">
             {showSettings && <Settings onClose={() => setShowSettings(false)} />}
@@ -125,7 +126,7 @@ const Homepage: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     
   );
 };

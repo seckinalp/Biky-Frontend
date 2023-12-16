@@ -5,14 +5,14 @@
 }
 
 .homepage__nav {
-    margin-top: 20px;  
+    margin-bottom: 10px;
        flex: 1;
   
     
 }
 
 .homepage__timeline {
-    margin-top: 20px; 
+   
     flex:9;
     
 }
