@@ -9,8 +9,10 @@ export interface SocialMediaPostsProps {
 const SocialMediaPosts: React.FC<SocialMediaPostsProps> = ({ initialPosts }) => {
   return (
     <div>
-      {initialPosts.map(post => (
+      {initialPosts.map((post ,index) => (
+        <div key={index} style={{ marginBottom: '16px' }}>
         <SocialMediaPost item={post.item} />
+        </div>
       ))}
     </div>
   );

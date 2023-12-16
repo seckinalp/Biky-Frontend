@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Post from "./Post";
+import Post, { PostProps } from "./Post";
 import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
-import  { useSelector } from 'react-redux';
+
 
 export interface SocialMediaPostProps {
     postID: string;
@@ -17,6 +17,24 @@ export interface SocialMediaPostProps {
     isLiked: boolean; // to show it is liked by viewing user
     isAnonymous: boolean;
     likecount: number;
+}
+
+function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
+  return {
+    item: {
+      postID: socialMediaPost.item.postID,
+      authorID: socialMediaPost.item.author.userID,
+      contentText: socialMediaPost.item.contentText,
+      images: socialMediaPost.item.imagesID,
+      author: {
+        userID: socialMediaPost.item.author.userID,
+        nickname: socialMediaPost.item.author.userName,
+        profileImage: "", // No direct equivalent, set a default or handle accordingly
+      },
+      postTime: socialMediaPost.item.postTime, // Convert Date to string
+      isAnonymous: socialMediaPost.item.isAnonymous
+    }
+  };
 }
 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
@@ -47,7 +65,11 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   return (
 
     <>
+<<<<<<< HEAD
+    <Post item={convertToPostProps(props).item} />
+=======
     <Post item={props} />
+>>>>>>> 74bfceefb534ac6204168267e595d6ff0444fd1a
       <div className="post-container">
       <div className="post-actions">
         <div className="post-buttons">

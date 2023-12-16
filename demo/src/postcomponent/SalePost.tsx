@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Post from "./Post";
-import Comments from '../comment/Comments';
-import  { CommentProps } from '../comment/Comment';
+import Post, { PostProps } from "./Post";
+
   
   export interface SalePostProps {
     item: SalePostClass,
@@ -16,13 +15,30 @@ import  { CommentProps } from '../comment/Comment';
       postID: string,
       authorID: string,
       contentText: string,
-      images: [],
+      images: string[],
       author: {
         userID: string,
         nickname: string,
         profileImage: string,
       },
       postTime: string
+  }
+  function convertToPostProps(salePost: SalePostProps): PostProps {
+    return {
+      item: {
+        postID: salePost.item.postID,
+        authorID: salePost.item.authorID,
+        contentText: salePost.item.contentText,
+        images: salePost.item.images,
+        author: {
+          userID: salePost.item.author.userID,
+          nickname: salePost.item.author.nickname,
+          profileImage: salePost.item.author.profileImage,
+        },
+        postTime: salePost.item.postTime,
+        isAnonymous: false,
+      }
+    };
   }
   
   const SalePost: React.FC<SalePostProps> = (props) => {
@@ -34,9 +50,8 @@ import  { CommentProps } from '../comment/Comment';
       setShowComments(!showComments);
     };
     return (
-  
       <>
-      <Post item={props.item}  />
+      <Post item={convertToPostProps(props).item}  />
         <div className="post-container">
         <div className="post-actions">
           <div className="post-buttons">
@@ -47,7 +62,6 @@ import  { CommentProps } from '../comment/Comment';
           </div>
         </div>
       </div>
-      {showComments && <Comments initialcomments={props.item.initialComments} author={props.item.author} />}
       </>
     );
   }

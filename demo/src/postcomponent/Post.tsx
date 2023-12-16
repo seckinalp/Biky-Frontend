@@ -12,14 +12,14 @@ export interface PostProps {
       postID: string,
       authorID: string,
       contentText: string,
-      images: [],
+      images: string[],
       author: {
         userID: string,
         nickname: string,
         profileImage: string,
       },
       postTime: string
-  isAnonymous: boolean // Added isAnonymous flag 
+      isAnonymous: boolean // Added isAnonymous flag 
   }
 }
 //assuming we pass the post as props.item
@@ -37,9 +37,6 @@ const Post: React.FC<PostProps> = (props) => {
   };
 
   // Empty function to handle unfollow user action
-  const handleUnfollowUser = (user: any) => {
-    // Placeholder for logic to unfollow a user
-  };
 
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -77,22 +74,28 @@ const Post: React.FC<PostProps> = (props) => {
           {showOptions && (
             <div className="options-panel">
             <button className="option-button" onClick={() => handleReportUser(user)}>Report User</button>
-            <button className="option-button" onClick={() => handleUnfollowUser(user)}>Unfollow User</button>
           </div>
           )}
         </div>
       </div>
       <div className="post-content">
         <p className="post-text">{props.item.contentText}</p>
-        {images && <div className="post-image-carousel">
-          <img className="post-image" src={images[currentImageIndex]} alt="Post content" />
-          {images.length > 1 && (
-          <>
-          <button className="carousel-arrow left" onClick={goPrev}>‹</button>
-          <button className="carousel-arrow right" onClick={goNext}>›</button>
-          </>
-          )}
-        </div>}
+        {images.length !== 0 &&(
+           <>
+           {images && <div className="post-image-carousel">
+             <img className="post-image" src={images[currentImageIndex]} alt="Post content" />
+             {images.length > 1 && (
+             <>
+             <button className="carousel-arrow left" onClick={goPrev}>‹</button>
+             <button className="carousel-arrow right" onClick={goNext}>›</button>
+             </>
+             )}
+           </div>}
+           </>          
+        )
+        
+        }
+       
       </div>
       </div>
   );

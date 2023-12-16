@@ -10,8 +10,10 @@ export interface SalePostsProps {
 const SocialMediaPosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
   return (
     <div>
-      {initialPosts.map(post => (
-        <SalePost item={post.item} />
+      {initialPosts.map((post,index)=> (
+        <div key={index} style={{ marginBottom: '16px' }}>
+          <SalePost item={post.item}  />
+        </div>
       ))}
     </div>
   );
