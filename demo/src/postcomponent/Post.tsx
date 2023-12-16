@@ -9,9 +9,6 @@ import { AddComment, FetchComment } from '../logic/backend';
 
 export interface PostProps {
   item: {
-		postType: number,
-      price: number,
-      categoryID: number,
       postID: string,
       authorID: string,
       contentText: string,

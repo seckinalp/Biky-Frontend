@@ -5,7 +5,7 @@ import Comment, { CommentProps, CommentClass } from './Comment';
 import './Comments.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
-import { AddComment, FetchComment } from '../logic/backend';
+import { AddComment, DeleteComment, FetchComment } from '../logic/backend';
 import { getUserCredentials } from '../logic/cookie';
 
 
@@ -61,12 +61,15 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
       });
     }
     };
+    const handleDelete = (commentId: string) => {
+      console.log(commentId);
+      DeleteComment(commentId)
+        .then(() => reloadComments())
+        .catch((error) => {
+          console.error('Error deleting comment:', error);
+        });
+    };
     
-
-
-      const handleDelete = (commentId: string) => {
-        reloadComments();
-      };
 
     //const displayedComments = [...comments].reverse();
     return (  loading ? <div>reloading </div> :

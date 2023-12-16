@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CategoryFilter.css'; // Make sure the path is correct
+import { FetchCategories } from '../logic/backend';
 
-interface Category {
+export interface Category {
   categoryID: number;
   name: string;
   children: Category[];
@@ -11,20 +12,39 @@ interface CategoryFilterProps {
   data: Category[];
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
+const CategoryFilter: React.FC<void> = () => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
   const [postType, setPostType] = useState<'socialMedia' | 'sale' | null>(null);
   const [showSaleOptions, setShowSaleOptions] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [data, setData] = useState<Category[]>([]);
+
+
   const handleCategoryChange = (category: Category, level: number) => {
     const newSelectedCategories = [...selectedCategories];
     newSelectedCategories[level] = category;
     // Remove any deeper selections when a higher level category is changed
     setSelectedCategories(newSelectedCategories.slice(0, level + 1));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await FetchCategories();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+      fetchData();
+  }, []); 
+
 
   const renderSelect = (categories: Category[], level: number) => {
     return (

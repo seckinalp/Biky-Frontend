@@ -5,7 +5,6 @@ import  { CommentProps } from '../comment/Comment';
 import  { useSelector } from 'react-redux';
 
 export interface SocialMediaPostProps {
-  item: {
     postID: string;
     author: {
       userID: string;
@@ -14,19 +13,18 @@ export interface SocialMediaPostProps {
     };
     imagesID: string[];
     contentText: string;
-    postTime: Date; // UTC time
+    postTime: string; // UTC time
     isLiked: boolean; // to show it is liked by viewing user
     isAnonymous: boolean;
     likecount: number;
-  };
 }
 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   
   
   const [likeState, setLikeState] = useState({
-    likeCount: props.item.likecount, // Initialize like count
-    liked: props.item.isLiked, // Initialize with the prop value
+    likeCount: props.likecount, // Initialize like count
+    liked: props.isLiked, // Initialize with the prop value
   });
 
   const toggleLike = () => {
@@ -49,7 +47,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   return (
 
     <>
-    <Post item={props.item} />
+    <Post item={props} />
       <div className="post-container">
       <div className="post-actions">
         <div className="post-buttons">
@@ -60,7 +58,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
-    {showComments && <Comments postID={props.item.postID}/>}
+    {showComments && <Comments postID={props.postID}/>}
     </>
   );
 }

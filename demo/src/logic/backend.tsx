@@ -1,24 +1,10 @@
+import { Category } from "../categoryFilterCompononet/CategoryFilter";
 import { CommentClass, CommentProps } from "../comment/Comment";
+import { SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
 import { getUserCredentials } from "./cookie";
 
 export const siteLink = "https://localhost:7172/";
 export const imageLink = `${siteLink}images/`;
-
-export async function FetchSocialMediaFollowerFeed(token : String) {
-    const response = await fetch(`${siteLink}SocialMediaPost/GetFeed`, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
-  },
-});
-    const resData = await response.json();
-    if (!response.ok) {
-        throw new Error('Failed to fetch social media posts');
-      }
-    
-      return resData.posts;
-}
 
 export async function FetchComment(postID : String) : Promise<CommentClass[]> {
 console.log(`${siteLink}Comment/GetByPost`);
@@ -56,19 +42,19 @@ export async function AddComment(postID : String, content : String) : Promise<vo
         }
 }
 
-export async function DeleteComment(commentID : string) : Promise<void> {
-  const {token, userID} = getUserCredentials();
-  const response = await fetch(`${siteLink}Comment/Delete`, {
+export async function DeleteComment(commentID: string): Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const url = `${siteLink}Comment/Delete?commentID=${commentID}`;
+  const response = await fetch(url, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'CommentID': commentID
-    }
-});
-      if (!response.ok) {
-          throw new Error('Failed to delete comment');
-        }
+    },
+  });
+  if (!response.ok) {
+    throw new Error('Failed to delete comment');
+  }
 }
 
 export interface UserCredentials {
@@ -111,4 +97,59 @@ export async function RegisterRequest(universityID : String, nickname: String, e
   if (!response.ok) {
       throw new Error('Failed to register');
     }
+}
+
+export async function FetchCategories() : Promise<Category[]> {
+  const response = await fetch(`${siteLink}Category/Get`, {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+},
+});
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to fetch comments');
+    }
+    return [resData];
+}
+
+export async function FetchGuestFeedSocial() : Promise<SocialMediaPostProps[]> {
+  const response = await fetch(`${siteLink}SocialMediaPost/GetGuestFeed`, {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+},
+});
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to fetch comments');
+    }
+    return [resData];
+}
+
+export async function UploadFile(file: File): Promise<string> {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await fetch(`${siteLink}Image/Upload`, {
+      method: "POST",
+      headers: {
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Failed to upload file: ${errorData.message}`);
+    }
+
+    return response.json();
+
+    console.log("File uploaded successfully");
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    throw error;
+  }
 }
