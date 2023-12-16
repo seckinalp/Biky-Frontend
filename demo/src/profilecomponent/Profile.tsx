@@ -245,7 +245,9 @@ const Profile: React.FC = () => {
           }
       </div>
     </div>
-    )}
+    )}<button className="profile-edit-button" onClick={toggleEdit}>Social Media Posts</button>
+    <button className="profile-edit-button" onClick={toggleEdit}>Sale Posts</button>
+
     </>
   );
 };

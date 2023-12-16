@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import store from './store'; 
 import CategorySelect from './assets/categoryComponent/CategorySelect';
 import SalePosts from './postcomponent/SalePosts';
+import Profile from './profilecomponent/Profile';
 
 interface Category {
   categoryID: number;
@@ -183,6 +184,7 @@ return (
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/posts" element={<Posts></Posts>} />
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
+        <Route path='/profile/:userID' element={<Profile />}/>
         <Route path="/category-select" element={<CategorySelect data={categoryData}/>} />
     
      
