@@ -35,9 +35,10 @@
   background: #000;
   position: absolute;
   display: block;
-  z-index: 1;
-  top: 5; /* Align to the top */
-right: 5; /* Align to the right */
+  margin-top: 10px;
+  margin-right: 10px;
+  top: 10; /* Align to the top */
+right: 10; /* Align to the right */
 transform: translate(50%, -50%); 
  
 }

@@ -10,6 +10,7 @@
     font-family: Arial, sans-serif;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 15px;
     overflow: hidden; /* Ensure child elements do not overflow */
   }
   

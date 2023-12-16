@@ -109,7 +109,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
 <div className="create-post">
       <div className="modal-header">
         <h2 className="modal-title">Create a Post</h2>
-        <button className="close-button" onClick={handleClose}>&times;</button>
+        <button className="close-button" onClick={handleClose}></button>
       </div>
       <form onSubmit={handleSubmit}>
       <div className="post-type-buttons">
