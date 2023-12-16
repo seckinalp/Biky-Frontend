@@ -217,7 +217,7 @@ const Profile: React.FC = () => {
       <div className="profile-header">
       </div>
       <div className="profile-info">
-      <img className="profile-avatar" src={`${imageLink}${data?.profileImage}` ||"../../public/profile.png" } alt={data?.nickname} />
+      <img className="profile-avatar" src={data?.profileImage == "" || data?.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${data?.profileImage}`} alt={data?.nickname} />
         <h1 className="profile-name">{data?.nickname}</h1>
         {data?.description && <div 
           className="profile-bio" 
