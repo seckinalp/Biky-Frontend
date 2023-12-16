@@ -1,4 +1,5 @@
 import { CommentClass, CommentProps } from "../comment/Comment";
+import { getUserCredentials } from "./cookie";
 
 export const siteLink = "https://localhost:7172/";
 export const imageLink = `${siteLink}images/`;
@@ -35,8 +36,10 @@ headers: {
     return resData;
 }
 
-export async function AddComment(postID : String, content : String, token: String) : Promise<void> {
-  const response = await fetch(`${siteLink}/Comment/Add`, {
+export async function AddComment(postID : String, content : String) : Promise<void> {
+  const {token} = getUserCredentials();
+  console.log(token + "tototken");
+  const response = await fetch(`${siteLink}Comment/Add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -47,32 +50,34 @@ export async function AddComment(postID : String, content : String, token: Strin
       content: content,
     }),
   });
+  console.log(response);
       if (!response.ok) {
           throw new Error('Failed to add comment');
         }
 }
 
-export async function DeleteComment(commentID : String,  token: String) : Promise<void> {
-  const response = await fetch(`${siteLink}/Comment/Delete`, {
-    method: 'POST',
+export async function DeleteComment(commentID : string) : Promise<void> {
+  const {token, userID} = getUserCredentials();
+  const response = await fetch(`${siteLink}Comment/Delete`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'CommentID': ''
+      'CommentID': commentID
     }
 });
       if (!response.ok) {
-          throw new Error('Failed to add comment');
+          throw new Error('Failed to delete comment');
         }
 }
 
 export interface UserCredentials {
-  Token: String,
-  UserID: String
+  token: String,
+  userID: String
 }
 
-export async function Login(name : String, password : String) : Promise<UserCredentials> {
-  const response = await fetch(`${siteLink}/User/Login`, {
+export async function LoginRequest(name : String, password : String) : Promise<UserCredentials> {
+  const response = await fetch(`${siteLink}User/Login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -83,14 +88,15 @@ export async function Login(name : String, password : String) : Promise<UserCred
     }),
   });
   const resData = await response.json();
+  console.log(resData);
   if (!response.ok) {
       throw new Error('Failed to login');
     }
     return resData;
 }
 
-export async function Register(universityID : String, nickname: String, email : String,  password : String) : Promise<void> {
-  const response = await fetch(`${siteLink}/User/Login`, {
+export async function RegisterRequest(universityID : String, nickname: String, email : String,  password : String) : Promise<void> {
+  const response = await fetch(`${siteLink}User/Login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -102,9 +108,7 @@ export async function Register(universityID : String, nickname: String, email : 
       Password: password
     }),
   });
-  const resData = await response.json();
   if (!response.ok) {
       throw new Error('Failed to register');
     }
-    return resData;
 }

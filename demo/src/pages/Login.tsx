@@ -3,6 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'; // Ensure this path is correct
 import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if necessary
 import '../ButtonStyle.css'; // This is the import statement for your CSS file
+import { LoginRequest , UserCredentials} from '../logic/backend';
+import { useDispatch } from 'react-redux';
+import { setTokenAndUserId } from '../store';
+import { setUserCredentials } from '../logic/cookie';
 
 
 const Login = () => {
@@ -11,6 +15,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const dispatch = useDispatch();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -20,12 +25,19 @@ const Login = () => {
     }));
   };
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: Add authentication logic here
-    // For demonstration, navigate to homepage on any input
-    navigate('/homepage');
+  
+    try {
+      const userAuth = await LoginRequest(credentials.email, credentials.password);
+      setUserCredentials(userAuth);
+      navigate('/homepage');
+    } catch (error) {
+      
+      console.error('Login failed:', error);
+    }
   };
+  
   return (
     <div className="login-container">
       <div className="login-form">
@@ -33,9 +45,9 @@ const Login = () => {
         <h2>Log In to your Account</h2>
         <form onSubmit={handleLogin}>
           <input 
-            type="email" 
+            type="text" 
             name="email" 
-            placeholder="Email" 
+            placeholder="Nickname" 
             value={credentials.email} 
             onChange={handleInputChange} 
             required 
