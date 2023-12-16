@@ -44,6 +44,10 @@ const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [socialMediaText, setSocialMediaText] = useState('');
   const [saleText, setSaleText] = useState('');
   const [data, setData] = useState<Category[]>([]);
+  const [feedType, setFeedType] = useState<'following' | 'allFeed' | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<'socialMedia' | 'sale' | 'following' | 'allFeed' | null>(null);
+
+// ...
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,19 +76,34 @@ const CategoryFilter: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     <button className="category-filter-close-btn" onClick={handleClose}>X</button>
     <div className="category-filter-header">Filter the Post</div>
     <div className="button-group">
-      <button 
+      <div className='button1'> <button 
         className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
         onClick={() => setPostType('socialMedia')}
       >
         Social Media Post
-      </button>
+      </button></div>
+     
       <button 
         className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
         onClick={() => setPostType('sale')}
       >
         Sale Post
-      </button>
-    </div>
+      </button></div>
+      <div className="button-group">
+        <div className='button2'> <button 
+    className={`post-type-button ${selectedFilter === 'following' ? 'active' : ''}`}
+    onClick={() => setSelectedFilter('following')}
+  >
+    See Following
+  </button></div>
+ 
+  <button 
+    className={`post-type-button ${selectedFilter === 'allFeed' ? 'active' : ''}`}
+    onClick={() => setSelectedFilter('allFeed')}
+  >
+    See all Feed
+  </button>
+</div>
     {postType === 'socialMedia' && (
       <input
         type="text"
