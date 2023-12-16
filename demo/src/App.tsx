@@ -106,78 +106,8 @@ return (
   <Provider store={store}>
     <Router>
     
-      <div>
-        <div>
         <Routes>
-        <Route path='/socailmediaposts' element={<SocialMediaPosts   initialPosts={[
-    {
-      item: {
-        postID: "12345",
-        author: {
-          userID: "user123",
-          userName: "JohnDoe",
-          userProfileLink: "https://example.com/profile/user123"
-        },
-        imagesID: ["image1.jpg", "image2.jpg"],
-        contentText: "This is an example post",
-        postTime: "2023-12-16T12:00:00Z",
-        isLiked: false,
-        isAnonymous: false,
-        likecount: 100
-      }
-    },
-    // ... additional posts
-  ]}/>}/>
-<Route path='/socialmediaposts' element={<SocialMediaPosts   initialPosts={[
-    {
-      item: {
-        postID: "12345",
-        author: {
-          userID: "user123",
-          userName: "JohnDoe",
-          userProfileLink: "https://example.com/profile/user123"
-        },
-        imagesID: ["image1.jpg", "image2.jpg"],
-        contentText: "This is an example post",
-        postTime: "2023-12-16T12:00:00Z",
-        isLiked: false,
-        isAnonymous: false,
-        likecount: 100
-      }
-    },   {
-      item: {
-        postID: "12345",
-        author: {
-          userID: "user123",
-          userName: "JohnDoe",
-          userProfileLink: "https://example.com/profile/user123"
-        },
-        imagesID: ["image1.jpg", "image2.jpg"],
-        contentText: "This is an example post",
-        postTime: "2023-12-16T12:00:00Z",
-        isLiked: false,
-        isAnonymous: false,
-        likecount: 100
-      }
-    },   {
-      item: {
-        postID: "12345",
-        author: {
-          userID: "user123",
-          userName: "JohnDoe",
-          userProfileLink: "https://example.com/profile/user123"
-        },
-        imagesID: ["image1.jpg", "image2.jpg"],
-        contentText: "This is an example post",
-        postTime: "2023-12-16T12:00:00Z",
-        isLiked: false,
-        isAnonymous: false,
-        likecount: 100
-      }
-    },
-    // ... additional posts
-  ]}/>}/>
-<Route path="/sale-post" element={<SalePosts initialPosts={sampleSalePosts}/>} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -185,14 +115,11 @@ return (
         <Route path="/posts" element={<Posts></Posts>} />
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
         <Route path='/profile/:userID' element={<Profile />}/>
-        <Route path="/category-select" element={<CategoryFilter data={categoryData} />} />
+        
     
      
         </Routes>
-        </div>
-
-      </div>
-    
+     
     </Router>
   </Provider>
 );
