@@ -23,9 +23,7 @@ export interface ProfileProps {
     profileImage: string | null
   }
   
-c
-onst Profile: React.FC
-, = () => {
+const Profile: React.FC = () => {
   const[data, setData] = useState<ProfileClass>();
   const [followersCount, setFollowersCount] = useState(0);
   const[isFollowed, setisFollowed] = useState(true)//Backend Handled
