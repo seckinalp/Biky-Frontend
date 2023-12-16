@@ -203,8 +203,9 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
         </div>
       )}
       
-      <div className="button-container">
-  <button className='publish-button' type="submit">PUBLISH!</button>
+      <div className="btn-container">
+      
+  <button className='btn' type="submit">PUBLISH!</button>
 </div>
 
   {/* ... */}
