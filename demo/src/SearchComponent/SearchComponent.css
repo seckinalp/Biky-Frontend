@@ -1,6 +1,7 @@
 
   
  .search-component {
+  position: relative;
     width: 100%;
     max-width: 500px; /* Adjust this to fit your design */
     margin: auto; /* Center the search component if less than 100% width */

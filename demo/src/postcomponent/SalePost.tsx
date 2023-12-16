@@ -23,6 +23,7 @@ import Post, { PostProps } from "./Post";
       },
       postTime: string
   }
+  
   function convertToPostProps(salePost: SalePostProps): PostProps {
     return {
       item: {

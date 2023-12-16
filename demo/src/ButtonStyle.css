@@ -24,3 +24,89 @@
   0 8px 0 -4px #39a2db,
   0 12px 10px -3px #39a2db;
 }
+
+.close-button {
+   
+  width: 25px; /* Set a specific width */
+  height: 25px; /* Set a specific height */
+  
+  box-shadow: 0px 10 10px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background: #000;
+  position: absolute;
+  display: block;
+  z-index: 1;
+  top: 5; /* Align to the top */
+right: 5; /* Align to the right */
+transform: translate(50%, -50%); 
+ 
+}
+.close-button:before{
+  content: '';
+  width: 55%;
+  height: 2px;
+  background: #ffffff;
+  position: absolute;
+  top: 48%;
+  left: 22%;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.close-button:after {
+  content: '';
+  width: 55%;
+  height: 2px;
+  background: #ffffff;
+  position: absolute;
+  top: 48%;
+  left: 22%;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.close-button:after {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.close-button:hover:before,
+.close-button:hover:after {
+  background: #000000;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+body {
+  background: #a7cfdf;
+  background: -moz-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #a7cfdf), color-stop(100%, #23538a));
+  background: -webkit-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
+  background: -o-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
+  background: -ms-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
+  background: linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a7cfdf', endColorstr='#23538a', GradientType=1);
+}
