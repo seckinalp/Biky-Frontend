@@ -3,16 +3,13 @@ import { UserCredentials } from "./backend";
   // Set UserCredentials as a cookie
  export function setUserCredentials(credentials: UserCredentials): void {
     const serializedCredentials = JSON.stringify(credentials);
-    console.log(serializedCredentials);
     setCookie('userCredentials', serializedCredentials);
   }
   
   // Get UserCredentials from a cookie
   export function getUserCredentials(): UserCredentials {
     const serializedCredentials = getCookie('userCredentials');
-    console.log(serializedCredentials + "creds");
         const a : UserCredentials = JSON.parse(serializedCredentials);
-        console.log(a);
         return a;   
   }
   

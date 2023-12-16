@@ -1,8 +1,12 @@
 // Profile.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
+import { getUserCredentials } from '../logic/cookie';
+import { AddFollow, CheckFollow, FetchProfile, RemoveFollow, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
+import { useParams } from 'react-router-dom';
+import EditProfile from './editprofile/EditProfile';
 
 export interface ProfileProps {
     item: ProfileClass,
@@ -16,101 +20,156 @@ export interface ProfileProps {
     description: string
     userID: string
     nickname: string
-    profileImage: string 
-
+    profileImage: string | null
   }
   
-const Profile: React.FC<ProfileProps> = (props) => {
-  const [followersCount, setFollowersCount] = useState(props.item.followersNumber);
-    const[isFollowed, setisFollowed] = useState(true)//Backend Handled
-    const vieweuserID = useSelector((state: RootState) => state.auth.userID);
-
-    //const [confirmPasswordError, setConfirmPasswordError] = useState('');
-    //const [passwordError, setPasswordError] = useState('');
+c
+onst Profile: React.FC
+, = () => {
+  const[data, setData] = useState<ProfileClass>();
+  const [followersCount, setFollowersCount] = useState(0);
+  const[isFollowed, setisFollowed] = useState(true)//Backend Handled
+  const { userID : vieweuserID} = getUserCredentials();
     const [isEditing, setIsEditing] = useState(false);
-    const[isOwnnProfile,setisOwnProfile] = useState(true)//vieweuserID == props.item.userID
+    //const[isOwnnProfile,setisOwnProfile] = useState(false); //vieweuserID == data?.userID
+    const [loading, setLoading] = useState<boolean>(true);
+    const [reload, setReload] = useState<boolean>(true);
+    const [update, setUpdate] = useState<boolean>(false);
+    const [invalid, setInvalid] = useState<boolean>(false);
+    const { userID : paramName } = useParams();
+      
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          if(paramName) {
+            console.log("Reloaded");
+          const result = await FetchProfile(paramName);
+          handleData(result);
+          if(data) setFollowersCount(data?.followersNumber);
+          const f = await CheckFollow(paramName);
+          setisFollowed(!f);
+        }
+        } catch (error) {
+          console.error('Error fetching profile:', error);
+          setInvalid(true);
 
-    const [profileData, setProfileData] = useState({
-      nickname: props.item.nickname,
-      //password: props.item.password,
-      //confirmPassword: props.item.password,
-      description: props.item.description,
-      profileUrl: props.item.profileImage
-    });
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+      if (reload) {
+        
+        fetchData();
+        setReload(false); 
+      }
+    }, [reload, paramName]); 
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          if(paramName) {
+            console.log("Reloaded");
+          await UpdateProfile(editData.nickname, editData.profileUrl, editData.description);
+        }
+        } catch (error) {
+          console.error('Error updating profile:', error);
+
+        }
+      };
+      
+      if (update) {
+        fetchData();
+        setUpdate(false); 
+      }
+    }, [update]); 
+
+    const reloadComments = () => {
+      setReload(true);
+    };
+
+    const handleData = (data: ProfileClass) => {
+      setData(data);
+    };
+
     const [editData, setEditData] = useState({
-      nickname: props.item.nickname,
-      //password: props.item.password,
-      //confirmPassword: props.item.password,
-      description: props.item.description,
-      profileUrl: props.item.profileImage       
+      nickname: "",
+      description: "",
+      profileUrl: ""   
     }); // Temporary state for editing
     // Function to toggle editing mode
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setEditData(prevState => ({ ...prevState, profileUrl: reader.result as string }));
-        };
-        reader.readAsDataURL(file);
+    
+        try {
+          // Upload the file and get the image URL
+          const imageUrl = await UploadFile(file);
+    
+          // Update the state with the image URL
+          setEditData(prevState => ({ ...prevState, profileUrl: imageUrl }));
+        } catch (error) {
+          // Handle errors, e.g., show an error message
+          console.error("Error uploading file:", error);
+        }
       }
     };
     const toggleEdit = () => {
-      //setPasswordError("");
-      //setConfirmPasswordError("");
-      //editData.confirmPassword = profileData.password;
-      setEditData(profileData); // Reset edit data to original profile data
+      if(data?.nickname && data?.description && data?.profileImage)
+      setEditData({nickname :data?.nickname, description: data?.description, profileUrl: data?.profileImage}); // Reset edit data to original profile data
       setIsEditing((prev) => !prev);
     };
-    const handleSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      //if(editData.password === editData.confirmPassword && editData.password.length >7) {
-        setProfileData(editData);
+    const handleSubmit = async (event: React.FormEvent) => {
+      //event.preventDefault();
+      try {
+        // Assuming UpdateProfile returns a promise
+        console.log(editData);
         setIsEditing(false);
-      //} 
-      //else {
-        /*
-        if(editData.password.length <8) {
-          setPasswordError("Password less than 8 Characters")
-          setIsEditing(true);
-        }
-        if(editData.password !== editData.confirmPassword){
-          setConfirmPasswordError('Passwords do not match');
-          setIsEditing(true);
-        }
+        await setUpdate(true);
+        await setReload(true);
+      } catch (error) {
+        // Handle the error (e.g., show an error message)
+        console.error("Error updating profile:", error);
       }
-      */
     };
+    
     const handleEditChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
-      /*
-      if (name === 'password') {
-        editData.confirmPassword = "";
-        setPasswordError("");
-        setConfirmPasswordError("");
-      }
-      if (name === 'confirmPassword') { // Adjust according to your field names
-        setPasswordError("");
-        setConfirmPasswordError("");
-      }
-      */
       
       setEditData({ ...editData, [name]: value });
     };
-    console.log(profileData);
     
-    const handleFollowClick = () => {
-      console.log("Follow button clicked");
-      setisFollowed(true);
-      setFollowersCount(prevCount => prevCount + 1); // Increment followers count
-      // You might want to make an API call here
+    const handleFollowClick = async () => {
+      try {
+        setisFollowed(true);
+    
+        // Assuming AddFollow returns a promise
+        if(data) await AddFollow(data?.userID);
+    
+        setFollowersCount(prevCount => prevCount + 1); // Increment followers count
+        // You might want to make an API call here
+      } catch (error) {
+        // Handle errors, e.g., show an error message
+        console.error("Error following:", error);
+      }
     };
+    
   
-    const handleUnfollowClick = () => {
-      console.log("Unfollow button clicked");
-      setisFollowed(false);
-      setFollowersCount(prevCount => prevCount > 0 ? prevCount - 1 : 0);
-      // You might want to make an API call here
+    const handleUnfollowClick = async () => {
+      try {
+        setisFollowed(false);
+        
+        // Assuming there's an asynchronous operation (e.g., an API call), use await
+        // If it's not asynchronous, you might not need the await keyword
+        // Example: await SomeAsyncOperation();
+        if(data) await RemoveFollow(data?.userID);
+        
+        setFollowersCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
+        // You might want to make an API call here
+      } catch (error) {
+        // Handle errors, e.g., show an error message
+        console.error("Error unfollowing:", error);
+      }
     };
   
     const handleMessageClick = () => {
@@ -134,27 +193,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
                 onChange={handleEditChange}
                 placeholder="New Username"
             />
-            {/* 
-              <input
-                  type="password"
-                  name="password"
-                  value={editData.password}
-                  onChange={handleEditChange}
-                  placeholder="New Password"
-                  style={{ marginBottom: passwordError !== '' ? '1px' : '20px' }}
-              />
-              {passwordError && <p className="error-message">{passwordError}</p>}
-
-              <input
-                  type="password"
-                  name="confirmPassword"
-                  value={editData.confirmPassword}
-                  onChange={handleEditChange}
-                  placeholder="Confirm New Password"
-                  style={{ marginBottom: confirmPasswordError !== '' ? '1px' : '20px' }}
-              />
-              {confirmPasswordError && <p className="error-message">{confirmPasswordError}</p>}
-            */}
+            {}
 
             <textarea
                 name="description"
@@ -179,20 +218,20 @@ const Profile: React.FC<ProfileProps> = (props) => {
       <div className="profile-header">
       </div>
       <div className="profile-info">
-      <img className="profile-avatar" src={profileData.profileUrl ||"../../public/profile.png" } alt={profileData.nickname} />
-        <h1 className="profile-name">{profileData.nickname}</h1>
-        <div 
+      <img className="profile-avatar" src={`${imageLink}${data?.profileImage}` ||"../../public/profile.png" } alt={data?.nickname} />
+        <h1 className="profile-name">{data?.nickname}</h1>
+        {data?.description && <div 
           className="profile-bio" 
-          dangerouslySetInnerHTML={{ __html: profileData.description.replace(/\n/g, '<br />') }}
-        />
+          dangerouslySetInnerHTML={{  __html: data?.description.replace(/\n/g, '<br />') }}
+        />}
         <div className="profile-stats">
-          <span className="profile-stat"><strong>{props.item.postNumber}</strong> Posts</span>
-          <span className="profile-stat"><strong>{props.item.followingsNumber}</strong> Following</span>
+          <span className="profile-stat"><strong>{data?.postNumber}</strong> Posts</span>
+          <span className="profile-stat"><strong>{data?.followingsNumber}</strong> Following</span>
           <span className="profile-stat"><strong>{followersCount}</strong> Followers</span>
-          <span className="profile-stat"><strong>{props.item.likeNumber}</strong> likeNumber</span>
+          <span className="profile-stat"><strong>{data?.likeNumber}</strong> likeNumber</span>
         </div>
         {
-            !isOwnnProfile ? (
+            !(data?.userID && vieweuserID == data?.userID) ? (
             <div className="profile-button-container">
               {!isFollowed ?(
                 <button onClick={handleFollowClick} className="profile-follow-button">Follow</button>
@@ -213,17 +252,5 @@ const Profile: React.FC<ProfileProps> = (props) => {
   );
 };
 
-Profile.defaultProps = {
-    item: {
-      userID: '1111',
-      profileImage: '../../public/profile.png',
-      nickname: 'elon.musk',
-      postNumber: 3,
-      followingsNumber: 27,
-      followersNumber: 207,
-      likeNumber: 1200,
-      description: 'Computer Science Student',
-    },
-  };
 
 export default Profile;

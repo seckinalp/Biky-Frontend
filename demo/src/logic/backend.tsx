@@ -1,13 +1,13 @@
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
 import { CommentClass, CommentProps } from "../comment/Comment";
 import { SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
+import { ProfileClass } from "../profilecomponent/Profile";
 import { getUserCredentials } from "./cookie";
 
 export const siteLink = "https://localhost:7172/";
 export const imageLink = `${siteLink}images/`;
 
 export async function FetchComment(postID : String) : Promise<CommentClass[]> {
-console.log(`${siteLink}Comment/GetByPost`);
   const response = await fetch(`${siteLink}Comment/GetByPost?postID=${postID}`, {
 method: 'GET',
 headers: {
@@ -24,7 +24,6 @@ headers: {
 
 export async function AddComment(postID : String, content : String) : Promise<void> {
   const {token} = getUserCredentials();
-  console.log(token + "tototken");
   const response = await fetch(`${siteLink}Comment/Add`, {
     method: 'POST',
     headers: {
@@ -36,7 +35,6 @@ export async function AddComment(postID : String, content : String) : Promise<vo
       content: content,
     }),
   });
-  console.log(response);
       if (!response.ok) {
           throw new Error('Failed to add comment');
         }
@@ -74,7 +72,6 @@ export async function LoginRequest(name : String, password : String) : Promise<U
     }),
   });
   const resData = await response.json();
-  console.log(resData);
   if (!response.ok) {
       throw new Error('Failed to login');
     }
@@ -131,7 +128,6 @@ export async function UploadFile(file: File): Promise<string> {
 
   const formData = new FormData();
   formData.append("file", file);
-
   try {
     const response = await fetch(`${siteLink}Image/Upload`, {
       method: "POST",
@@ -139,17 +135,99 @@ export async function UploadFile(file: File): Promise<string> {
       },
       body: formData,
     });
-
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to upload file: ${errorData.message}`);
     }
-
     return response.json();
-
-    console.log("File uploaded successfully");
   } catch (error) {
     console.error("Error uploading file:", error);
     throw error;
   }
+}
+
+export async function FetchProfile(userID: String) : Promise<ProfileClass> {
+  const response = await fetch(`${siteLink}User/GetProfile?userID=${userID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    });
+    console.log(response);
+      const resData = await response.json();
+      if (!response.ok) {
+          throw new Error('Failed to fetch profile');
+        }
+        console.log(resData);
+        return resData;
+}
+
+export async function UpdateProfile(
+  nickname: string | undefined,
+  profileImage: string | null | undefined,
+  description: string | undefined
+): Promise<void> {
+  const { token, userID } = getUserCredentials();
+
+  // Type assertion for nickname
+  const safeNickname = nickname!;
+  console.log(`${siteLink}User/UpdateProfile?nickname=${safeNickname}&profileImage=${profileImage}&description=${description}&userID=${userID}`);
+const response = await fetch(`${siteLink}User/UpdateProfile?nickname=${safeNickname}&profileImage=${profileImage}&description=${description}&userID=${userID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  console.log(response + "aaaaaaaaa");
+  if (!response.ok) {
+    throw new Error('Failed to fetch profile');
+  }
+}
+
+export async function CheckFollow(followingID: String) : Promise<boolean> {
+  const { token, userID } = getUserCredentials();
+  console.log(`${siteLink}User/CheckFollowing?followingID=${followingID}`);
+  const response = await fetch(`${siteLink}User/CheckFollowing?followingID=${followingID}&followerID=${userID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+      const resData = await response.json();
+      if (!response.ok) {
+          throw new Error('Failed to fetch profile');
+        }
+        return resData;
+}
+
+export async function AddFollow(followingID: String) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}User/AddFollowing?followingID=${followingID}&followerID=${userID}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch profile');
+        }
+}
+
+export async function RemoveFollow(followingID: String) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}User/DeleteFollowing?followingID=${followingID}&followerID=${userID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch profile');
+      }
 }
