@@ -190,7 +190,61 @@ const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
     // ... more social media posts
   ]
 };
-
+const sampleSalePosts: SalePostProps[] = [
+  {
+    item: {
+      postType: 1, // Example post type
+      price: 100.00, // Example price
+      categoryID: 123, // Example category ID
+      postID: 'post123', // Example post ID
+      authorID: 'author123', // Example author ID
+      contentText: 'This is a sample sale post.', // Example content text
+      images: ['image1.jpg', 'image2.jpg'], // Example images
+      author: {
+        userID: 'user123',
+        nickname: 'SampleUser',
+        profileImage: 'profileImage.jpg', // Example profile image
+      },
+      postTime: new Date().toISOString(), // Current time as an example
+    },
+    isAnonymous: false,
+  },{
+    item: {
+      postType: 1, // Example post type
+      price: 100.00, // Example price
+      categoryID: 123, // Example category ID
+      postID: 'post123', // Example post ID
+      authorID: 'author123', // Example author ID
+      contentText: 'This is a sample sale post.', // Example content text
+      images: ['image1.jpg', 'image2.jpg'], // Example images
+      author: {
+        userID: 'user123',
+        nickname: 'SampleUser',
+        profileImage: 'profileImage.jpg', // Example profile image
+      },
+      postTime: new Date().toISOString(), // Current time as an example
+    },
+    isAnonymous: false,
+  },{
+    item: {
+      postType: 1, // Example post type
+      price: 100.00, // Example price
+      categoryID: 123, // Example category ID
+      postID: 'post123', // Example post ID
+      authorID: 'author123', // Example author ID
+      contentText: 'This is a sample sale post.', // Example content text
+      images: ['image1.jpg', 'image2.jpg'], // Example images
+      author: {
+        userID: 'user123',
+        nickname: 'SampleUser',
+        profileImage: 'profileImage.jpg', // Example profile image
+      },
+      postTime: new Date().toISOString(), // Current time as an example
+    },
+    isAnonymous: false,
+  }
+  // ... more items if needed
+];
 const App = () => {
   const categoryData: Category[] = [
     {
@@ -224,7 +278,7 @@ return (
       <div>
       
         {/* Include the Navbar component here */}
-        <div className='navbar_container'><Navbar  /></div>
+       
         <br />
         <br />
         <br />
@@ -232,7 +286,45 @@ return (
         <br />
         <div>
         <Routes>
-        <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
+        <Route path='/socailmediaposts' element={<SocialMediaPosts   initialPosts={[
+    {
+      item: {
+        postID: "12345",
+        author: {
+          userID: "user123",
+          userName: "JohnDoe",
+          userProfileLink: "https://example.com/profile/user123"
+        },
+        imagesID: ["image1.jpg", "image2.jpg"],
+        contentText: "This is an example post",
+        postTime: "2023-12-16T12:00:00Z",
+        isLiked: false,
+        isAnonymous: false,
+        likecount: 100
+      }
+    },
+    // ... additional posts
+  ]}/>}/>
+<Route path='/socialmediaposts' element={<SocialMediaPosts   initialPosts={[
+    {
+      item: {
+        postID: "12345",
+        author: {
+          userID: "user123",
+          userName: "JohnDoe",
+          userProfileLink: "https://example.com/profile/user123"
+        },
+        imagesID: ["image1.jpg", "image2.jpg"],
+        contentText: "This is an example post",
+        postTime: "2023-12-16T12:00:00Z",
+        isLiked: false,
+        isAnonymous: false,
+        likecount: 100
+      }
+    },
+    // ... additional posts
+  ]}/>}/>
+<Route path="/sale-post" element={<SalePosts initialPosts={sampleSalePosts}/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -250,6 +342,7 @@ return (
         <Route path="/category" element={<CategoryFilter data={categoryData} />} />
         <Route path="/category-select" element={<CategorySelect data={categoryData}/>} />
         <Route path="/search" element={<SearchComponent />} />
+        
         <Route path="/show-row" element={<ShowRow item={{
             id: 1,
             name: 'Elon Musk',
