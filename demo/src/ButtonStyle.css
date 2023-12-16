@@ -7,7 +7,7 @@
  width: 130px;
  height: 40px;
  cursor: pointer;
- background-color: #171717;
+ background-color: #000000;
  color: #ffffff;
  border: none;
  border-radius: 5px;
@@ -17,7 +17,7 @@
 
 .btn:hover {
  border-radius: 10px;
- transform: translateY(-7px);
+ transform: translateY(-5px);
  box-shadow: 10px 7px 0 -2px #f85959,
   -10px 15px 0 -4px #39a2db;
 }
