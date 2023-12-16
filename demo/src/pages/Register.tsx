@@ -11,6 +11,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    studentId: "",
   });
   const [error, setError] = useState('');
   const [error1, setError1] = useState('');
@@ -46,6 +47,15 @@ const Register = () => {
 
     return isValid;
   }
+  const [studentIdError, setStudentIdError] = useState('');
+  const validateStudentId = () => {
+    if (formData.studentId.length < 8 || !/^\d+$/.test(formData.studentId)) {
+      setStudentIdError('Invalid studentId');
+      return false;
+    }
+    setStudentIdError('');
+    return true;
+  };
   
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +70,7 @@ const Register = () => {
     if (name === 'password') { // Adjust according to your field names
       setError1('');
     }
+    if (name === 'studentId') setStudentIdError('');
   };
 
   const handleRegister = (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,14 +78,16 @@ const Register = () => {
     console.log("Form Data: ",formData)
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
-    if (!(isEmailValid && isPasswordValid) ) {
+    const isStudentIdValid = validateStudentId();
+
+    if (!(isEmailValid && isPasswordValid && isStudentIdValid) ) {
       return; // Stop the form from submitting
     }
 
     // TODO: Implement your registration logic here
     // If everything is okay, navigate to the homepage
     console.log(formData.password);
-    navigate('/homepage');
+    navigate('/login');
   };
 
   return (
@@ -103,6 +116,16 @@ const Register = () => {
             className={emailError ? 'input-error' : ''} 
           />
           {emailError !== '' && <div className="error-message">{emailError}</div>}
+          <input 
+            type="text" 
+            name="studentId" 
+            placeholder="Your Bilkent Id" 
+            value={formData.studentId} 
+            onChange={handleInputChange} 
+            required 
+            style={{ marginBottom: studentIdError !== '' ? '1px' : '20px' }}
+          />
+          {studentIdError && <div className="error-message">{studentIdError}</div>}
           <input 
             type="password" 
             name="password" 

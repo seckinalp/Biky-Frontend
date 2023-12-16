@@ -15,11 +15,9 @@ const Homepage: React.FC = () => {
       <div className='background'></div>
       <div className="homepage">
         <div className="app__homepage">
-        <div className="homepage__nav">
-          <Navbar handleCreateClick={handleCreateClick} />
-        </div>
+   
         <div className="homepage__timeline">
-          <Timeline isRectangleVisible={isRectangleVisible} setIsRectangleVisible={setIsRectangleVisible} />
+        
         </div>
       </div>
       </div>

@@ -1,0 +1,100 @@
+
+  
+ .search-component {
+    width: 100%;
+    max-width: 500px; /* Adjust this to fit your design */
+    margin: auto; /* Center the search component if less than 100% width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensure child elements do not overflow */
+  }
+  
+  .search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f9f9f9; /* Optional: different background for the header */
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .search-title {
+    font-size: 16px;
+    font-weight: bold;
+    flex-grow: 1; /* Ensures the title takes up the available space */
+    text-align: center; /* Center the title */
+  }
+  
+  .search-close-btn {
+    font-size: 30px; /* Adjust the font size to make the 'X' larger */
+    width: 32px; /* Set a specific width */
+    height: 32px; /* Set a specific height */
+    line-height: 32px; /* Align the 'X' vertically */
+    text-align: center; /* Align the 'X' horizontally */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%; /* Optional: if you want a rounded button */
+    margin-left: 10px; /* To ensure some space between the title and the button */
+  }
+  
+  /* Optional: Add styles for hover effect */
+  .search-close-btn:hover {
+    color: purple;
+    background: transparent /* Slight background on hover for better UX */
+  }
+  .search-body {
+    padding: 10px;
+  }
+  
+  .search-input {
+    width: calc(100% - 20px); /* Adjust width considering padding */
+    padding: 10px;
+    margin-right: 10px; /* Add margin to the right */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space between input and results */
+    outline: none;
+  }
+  
+  .search-results {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  .search-item:last-child {
+    border-bottom: none;
+  }
+  
+  .search-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  
+  .search-info {
+    flex-grow: 1;
+  }
+  
+  .search-name {
+    font-weight: bold;
+  }
+  
+  .search-username {
+    color: #555;
+  }
+  

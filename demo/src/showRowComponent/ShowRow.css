@@ -1,0 +1,31 @@
+.show-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin: 5px;
+    
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Fade effect for background */
+  }
+  
+  .show-row:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Slight darkening on hover */
+  }
+  
+  .show-row-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  
+  .show-row-info {
+    flex-grow: 1;
+  }
+  
+  .show-row-name {
+    font-weight: bold;
+  }
+  

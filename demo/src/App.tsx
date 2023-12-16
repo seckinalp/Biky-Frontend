@@ -19,6 +19,15 @@ import { SalePostProps } from './postcomponent/SalePost';
 import SalePosts, { SalePostsProps } from './postcomponent/SalePosts';
 import { Provider } from 'react-redux';
 import store from './store'; 
+import CategoryFilter from './categoryFilterCompononet/CategoryFilter';
+
+import SearchComponent from './SearchComponent/SearchComponent';
+import ShowRow from './showRowComponent/ShowRow';
+
+import bikyImage from './indir.jpg';
+import Deneme from './categoryFilterCompononet/deneme';
+import Navbar from './navigation/Navbar';
+import BackgroundContainer from './BackgroundContainer/BackgroundContainer';
 const exampleSalePostsProps: SalePostsProps = {
   initialPosts: [
     {
@@ -97,7 +106,11 @@ const exampleSalePostsProps: SalePostsProps = {
   ]
 };
 
-
+interface Category {
+  categoryID: number;
+  name: string;
+  children: Category[];
+}
 
 const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
   initialPosts: [
@@ -178,11 +191,47 @@ const exampleSocialMediaPostsProps: SocialMediaPostsProps = {
 };
 
 const App = () => {
-  return (
-    <Provider store={store}>
+  const categoryData: Category[] = [
+    {
+      categoryID: 1,
+      name: "string",
+      children: [
+        {
+          categoryID: 2,
+          name: "lesson",
+          children: [
+            {
+              categoryID: 3,
+              name: "cs",
+              children: [
+                { categoryID: 4, name: "cs223", children: [] },
+                { categoryID: 5, name: "cs315", children: [] },
+                { categoryID: 6, name: "cs319", children: [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    // ... other categories
+  ];
+
+return (
+  <Provider store={store}>
     <Router>
-      <Routes>
-      <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
+    
+      <div>
+      
+        {/* Include the Navbar component here */}
+        <div className='navbar_container'><Navbar  /></div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+        <Routes>
+        <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -197,14 +246,24 @@ const App = () => {
         <Route path='/profile' element={<Profile />}/>
         <Route path='/saleposts' element={<SalePosts initialPosts ={exampleSalePostsProps.initialPosts}/>}/>
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
-        
-      
-      
+        <Route path="/category" element={<CategoryFilter data={categoryData} />} />
 
-      </Routes>
+        <Route path="/search" element={<SearchComponent />} />
+        <Route path="/show-row" element={<ShowRow item={{
+            id: 1,
+            name: 'Elon Musk',
+            avatarUrl: bikyImage
+          }} onItemClick={function (id: number): void {
+            throw new Error('Function not implemented.');
+          } }/>} />
+        </Routes>
+        </div>
+
+      </div>
+    
     </Router>
-    </Provider>
-  );
+  </Provider>
+);
 };
 
 export default App;
