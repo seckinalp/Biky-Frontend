@@ -80,7 +80,7 @@ export async function LoginRequest(name : String, password : String) : Promise<U
 }
 
 export async function RegisterRequest(universityID : String, nickname: String, email : String,  password : String) : Promise<void> {
-  const response = await fetch(`${siteLink}User/Login`, {
+  const response = await fetch(`${siteLink}User/Register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
