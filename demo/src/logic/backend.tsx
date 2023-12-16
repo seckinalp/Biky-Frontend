@@ -32,7 +32,6 @@ headers: {
   if (!response.ok) {
       throw new Error('Failed to fetch comments');
     }
-    console.log(resData);
     return resData;
 }
 
@@ -48,10 +47,64 @@ export async function AddComment(postID : String, content : String, token: Strin
       content: content,
     }),
   });
-      const resData = await response.json();
       if (!response.ok) {
           throw new Error('Failed to add comment');
         }
-      
-        return resData.posts;
+}
+
+export async function DeleteComment(commentID : String,  token: String) : Promise<void> {
+  const response = await fetch(`${siteLink}/Comment/Delete`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'CommentID': ''
+    }
+});
+      if (!response.ok) {
+          throw new Error('Failed to add comment');
+        }
+}
+
+export interface UserCredentials {
+  Token: String,
+  UserID: String
+}
+
+export async function Login(name : String, password : String) : Promise<UserCredentials> {
+  const response = await fetch(`${siteLink}/User/Login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      Nickname: name,
+      Password: password
+    }),
+  });
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to login');
+    }
+    return resData;
+}
+
+export async function Register(universityID : String, nickname: String, email : String,  password : String) : Promise<void> {
+  const response = await fetch(`${siteLink}/User/Login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      UniversityID: universityID,
+      Nickname: nickname,
+      Email: email,
+      Password: password
+    }),
+  });
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to register');
+    }
+    return resData;
 }
