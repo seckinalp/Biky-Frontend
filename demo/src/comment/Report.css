@@ -1,0 +1,66 @@
+/* Report.css */
+.reportr-container {
+    background-color: white;
+    border-radius: 10px;
+    width: 400px; /* Adjust width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: absolute;
+    left: 20px; /* Adjust position as needed */
+    top: 20px; /* Adjust position as needed */
+    border: 1px solid black;
+    z-index: 3;
+  }
+  
+  .reportr-header {
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .reportr-back-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .reportr-back-button:hover {
+    background: transparent;
+    color: red;
+  }
+  
+  .reportr-back-button .material-icons {
+    font-size: 24px;
+  }
+  
+  .reportr-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .report-textarea-container {
+    flex-grow: 1; /* Adjust as needed */
+    margin-bottom: 10px;
+  }
+  
+  .report-textarea-container textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    resize: none;
+  }
+  
+  .report-button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .report-button-container button {
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  

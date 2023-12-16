@@ -252,7 +252,7 @@
   transition: transform 0.3s ease;
 }
 .more-options:hover {
-  transform: scale(1.2); /* Scales up the size when hovered */
+  transform: scale(1.0); /* Scales up the size when hovered */
 }
 .price-button {
   justify-content: flex-start; /* Align content to the left */
@@ -261,4 +261,14 @@
   justify-content: center; /* Center content within each button */
   flex-direction: row;
   filter: none; /* Makes the emoji white */
+}
+
+.delete-postc{
+  padding: 3px; /* Adjust padding as needed */
+  background-color: red;
+  margin-right: 5px;
+}
+.delete-postc:hover{
+  transform: scale(1.1);
+  background-color: grey;
 }

@@ -201,8 +201,8 @@ const handleFilterChange = () => {
         </div>
         
       )}
+      <div className='btn-container'><button className="btn" onClick={handleFilterChange}>Filter</button></div>
       
-      <button className="category-filter-apply-btn" onClick={handleFilterChange}>Filter</button>
     </div>
   );
   
