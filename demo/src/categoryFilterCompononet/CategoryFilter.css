@@ -6,6 +6,8 @@
     position: relative;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     background-color: white;
+    padding: 15px; /* Add padding */
+    box-sizing: border-box; /
   }
   
   .category-filter-header {
@@ -13,6 +15,10 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
   }
   
   .category-filter-select {
@@ -30,8 +36,12 @@
     border: none;
     background: transparent;
     cursor: pointer;
+    font-size: 20px;
   }
-  
+  .category-filter-close-btn:hover{
+    color: purple;
+    background-color: transparent;
+  }
   .category-filter-apply-btn {
     width: 100%;
     padding: 10px;
@@ -41,9 +51,85 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    width: 100%;
   }
-  
+  .category-select label {
+    margin-right: 10px;
+  }
   .category-filter-apply-btn:hover {
     background-color: #0056b3;
   }
   
+  .category-filter-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px; /* Add some space between the buttons */
+  }
+  
+  .category-filter-button:hover {
+    background-color: #0056b3;
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .button-group button {
+    margin-right: 10px; /* Adds gap between buttons */
+  }
+  .post-type-button {
+    flex: 1; /* Buttons take up equal space */
+    margin-right: 5px; /* Space between buttons */
+  }
+  .post-type-button:last-child {
+    margin-right: 0; /* No space after the last button */
+  }
+  .button-group button:last-child {
+    margin-right: 0; /* Removes margin from the last button */
+  }
+  .post-type-button.active {
+    background-color: #007bff; /* Active button color */
+    color: white;
+  }
+  .sale-options {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .sale-options input[type="text"] {
+    margin-right: 10px; /* Adds gap between the price input fields */
+  }
+  
+  .sale-options input[type="text"]:last-child {
+    margin-right: 0; /* Removes margin from the last input field */
+  }
+  
+  .sale-options select {
+    margin-left: 10px; /* Adds gap between the last input field and the select box */
+  }
+  .price-input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    
+    
+  }
+  .price-input {
+    max-width: 110px;
+  }
+  .price-input-group input[type="text"] {
+    flex: 1; /* Input fields take up equal space */
+    margin-right: 5px; /* Space between input fields */
+   
+  }
+  
+  .price-input-group input[type="text"]:last-child {
+    margin-right: 0; /* No space after the last input field */
+  }

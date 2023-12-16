@@ -20,7 +20,14 @@ import SalePosts, { SalePostsProps } from './postcomponent/SalePosts';
 import { Provider } from 'react-redux';
 import store from './store'; 
 import CategoryFilter from './categoryFilterCompononet/CategoryFilter';
+
 import SearchComponent from './SearchComponent/SearchComponent';
+import ShowRow from './showRowComponent/ShowRow';
+
+import bikyImage from './indir.jpg';
+import Deneme from './categoryFilterCompononet/deneme';
+import Navbar from './navigation/Navbar';
+import BackgroundContainer from './BackgroundContainer/BackgroundContainer';
 const exampleSalePostsProps: SalePostsProps = {
   initialPosts: [
     {
@@ -208,11 +215,23 @@ const App = () => {
     }
     // ... other categories
   ];
-  return (
-    <Provider store={store}>
+
+return (
+  <Provider store={store}>
     <Router>
-      <Routes>
-      <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
+    
+      <div>
+      
+        {/* Include the Navbar component here */}
+        <div className='navbar_container'><Navbar  /></div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+        <Routes>
+        <Route path="/socialmediaposts" element={<SocialMediaPosts initialPosts={exampleSocialMediaPostsProps.initialPosts} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -228,13 +247,23 @@ const App = () => {
         <Route path='/saleposts' element={<SalePosts initialPosts ={exampleSalePostsProps.initialPosts}/>}/>
         <Route path='/comments' element={<Comments postID={"7f3e30a5-cc09-4501-82e0-feb7136e22bb"}/>}/>
         <Route path="/category" element={<CategoryFilter data={categoryData} />} />
-        <Route path="/search" element={<SearchComponent />} />
-      
 
-      </Routes>
+        <Route path="/search" element={<SearchComponent />} />
+        <Route path="/show-row" element={<ShowRow item={{
+            id: 1,
+            name: 'Elon Musk',
+            avatarUrl: bikyImage
+          }} onItemClick={function (id: number): void {
+            throw new Error('Function not implemented.');
+          } }/>} />
+        </Routes>
+        </div>
+
+      </div>
+    
     </Router>
-    </Provider>
-  );
+  </Provider>
+);
 };
 
 export default App;

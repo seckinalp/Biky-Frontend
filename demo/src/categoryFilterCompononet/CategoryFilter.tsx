@@ -13,7 +13,12 @@ interface CategoryFilterProps {
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-
+  const [isVisible, setIsVisible] = useState(true); // State to control visibility
+  const [postType, setPostType] = useState<'socialMedia' | 'sale' | null>(null);
+  const [showSaleOptions, setShowSaleOptions] = useState(false);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [category, setCategory] = useState('');
   const handleCategoryChange = (category: Category, level: number) => {
     const newSelectedCategories = [...selectedCategories];
     newSelectedCategories[level] = category;
@@ -47,23 +52,82 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ data }) => {
       </div>
     );
   };
+  const handleClose = () => {
+    setIsVisible(false); // Hide the component
+  };
+  const handlePostTypeChange = (type: 'socialMedia' | 'sale') => {
+    setPostType(type);
+    // Only show sale options if 'sale' is selected
+    setShowSaleOptions(type === 'sale');
+  };
+  if (!isVisible) return null;
+  let selects: JSX.Element[] = [];
+  if (postType === 'sale') {
+    selects = [renderSelect(data, 0)];
+    let currentCategories = selectedCategories[0]?.children || [];
 
-  let selects = [renderSelect(data, 0)];
-  let currentCategories = selectedCategories[0]?.children || [];
-
-  for (let i = 1; i <= selectedCategories.length; i++) {
-    selects.push(renderSelect(currentCategories, i));
-    currentCategories = selectedCategories[i]?.children || [];
+    for (let i = 1; i <= selectedCategories.length; i++) {
+      selects.push(renderSelect(currentCategories, i));
+      currentCategories = selectedCategories[i]?.children || [];
+    }
   }
-
   return (
     <div className="category-filter-container">
-      <button className="category-filter-close-btn">X</button>
-      <div className="category-filter-header">Filter the Post</div>
+      <div className="category-filter-header">
+        <span>Filter the Post</span>
+        <button className="category-filter-close-btn" onClick={handleClose}>X</button>
+      </div>
+      <div className="button-group">
+        <button 
+          className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
+          onClick={() => setPostType('socialMedia')}
+        >
+          Social Media Post
+        </button>
+        <button 
+          className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
+          onClick={() => setPostType('sale')}
+        >
+          Sale Post
+        </button>
+      </div>
+      {postType === 'sale' && (
+        <div className="sale-options">
+          <div className="price-input-group">
+            <input
+              type="text"
+              className="price-input"
+              placeholder="Minimum Price"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+            />
+            <input
+              type="text"
+              className="price-input"
+              placeholder="Maximum Price"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+          </div>
+          <div className="category-select-group">
+            <label>Category:</label>
+            <select
+              className="category-select"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select a Category</option>
+              <option value="lostAndFound">Lost and Found</option>
+              <option value="secondHand">Second Hand</option>
+            </select>
+          </div>
+        </div>
+      )}
       {selects}
       <button className="category-filter-apply-btn">Filter</button>
     </div>
   );
+  
 };
 
 export default CategoryFilter;

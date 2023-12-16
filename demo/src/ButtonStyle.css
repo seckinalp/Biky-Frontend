@@ -1,14 +1,4 @@
-button{
-    background-color: #A980FC; /* Bootstrap primary color */
-    /* Other styling for buttons can go here */
-  }
-  
-  /* Hover effect for all buttons */
-  button:hover{
-    background-color: gray; /* Change background color on hover */
-    transform: scale(1.1); /* Increase the size of the button when hovered */
-    /* Additional hover effects can go here */
-  }
+
 .btn {
  width: 130px;
  height: 40px;

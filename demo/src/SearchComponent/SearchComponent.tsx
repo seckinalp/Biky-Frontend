@@ -1,52 +1,50 @@
 import React, { useState } from 'react';
 import './SearchComponent.css'; // Make sure the path is correct
+import ShowRow from '../showRowComponent/ShowRow'; 
 
 interface SearchItem {
   id: number;
   name: string;
-  username: string;
   avatarUrl: string;
 }
 
 const initialItems: SearchItem[] = [
   // Add initial items here
-  { id: 1, name: 'Marc Zuckerberg', username: '@marc.zucker31', avatarUrl: 'path/to/avatar1.png' },
-  { id: 2, name: 'Marc Zuckerberg', username: '@marc.zucker31', avatarUrl: 'path/to/avatar1.png' },
+  { id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
+  { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
   // More items...
 ];
 
 const SearchComponent: React.FC = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [filteredItems, setFilteredItems] = useState<SearchItem[]>([]);
-    const [isVisible, setIsVisible] = useState(true); // State to control visibility
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredItems, setFilteredItems] = useState<SearchItem[]>(initialItems);
+  const [isVisible, setIsVisible] = useState(true); // State to control visibility
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearchQuery(query);
-
+  
     if (!query) {
-      setFilteredItems([]);
+      setFilteredItems(initialItems);
       return;
     }
-
+  
+    // Sadece isimlerin başlangıcında arama yap
     const matchedItems = initialItems.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase()) ||
-      item.username.toLowerCase().includes(query.toLowerCase())
+      item.name.toLowerCase().startsWith(query.toLowerCase())
     );
-
+  
     setFilteredItems(matchedItems);
   };
 
   const handleItemClick = (itemId: number) => {
-    // Perform actions when an item is clicked
     console.log('Item clicked:', itemId);
+    // Implement further logic as needed
   };
 
   const handleCloseClick = () => {
     setIsVisible(false); // Hide the entire component
   };
-
-
 
   if (!isVisible) return null; // Do not render the component if not visible
 
@@ -67,13 +65,11 @@ const SearchComponent: React.FC = () => {
         {searchQuery && filteredItems.length > 0 && (
           <div className="search-results">
             {filteredItems.map((item) => (
-              <div key={item.id} className="search-item" onClick={() => handleItemClick(item.id)}>
-                <img src={item.avatarUrl} alt={item.name} className="search-avatar" />
-                <div className="search-info">
-                  <div className="search-name">{item.name}</div>
-                  <div className="search-username">{item.username}</div>
-                </div>
-              </div>
+              <ShowRow
+                key={item.id}
+                item={item}
+                onItemClick={handleItemClick}
+              />
             ))}
           </div>
         )}
@@ -81,7 +77,5 @@ const SearchComponent: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default SearchComponent;
