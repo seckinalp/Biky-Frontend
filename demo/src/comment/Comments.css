@@ -3,9 +3,10 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px; /* Increased padding */
-    width: 430px; /* Adjusted width */
+    width: 400px; /* Adjusted width */
     position: relative; /* Set position relative for absolute child positioning */
-
+    margin-top: 0px;
+    
   }
   
   .comment-header {

@@ -17,7 +17,7 @@
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    margin: 16px;
+    margin-top: 16px;
     width: 430px; /* Adjust width as necessary */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -163,9 +163,6 @@
   .carousel-arrow.right {
     right: 10px;
   }
-  
-
-
 
 
 
@@ -224,6 +221,8 @@
 
 .option-button:hover {
   background-color: #f0f0f0; /* Light hover effect */
+  transform: scale(1.0); /* Increase the size of the button when hovered */
+
 }
 .more-options-icon {
 
@@ -255,4 +254,12 @@
 }
 .more-options:hover {
   transform: scale(1.2); /* Scales up the size when hovered */
+}
+.price-button {
+  justify-content: flex-start; /* Align content to the left */
+  flex: 1; /* Each button takes equal space */
+  display: flex;
+  justify-content: center; /* Center content within each button */
+  flex-direction: row;
+  filter: none; /* Makes the emoji white */
 }

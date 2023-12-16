@@ -16,10 +16,17 @@ export interface PostProps {
 		imagesID: string[]
 		contentText: string
 		postTime: Date //UTC time
+    isAnonymous: boolean // Added isAnonymous flag
 		}
+    
 }
 //assuming we pass the post as props.item
 const Post: React.FC<PostProps> = (props) => {
+  const [globalId, setGlobalId] = useState("1234");
+
+  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == globalId);
+
+
   const user = {}; // Placeholder for user object from backend
 
   // Empty function to handle report user action
@@ -51,15 +58,19 @@ const Post: React.FC<PostProps> = (props) => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+ 
+
   return (
     <div className="post-container">
       <div className="post-header">
-        <img className="profile-pic" src="../../public/profile.png" alt="Profile" />
+        <img className="profile-pic" src={props.item.isAnonymous ? "../public/ppdefault.jpg" : props.item.author.userProfileLink} alt="Profile"/>
         <div className="username-time">
-          <div className="username">{props.item.author.userName}</div>
+          <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.userName}</div>
           <div className="time-posted">{dateTime}</div>
         </div>
+        {showDeletePost && <button  className="delete-postc">🗑️</button>}
         <div className="more-options" onClick={toggleOptions}>
+       
           <div className="more-options-icon">...</div>
           {showOptions && (
             <div className="options-panel">
@@ -81,22 +92,8 @@ const Post: React.FC<PostProps> = (props) => {
           )}
         </div>}
       </div>
-
-    </div>
+      </div>
   );
-};
-Post.defaultProps = {
-  item: {
-    postID: 'defaultPostID',
-    author: {
-      userID: 'defaultUserID',
-      userName: 'Default User',
-      userProfileLink: '/default-profile',
-    },
-    imagesID: [],
-    contentText: 'Default content text',
-    postTime: new Date(), // Current date-time as default
-  },
 };
 
 export default Post;

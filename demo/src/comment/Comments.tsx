@@ -22,9 +22,14 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
     const [isVisible, setIsVisible] = useState(true); // State to control visibility
     
     const [newCommentText, setNewCommentText] = useState('');
+    const [isInputValid, setIsInputValid] = useState(true); // State to track input validation
+    
+
 
     const handleNewCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewCommentText(e.target.value);
+      setIsInputValid(true); // Reset validation state on typing
+
     };
     const handleSendComment = () => {
         const newComment: CommentProps = {
@@ -36,7 +41,7 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
                 commentTime: new Date(), // Current date-time as default
 
             },
-            showDelete: false,
+            showDelete: false,//true or false it does not matter in the return statement aboove it checks 
             onDelete: function (): void {
                 throw new Error('Function not implemented.');
             }
@@ -45,12 +50,7 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
         setNewCommentText('');// Clear input field after sending comment
      } 
 
-    const handleClose = () => {
-        setIsVisible(false); // Function to hide the comment section
-      };
-      if (!isVisible) {
-        return null; // Don't render anything if the comment section is not visible
-      }
+
       const handleDelete = (commentId: string) => {
         // Filter out the comment that needs to be deleted
         const updatedComments = comments.filter(comment => comment.item.commentId !== commentId);
@@ -62,7 +62,6 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
     <div className="comment-section">
       <div className="comment-header">
         <strong>Comments</strong>
-        <button className="close-button"onClick={handleClose}>X</button>
       </div>
       <div className="comment-list">
       {displayedComments.map((comment) => (
@@ -87,6 +86,13 @@ const Comments: React.FC<CommentsProps> = ({ initialcomments, author }) => {
   );
 };
 
+
+
+
+
+
+
+
 Comments.defaultProps = {
     initialcomments: [
       {
@@ -98,7 +104,7 @@ Comments.defaultProps = {
             userName: "Default User",
             userProfileLink: "../public/profile.png", // Ensure this path is correct
           },
-          contentText: "This is a default comment. ashjdkhsakjfhdsljkfhljksahjklshfkljdsahfjlkdhgbkljvb cxlkjafhndjılkghbvl jkln lk fnfjvasdasdsdfa asdfadsfkjdshgfhagdbkfjhxn cnads bfjhcabcxnvbcjklsadhsbjömasb chdsnhfdblkjasmhdxfblhdnbashjhdjöhcnjkladsöfamhbdhlkJGSAFBHADHFJKDFADSFADSFSDIUHASDBFKHSDASDASDV DSSADSA SDASDAS SADASD QNFBLJHDFJXCNKhbhkasnzxgfbnASASD DFSDFD",
+          contentText: "This is a defaultSDFD",
           commentTime: new Date(), // Current date-time as default
 
         },

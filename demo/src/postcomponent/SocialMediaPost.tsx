@@ -1,91 +1,63 @@
-import { PostProps } from "./Post"
-import Post from "./Post"
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Post from "./Post";
+import Comments from '../comment/Comments';
+import  { CommentProps } from '../comment/Comment';
 
-
-interface SocialMediaPostProps {
-    item: {
-          postID: string
-          author: 
-              {
-              userID: string
-              userName: string
-              userProfileLink: string
-              }
-          imagesID: string[]
-          contentText: string
-          postTime: Date //UTC time
-          isLiked : boolean //to show it is liked by viewing user
-          isAnonymous: boolean
-          }
-  }
-  const convertToPostProps = (socialMediaPost: SocialMediaPostProps): PostProps => {
-    const { postID, author, imagesID, contentText, postTime} = socialMediaPost.item;
-     const post : PostProps = {
-      item: {
-        postID,
-        author,
-        imagesID,
-        contentText,
-        postTime,
-      },
+export interface SocialMediaPostProps {
+  item: {
+    postID: string;
+    author: {
+      userID: string;
+      userName: string;
+      userProfileLink: string;
     };
-    return post;
+    imagesID: string[];
+    contentText: string;
+    postTime: Date; // UTC time
+    isLiked: boolean; // to show it is liked by viewing user
+    isAnonymous: boolean;
+    likecount: number;
+    initialComments: CommentProps[];
   };
-  const [socialMediaPost, setSocialMediaPost] = useState({
-    likeCount: 1125, // Initialize like count
-    liked: false, // State to track if the user has liked the post
+}
+
+const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
+  
+  
+  const [likeState, setLikeState] = useState({
+    likeCount: props.item.likecount, // Initialize like count
+    liked: props.item.isLiked, // Initialize with the prop value
   });
+
   const toggleLike = () => {
-    setSocialMediaPost((prevPost) => ({
-      liked: !prevPost.liked,
-      likeCount: prevPost.liked ? prevPost.likeCount - 1 : prevPost.likeCount + 1,
+    setLikeState(prevState => ({
+      liked: !prevState.liked,
+      likeCount: prevState.liked ? prevState.likeCount - 1 : prevState.likeCount + 1,
     }));
   };
-  const handleComment = () => {
-    // Placeholder for comment logic
-  };
 
-  // Empty function for handling share action
-  const handleShare = () => {
-    // Placeholder for share logic
-  };
+  const [showComments, setShowComments] = useState(false);
 
-  const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
-    return <>
-    <Post item = {convertToPostProps(props).item}/>
-    <div className="post-actions">
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
+  return (
+
+    <>
+    <Post item={props.item} />
+      <div className="post-container">
+      <div className="post-actions">
         <div className="post-buttons">
-        <button className={`like-button ${socialMediaPost.liked ? 'liked' : ''}`} onClick={toggleLike}>
-            👍
-            <span className="like-count">{socialMediaPost.likeCount}</span>
+          <button className={`like-button ${likeState.liked ? 'liked' : ''}`} onClick={toggleLike}>
+            👍 <span className="like-count">{likeState.likeCount}</span>
           </button>
-          <button className="comment-button" onClick={handleComment}>💬 Comment</button>
-          <button className="share-button" onClick={handleShare}>🔗 Share</button>
+          <button className="comment-button" onClick={toggleComments}>💬 Comment</button>
         </div>
       </div>
+    </div>
+    {showComments && <Comments initialcomments={props.item.initialComments} author={props.item.author} />}
     </>
-  }
+  );
+}
 
-  SocialMediaPost.defaultProps = {
-    item: {
-      postID: "sdasd",
-      author: 
-          {
-          userID: "dsasdfa",
-          userName: "sddsads",
-          userProfileLink: "dasas",
-          },
-      imagesID: [
-        "asdasdadsf","sfasdasdD"
-      ],
-      contentText: "sdfasdfasdfa",
-      postTime: new Date(), //UTC time,
-      isLiked : false, //to show it is liked by viewing user,
-      isAnonymous: true,
-      }
-
-
-
-  }
-  export default SocialMediaPost;
+export default SocialMediaPost;
