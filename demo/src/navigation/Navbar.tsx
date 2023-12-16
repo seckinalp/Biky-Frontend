@@ -40,13 +40,26 @@ const Navbar: React.FC<NavbarProps> = () => {
     // Mağaza düğmesi tıklama olayını burada işleyin
   };
 
+  const handleSearchClick = () => {
+    // Mağaza düğmesi tıklama olayını burada işleyin
+  };
+  const handleFilterClick = () => {
+    // Mağaza düğmesi tıklama olayını burada işleyin
+  };
   return (
     <div className="navbar">
       <div className="navbar__rectangle"></div>
-      <img className="navbar__bikylogo" src="../../siyaharkaplansiz.png" alt="" />
+      
       <div className="navbar__left">
+        
+        <img className="navbar__bikylogo" src="../../siyaharkaplansiz.png" alt="" />
+        
+      
         <button className="navbar__button navbar__button_profile" onClick={handleProfileClick}>
           <img className="navbar__profile" src="../../profile.png" alt="" />
+        </button>
+        <button className="navbar__button navbar__button_home" onClick={handleHomeClick}>
+          <img className="navbar__home" src="../../home-buttonn.png" alt="" />
         </button>
         <button className="navbar__button navbar__button_message" onClick={handleMessageClick}>
           <img className="navbar__message" src="../../message.png" alt="" />
@@ -57,19 +70,26 @@ const Navbar: React.FC<NavbarProps> = () => {
         <button className="navbar__button navbar__button_settings" onClick={handleSettingsClick}>
           <img className="navbar__settings" src="../../settings.png" alt="" />
         </button>
+      
       </div>
       <div className="navbar__middle">
-        <button className="navbar__button navbar__button_home" onClick={handleHomeClick}>
-          <img className="navbar__home" src="../../homedark.png" alt="" />
-        </button>
+
         <button className="navbar__button navbar__button_create" onClick={handleCreateClick}>
           <img className="navbar__create" src="../../create.png" alt="" />
         </button>
-        <button className="navbar__button navbar__button_store" onClick={handleStoreClick}>
-          <img className="navbar__store" src="../../storelight.png" alt="" />
+       
+      </div>
+      <div className="navbar__right">
+        
+      <button className="navbar__button navbar__button_filter" onClick={handleFilterClick}>
+          <img className="navbar__filter" src="../../filter-button.png" alt="" />
+        </button>
+
+        
+        <button className="navbar__button navbar__button_search" onClick={handleSearchClick}>
+          <img className="navbar__search" src="../../search-button.png" alt="" />
         </button>
       </div>
-      <div className="navbar__right"></div>
     </div>
   );
 };

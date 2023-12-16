@@ -161,6 +161,41 @@
     /* Additional styling for the header */
   }
 
+  .profile-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust the space between buttons */
+  }
+  
+  .profile-button-container button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+    background-color: #A980FC; /* Matching the Edit Profile button color */
+    transition: transform 0.3s ease; /* Transition for smooth scaling */
+  }
+  
+  .profile-follow-button {
+    background-color: #28a745; /* Green background for Follow button */
+  }
+  
+  .profile-unfollow-button {
+    background-color: #dc3545; /* Red background for Unfollow button */
+  }
+  
+  .profile-message-button {
+    background-color: #17a2b8; /* Light blue background for Message button */
+  }
+  
+  .profile-button-container button:hover {
+    transform: scale(1.1); /* Increase the size of the button when hovered */
+    background-color: gray; /* Darker shade for hover effect */
+  }
+  
+
   
   /* Additional styles if needed based on your provided CSS */
   
