@@ -75,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
         
       
         <button className="navbar__button navbar__button_profile" onClick={handleProfileClick}>
-          <img className="navbar__profile" src={photo == "" || photo == null ? "../../public/ppdefault.jpg" : `${imageLink}${photo}`} alt="" />
+          <img className="navbar-avatar" src={photo == "" || photo == null ? "../../public/ppdefault.jpg" : `${imageLink}${photo}`} alt="" />
         </button>
         <button className="navbar__button navbar__button_home" onClick={handleHomeClick}>
           <img className="navbar__home" src="../../home-buttonn.png" alt="" />

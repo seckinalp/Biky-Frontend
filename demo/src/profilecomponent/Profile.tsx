@@ -123,7 +123,6 @@ const Profile: React.FC = () => {
       //event.preventDefault();
       try {
         // Assuming UpdateProfile returns a promise
-        console.log(editData);
         setIsEditing(false);
         await setUpdate(true);
         await setReload(true);
@@ -180,14 +179,13 @@ const Profile: React.FC = () => {
                 <h2>Edit Profile</h2>
                 <button className="close-button1" onClick={toggleEdit}>×</button>
             </div>
-            <input
-                type="text"
-                name="username"
+            <textarea
+                name="nickname"
                 value={editData.nickname}
                 onChange={handleEditChange}
-                placeholder="New Username"
+                placeholder="New User Name"
+                maxLength={32}
             />
-            {}
 
             <textarea
                 name="description"
