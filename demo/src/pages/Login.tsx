@@ -6,7 +6,7 @@ import '../ButtonStyle.css'; // This is the import statement for your CSS file
 import { LoginRequest , UserCredentials} from '../logic/backend';
 import { useDispatch } from 'react-redux';
 import { setTokenAndUserId } from '../store';
-import { setUserCredentials } from '../logic/cookie';
+import { getUserCredentials, setUserCredentials } from '../logic/cookie';
 
 
 const Login = () => {
@@ -16,6 +16,7 @@ const Login = () => {
     password: ''
   });
   const dispatch = useDispatch();
+  const [loginE, setLoginE] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -23,6 +24,7 @@ const Login = () => {
       ...prevCredentials,
       [name]: value
     }));
+    setLoginE("");
   };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,10 +33,13 @@ const Login = () => {
     try {
       const userAuth = await LoginRequest(credentials.email, credentials.password);
       setUserCredentials(userAuth);
+      if(getUserCredentials().token !== "") {
       navigate('/homepage');
+      }
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
     } catch (error) {
-      
       console.error('Login failed:', error);
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
     }
   };
   
@@ -60,6 +65,8 @@ const Login = () => {
             onChange={handleInputChange} 
             required 
           />
+          <div>{loginE}</div>
+
           {/*
               <div className="form-options">
               <Link className="forgot-password-link" to="/forgot-password">Forgot Password?</Link>

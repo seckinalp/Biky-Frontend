@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import Post, { PostProps } from "./Post";
 import Comments from '../comment/Comments';
+import { GetCategoryName, SendMessage } from '../logic/backend';
+import { getUserCredentials } from '../logic/cookie';
 
   
   export interface SalePostProps {
     item: SalePostClass,
     isAnonymous?: false;
   }
+
+  export const reverseCategoryMap: { [key: number]: string } = {
+    1: 'lost & found',
+    3: 'second hand',
+    2: 'private lesson',
+    4: 'trade',
+    0: 'borrow',
+  };
+  
 
   export interface SalePostClass{
     
@@ -47,8 +58,8 @@ import Comments from '../comment/Comments';
   const SalePost: React.FC<SalePostProps> = (props) => {
     console.log(props);
     const[visible,setVisible] = useState(true);
+    const[sent, isSent] = useState(false);
     const handleVisible = () => {
-    console.log("aiee")
     setVisible(false);
   }
     const [showComments, setShowComments] = useState(false);
@@ -68,6 +79,18 @@ import Comments from '../comment/Comments';
           return null;
       }
     };
+    const sendDM = async () => {
+      if(!sent) {
+      try {
+        const categoryName = await  GetCategoryName(props.item.categoryID);
+      SendMessage(props.item.authorID, "Hello, I saw your " +
+       reverseCategoryMap[props.item.postType] + " post about " + categoryName + ". Can we talk about it?"  );
+      } catch (error) {
+        console.log(error);
+      }
+      isSent(true);
+    }
+    }
   
     const toggleComments = () => {
       setShowComments(!showComments);
@@ -87,6 +110,8 @@ import Comments from '../comment/Comments';
             </button>
             {getSpecialButton()}
             <button className="comment-button" onClick={toggleComments}>💬 Comment</button>
+            {getUserCredentials().userID !== props.item.authorID && 
+            (!sent ? <button className="comment-button" onClick={sendDM}>📨 Auto DM</button> : <button className="comment-button">Sent! Check chat </button>)}
           </div>
         </div>
       </div>
