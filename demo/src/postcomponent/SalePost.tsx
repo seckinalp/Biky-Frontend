@@ -115,7 +115,7 @@ import { getUserCredentials } from '../logic/cookie';
           </div>
         </div>
       </div>
-      {showComments && <Comments postID = {props.item.postID}/>}
+      {showComments && <Comments postID = {props.item.postID} authorID = {props.item.authorID}/>}
       </>
     );
   }

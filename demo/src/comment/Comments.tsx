@@ -11,11 +11,12 @@ import { getUserCredentials } from '../logic/cookie';
 
 export interface CommentsProps {
   postID: String
+  authorID: string
   //initialcomments: CommentProps[]
 }
 
 
-const Comments: React.FC<CommentsProps> = ({postID}) => {
+const Comments: React.FC<CommentsProps> = ({postID, authorID}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [reload, setReload] = useState<boolean>(true);
   const [comments, setComments] = useState<CommentClass[]>([]);
@@ -81,7 +82,7 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
         <Comment 
         key={comment.commentID} 
         item={comment} 
-        showDelete={comment.author.userID === userID}
+        showDelete={comment.author.userID === userID || getUserCredentials().userID === authorID}
         onDelete={() => handleDelete(comment.commentID)}
         />
         ))}

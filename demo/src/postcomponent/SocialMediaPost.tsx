@@ -11,6 +11,7 @@ export interface SocialMediaPostProps {
 
 export interface SocialMediaPostClass {
     postID: string;
+    authorID: string;
     author: {
       userID: string;
       nickname: string;
@@ -78,7 +79,6 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   };
 
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState<CommentProps[]>([]);
 
   const toggleComments = () => {
     setShowComments(!showComments);
@@ -105,7 +105,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
-    {showComments && <Comments postID = {props.item.postID}/>} 
+    {showComments && <Comments postID = {props.item.postID} authorID = {props.item.authorID}/>} 
     </>
   );
 }
