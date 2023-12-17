@@ -9,6 +9,7 @@ import { UserCredentials } from "./backend";
   // Get UserCredentials from a cookie
   export function getUserCredentials(): UserCredentials {
     const serializedCredentials = getCookie('userCredentials');
+    if(serializedCredentials === "") return {token : "", userID : ""};
         const a : UserCredentials = JSON.parse(serializedCredentials);
         return a;   
   }
@@ -28,15 +29,22 @@ import { UserCredentials } from "./backend";
   
   function getCookie(name: string): string {
     const cookies = document.cookie.split(';');
+    try {
     for (const cookie of cookies) {
       const [cookieName, cookieValue] = cookie.trim().split('=');
       if (cookieName === name) {
         return decodeURIComponent(cookieValue);
       }
     }
-    return "";
+  } catch {
+  }
+  return "";
   }
   
   function deleteCookie(name: string): void {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+
+  export function validateUserCredential() {
+    
   }
