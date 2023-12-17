@@ -11,9 +11,10 @@ interface NavbarProps {
   onCategoryFilterClick:() => void;
   onSearchClick :() =>void;
   onChatClick: () => void;
+  onHomeClick: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onChatClick, onSearchClick , onCategoryFilterClick,onSettingsClick, onNotificationsClick, onProfileClick,onCreatePostClick }) => {
+const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick , onCategoryFilterClick,onSettingsClick, onNotificationsClick, onProfileClick,onCreatePostClick }) => {
 
   const navigate = useNavigate();
 
@@ -34,8 +35,8 @@ const Navbar: React.FC<NavbarProps> = ({ onChatClick, onSearchClick , onCategory
   };
 
   const handleHomeClick = () => {
-    navigate("/posts")
-    // Ana sayfa düğmesi tıklama olayını burada işleyin
+   
+    onHomeClick();
   };
   const handleCreateClick = () => {
     onCreatePostClick();

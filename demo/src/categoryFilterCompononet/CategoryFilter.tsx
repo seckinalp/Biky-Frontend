@@ -36,7 +36,8 @@ export const categoryMap: { [key: string]: number } = {
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange }) => {
  
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
-  const [postType, setPostType] = useState<'socialMedia' | 'sale' | undefined>(undefined);
+  const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
+const [selectedFilter, setSelectedFilter] = useState<'following' | 'allFeed' | 'filter'>('allFeed');
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
 
   const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange
   const [saleText, setSaleText] = useState('');
   const [data, setData] = useState<Category[]>([]);
 
-  const [selectedFilter, setSelectedFilter] = useState<'socialMedia' | 'sale' | 'following' | 'allFeed' | 'filter' | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
 // ...
 const handleItemCategoryChange = (categoryId: number) => {
@@ -67,6 +68,8 @@ const handleFilterChange = () => {
 
   });
 };
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -77,10 +80,15 @@ const handleFilterChange = () => {
       } finally {
         setLoading(false);
       }
+      setIsInitialized(true);
     };
       fetchData();
   }, []); 
-
+  useEffect(() => {
+    if (isInitialized) {
+      handleFilterChange(); // Call this only when isInitialized is true
+    }
+  }, [isInitialized]);
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // Update to use undefined instead of an empty string
     const value = event.target.value;
@@ -88,11 +96,13 @@ const handleFilterChange = () => {
   };
   const handleClose = () => {
     onClose(); 
+    
   };
 
   if (!isVisible) return null;
  
   return (
+    
     <div className="category-filter-container">
     <button className="generic-close-button" onClick={handleClose}></button>
     <div className="category-filter-header">Filter the Post</div>

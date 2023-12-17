@@ -49,9 +49,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems
 
 
   const handleItemClick = (itemId: string) => {
-    console.log('Item clicked:', itemId);
     navigate(`../../../profile/${itemId}`);
-    // Implement further logic as needed
   };
 
   const handleCloseClick = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import "./Homepage.css";
 import Navbar from "./navigation/Navbar";
 import Settings from "./settingsComponent/Settings";
@@ -9,6 +9,9 @@ import CategoryFilter from "./categoryFilterCompononet/CategoryFilter";
 import SearchComponent from "./SearchComponent/SearchComponent";
 import Chat from "./ChatComponent/Chat";
 import { getUserCredentials } from "./logic/cookie";
+import Feed from "./postcomponent/Feed";
+import ProfileFeed from "./profilecomponent/ProfileFeed";
+import { useNavigate } from "react-router-dom";
 
 
 const sampleProfileData = {
@@ -29,7 +32,12 @@ const items = [
   // ... more items
 ];
 
-const Homepage: React.FC = () => {
+type HomepageProps = {
+  children: ReactNode;
+};
+
+const Homepage: React.FC<HomepageProps> = ({ children }) => {
+  const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -37,6 +45,7 @@ const Homepage: React.FC = () => {
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const [showSearchComponent, setShowSearchComponent] = useState(false);
   const [showChatComponent, setShowChatComponent] = useState(false);
+  const [showFeed, setShowFeedComponent] = useState(false);
   const [filter, setFilter] = useState({});
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
@@ -84,6 +93,7 @@ const Homepage: React.FC = () => {
     setShowSettings(false);
   };
   const handleProfileClick = () => {
+    navigate(`../../../profile/${getUserCredentials().userID}`);
     setShowProfile(prev => !prev);
     // Optionally close the other components
     setShowSettings(false);
@@ -99,6 +109,12 @@ const Homepage: React.FC = () => {
     setShowCategoryFilter(false);
     setShowSearchComponent(false);
   };
+  const handleHomeClick = () => {
+    navigate(`../../feed`);
+  }
+  if(getUserCredentials().token === "") {
+    navigate("../../login");
+  }
   return (
     <div className='app'>
       <div className='background'></div>
@@ -109,7 +125,7 @@ const Homepage: React.FC = () => {
 
           <Navbar onSettingsClick={handleSettingsClick}
       onNotificationsClick={handleNotificationsClick} onProfileClick= {handleProfileClick} onCreatePostClick={handleCreatePostClick} onCategoryFilterClick={handleCategoryFilterClick}
-      onSearchClick={handleSearchClick} onChatClick={handleChatClick}
+      onSearchClick={handleSearchClick} onChatClick={handleChatClick} onHomeClick={handleHomeClick}
         />
 
           </div>
@@ -127,9 +143,11 @@ const Homepage: React.FC = () => {
                 />
               )}
             </div>
+            
             <div className="timeline__middle">
-        
+            {showFeed && <Feed/>}
          {showCreatePost &&<CreatePost onClose={handleCreatePostClick} />}
+         { children }
          
             </div>
             <div className="timeline__right">
