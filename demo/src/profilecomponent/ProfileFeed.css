@@ -3,11 +3,15 @@
     display: flex;
     justify-content: center; /* Center the buttons */
     gap: 10px;
-    margin-bottom: 20px; /* Space below the buttons */
+ 
+ 
+     /* Space below the buttons */
 }
 
 
 .profile-edit-button {
+   
+    margin-top: 30px;
     font-size: 0.8rem; /* Larger font size */
     height: 45px;
     width: 200px;
@@ -43,4 +47,10 @@
   .profile-edit-button:active {
     box-shadow: 0 1px 0 0 #000; /* Adjust box-shadow to look like the button is pressed */
     transform: translateY(2px); /* Move the button down slightly to simulate pressing */
+  }
+
+  .profile-posts{
+    justify-content: center;
+    margin-top: 30px;
+    display: flex;
   }
