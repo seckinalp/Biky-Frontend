@@ -38,13 +38,13 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const [filter, setFilter] = useState({});
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
-    setShowCategoryFilter(false);
-    setShowCreatePost(false);
+    
+   
     setShowNotifications(false);
-    setShowProfile(false);
-    setShowSearchComponent(false);
+    
+   
     setShowSettings(false);
-    setShowNotifications(false);
+   
     
     
   };
@@ -65,8 +65,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     // setShowSettings(false);
     // setShowNotifications(false);
     // setShowProfile(false);
-    setShowCreatePost(false);
-    setShowCategoryFilter(false);
+    
   };
 
   const handleCategoryFilterClick = () => {
