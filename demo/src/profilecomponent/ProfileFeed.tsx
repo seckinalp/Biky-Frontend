@@ -61,7 +61,10 @@ const ProfileFeed: React.FC<ProfileFeedProps> = ({ userID }) => {
       Sale Posts
     </button>
   </div>
-    {isSocial ? <SocialMediaPosts initialPosts={data as SocialMediaPostClass[]} />: <SalePosts initialPosts={ data as SalePostClass[]}/>}
+  <div className='profile-posts'>
+  {isSocial ? <SocialMediaPosts initialPosts={data as SocialMediaPostClass[]} />: <SalePosts initialPosts={ data as SalePostClass[]}/>}
+  </div>
+
     </>
   );
 };

@@ -234,6 +234,7 @@ const Profile: React.FC = () => {
       
         
       ) : (
+        <div>
     <div className="profile-profile-card">
       <div className="profile-profile-header">
       </div>
@@ -248,7 +249,7 @@ const Profile: React.FC = () => {
           <span className="profile-profile-stat"><strong>{data?.postNumber}</strong> Posts</span>
           <span className="profile-profile-stat"><strong>{data?.followingsNumber}</strong> Following</span>
           <span className="profile-profile-stat"><strong>{followersCount}</strong> Followers</span>
-          <span className="profile-profile-stat"><strong>{data?.likeNumber}</strong> likeNumber</span>
+          <span className="profile-profile-stat"><strong>{data?.likeNumber}</strong> Likes</span>
         </div>
         {
             !(data?.userID && vieweuserID == data?.userID) ? (
@@ -266,7 +267,11 @@ const Profile: React.FC = () => {
             )
           }
       </div>
-      {paramName && <ProfileFeed userID = {paramName}/> }
+     
+    </div>
+    <div>
+ {paramName && <ProfileFeed userID = {paramName}/> }
+    </div>
     </div>
     )}
 

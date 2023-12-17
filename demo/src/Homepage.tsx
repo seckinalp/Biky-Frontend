@@ -20,7 +20,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   useEffect(() => {
     const checkUserCredentials = () => {
       const userCredentials = getUserCredentials();
-      console.log("wtf")
       if (userCredentials.token === "") {
         navigate('/login');
       }
@@ -50,7 +49,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     
   };
   const handleFilterChange = (newFilterData: React.SetStateAction<{}>) => {
-    console.log('Filter data:', newFilterData);
     setFilter(newFilterData);
     // Add logic to handle the filter change
   };
@@ -59,7 +57,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     // Optionally close other components
 
     setShowNotifications(false);
-    
+    setShowChatComponent(false);
   };
   const handleSearchClick = () => {
     setShowSearchComponent(prev => !prev); // Toggle the SearchComponent visibility
@@ -80,6 +78,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const handleNotificationsClick = () => {
     setShowNotifications(prev => !prev);
     setShowSettings(false);
+    setShowChatComponent(false);
   };
   const handleProfileClick = () => {
     navigate(`../../../profile/${getUserCredentials().userID}`);

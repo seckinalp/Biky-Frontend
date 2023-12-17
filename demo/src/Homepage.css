@@ -1,26 +1,13 @@
-.homepage {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.homepage__nav {
-    margin-bottom: 10px;
-       flex: 1;
-  
-    
-}
-
-body {
+/* Reset margins and set the font family for consistency */
+body, html {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.homepage__timeline {
-    margin-top: 10px;
-    flex:9;
-    
-}
-.background {
+    height: 100%; /* Full height to allow sticky positioning */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Ensure the background is fixed and behind other content */
+  .background {
     position: fixed;
     top: 0;
     left: 0;
@@ -31,28 +18,64 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     filter: brightness(70%);
-    z-index: -1;
+    z-index: -1; /* Behind all other content */
   }
   
-  .app__homepage {
-    position: relative;
-    z-index: 1;
+  /* Set the navbar to be fixed at the top of the page */
+  .homepage__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Make sure the navbar is above other elements */
+    /* Add your navbar's height here if it's not 100px */
+    height: 100px; /* Adjust this if your navbar has a different height */
+    /* Add your navbar styling (background, padding, etc.) */
   }
-
+  
+  /* Adjust the main container to account for the navbar */
+  .homepage {
+    padding-top: 100px; /* Same height as navbar to prevent overlap */
+    display: flex;
+    flex-direction: column;
+   
+    position: relative; /* Needed for z-index to take effect */
+    z-index: 1; /* Above the background */
+  }
+  
+  /* Set up the main timeline container */
   .homepage__timeline {
     display: flex;
     flex-direction: row;
+    flex-grow: 1; /* Allow this to fill the space after the navbar */
+    /* Remove margin-top if padding-top is set on .homepage */
+    max-width: 100vw;
+  }
+  
+  /* Sticky sidebar that moves with the scroll */
+  .timeline__left {
+    position: sticky;
+    top: 100px; /* Same as navbar height to align properly */
+    height: calc(100vh - 100px); /* Adjust the height */
+    overflow-y: auto; /* Enable scrolling within the sidebar */
+    flex: 0.3;
+  }
+  
+  /* Sticky sidebar for right timeline */
+  .timeline__right {
+    position: sticky;
+    top: 100px; /* Same as navbar height to align properly */
+    height: calc(100vh - 100px); /* Adjust the height */
+    overflow-y: auto; /* Enable scrolling within the sidebar */
+    flex: 0.3;
    
-}
-.timeline__left {
-    flex: 0.3;
-}
-
-.timeline__middle {
+  }
+  
+  /* Center content area */
+  .timeline__middle {
     flex: 0.4;
-}
+    overflow-y: auto;
+    /* Add padding if necessary, and other styles */
+  }
 
-.timeline__right {
-    flex: 0.3;
-}
-
+  

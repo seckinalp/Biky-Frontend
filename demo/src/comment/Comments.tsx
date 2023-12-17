@@ -62,7 +62,6 @@ const Comments: React.FC<CommentsProps> = ({postID}) => {
     }
     };
     const handleDelete = (commentId: string) => {
-      console.log(commentId);
       DeleteComment(commentId)
         .then(() => reloadComments())
         .catch((error) => {

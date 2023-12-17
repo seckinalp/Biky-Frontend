@@ -44,7 +44,9 @@ const Login = () => {
   };
   
   return (
+    
     <div className="login-container">
+      <div className='background'></div>
       <div className="login-form">
       <h6>CHIEF? IS IT REALLY YOU?</h6>
         <h2>Log In to your Account</h2>

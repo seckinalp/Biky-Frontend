@@ -2,10 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 90vh;
     padding: 20px;
-    background: url('../assets/homearkaplan.jpg') no-repeat center center;
-    background-size: cover;
+  
   }
   
   .login-form {
