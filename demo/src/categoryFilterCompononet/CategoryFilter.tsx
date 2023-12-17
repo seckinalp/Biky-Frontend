@@ -3,17 +3,19 @@ import './CategoryFilter.css'; // Make sure the path is correct
 import { FetchCategories } from '../logic/backend';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
 
+export interface filterData {
+  postType?: 'socialMedia' | 'sale';
+  text?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  category?: number;
+  itemCategory?: number;
+  feedType?: 'following' | 'allFeed';
+}
+
 export interface CategoryFilterProps {
   onClose: () => void;
-  onFilterChange: (filterData: {
-    postType?: 'socialMedia' | 'sale';
-    text?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    category?: number;
-    itemCategory?: number;
-    feedType?: 'following' | 'allFeed';
-  }) => void;
+  onFilterChange: (f : filterData) => void;
 }
 
 export interface Category {
@@ -22,30 +24,6 @@ export interface Category {
   children: Category[];
 }
 
-const categoryData: Category[] = [
-  {
-    categoryID: 1,
-    name: "string",
-    children: [
-      {
-        categoryID: 2,
-        name: "lesson",
-        children: [
-          {
-            categoryID: 3,
-            name: "cs",
-            children: [
-              { categoryID: 4, name: "cs223", children: [] },
-              { categoryID: 5, name: "cs315", children: [] },
-              { categoryID: 6, name: "cs319", children: [] }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-  // ... other categories
-];
 const categoryMap: { [key: string]: number } = {
   lostAndFound: 1,
   secondHand: 3,
@@ -61,8 +39,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
 
   const [loading, setLoading] = useState(true);
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
   const [category, setCategory] = useState<number | undefined>(undefined);
 
   const [socialMediaText, setSocialMediaText] = useState('');
@@ -114,7 +92,7 @@ const handleFilterChange = () => {
  
   return (
     <div className="category-filter-container">
-    <button className="close-button" onClick={handleClose}></button>
+    <button className="generic-close-button" onClick={handleClose}></button>
     <div className="category-filter-header">Filter the Post</div>
     <div className="button-group">
       <div className='button1'> <button 
@@ -145,7 +123,7 @@ const handleFilterChange = () => {
     See all Feed
   </button>
 </div>
-    {postType === 'socialMedia' && (
+    {postType === 'socialMedia' && selectedFilter === 'allFeed' && (
       <input
         type="text"
         className="social-media-input"
@@ -154,7 +132,7 @@ const handleFilterChange = () => {
         onChange={(e) => setSocialMediaText(e.target.value)}
       />
     )}
-      {postType === 'sale' && (
+      {postType === 'sale' && selectedFilter === 'allFeed' && (
         <div className="sale-options">
           <div className='contains-input'>
           <input 
@@ -168,18 +146,18 @@ const handleFilterChange = () => {
        
         <div className="price-input-group">
             <input
-              type="text"
+              type="number"
               className="price-input"
               placeholder="Minimum Price"
               value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
+              onChange={(e) => setMinPrice(parseInt(e.target.value.replace(/[^0-9]/g, '').replace(/^0+/, '')))}
             />
             <input
-              type="text"
+              type="number"
               className="price-input"
               placeholder="Maximum Price"
               value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
+              onChange={(e) => setMaxPrice(parseInt(e.target.value.replace(/[^0-9]/g, '').replace(/^0+/, '')))}
             />
           </div>
           <div className="category-select-group">

@@ -22,6 +22,7 @@ const sampleProfileData = {
   profileImage: 'path_to_profile_image.jpg' // Replace with actual path to an image
 };
 
+
 const items = [
   { id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
   { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
@@ -94,7 +95,10 @@ const Homepage: React.FC = () => {
     setShowCategoryFilter(false);
     setShowSearchComponent(false);
   };
+  const handleCreatePostSubmit = () => {
+    // Handle the submission of post data, e.g., sending it to an API or processing it
 
+  };
   return (
     <div className='app'>
       <div className='background'></div>
@@ -123,12 +127,12 @@ const Homepage: React.FC = () => {
               )}
             </div>
             <div className="timeline__middle">
-            {showProfile && <Profile item={getUserCredentials().userID} />}
-           {showCreatePost && <CreatePost onClose={handleCreatePostClick} />}
-           {showChatComponent && <Chat onClose={handleChatClick} />}
+         
+         {showCreatePost &&<CreatePost onClose={handleCreatePostClick} onSubmit={handleCreatePostSubmit}/>}
+         {showChatComponent && <Chat onClose={handleChatClick} />}
             </div>
             <div className="timeline__right">
-          {showCategoryFilter && <CategoryFilter onClose={() => setShowCategoryFilter(false)} />}
+       
           {showSearchComponent && <SearchComponent initialItems={items} onClose={() => setShowSearchComponent(false)} />}
 </div>
             </div>

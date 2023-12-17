@@ -7,7 +7,7 @@ export interface SalePostsProps {
   initialPosts: SalePostClass[];
 }
 
-const SocialMediaPosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
+const SalePosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
   return (
     <div>
       {initialPosts.map((post,index)=> (
@@ -19,4 +19,4 @@ const SocialMediaPosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
   );
 }
 
-export default SocialMediaPosts;
+export default SalePosts;

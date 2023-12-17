@@ -80,7 +80,7 @@ export async function LoginRequest(name : String, password : String) : Promise<U
 }
 
 export async function RegisterRequest(universityID : String, nickname: String, email : String,  password : String) : Promise<void> {
-  const response = await fetch(`${siteLink}User/Login`, {
+  const response = await fetch(`${siteLink}User/Register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -268,6 +268,152 @@ export async function GetSaleUser(authorID: String) : Promise<SalePostClass[]> {
     const resData = await response.json();
     return resData;
 }
+
+export async function GetSaleAll() : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SalePost/GetAll`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
+}
+
+export async function GetSaleFollowings() : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SalePost/GetFollowings`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
+}
+
+export async function GetSaleFiltered(
+  min: number | null,
+  max: number | null,
+  type: number | null,
+  categoryid: number | null,
+  contains: string | null
+): Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+
+  // Create an object to hold non-null and non-empty values
+  const payload: Record<string, number | string> = {};
+
+  // Check and add min if it's a valid number
+  if (min !== null && !isNaN(min)) {
+    payload.min = min;
+  }
+
+  // Check and add max if it's a valid number
+  if (max !== null && !isNaN(max)) {
+    payload.max = max;
+  }
+
+  // Check and add type if it's a valid number
+  if (type !== null && !isNaN(type)) {
+    payload.type = type;
+  }
+
+  // Check and add categoryid if it's a valid number
+  if (categoryid !== null && !isNaN(categoryid)) {
+    payload.categoryid = categoryid;
+  }
+
+  // Check and add contains if it's not null or an empty string
+  if (contains !== null && contains.trim() !== "") {
+    payload.contains = contains;
+  }
+
+  const response = await fetch(`${siteLink}SalePost/GetFiltered`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch posts');
+  }
+
+  const resData = await response.json();
+  return resData;
+}
+
+export async function GetSocialAll() : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SocialMediaPost/GetAllFeed`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
+}
+
+export async function GetSocialFollowings() : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SocialMediaPost/GetFollowingsFeed`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
+}
+
+export async function GetSocialFiltered(contains : string) : Promise<SalePostClass[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SocialMediaPost/GetFeedByContent?contains=${contains}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+
+    const resData = await response.json();
+    return resData;
+}
+
+
 
 export async function AddLike(postID: String) : Promise<void> {
   const { token, userID } = getUserCredentials();
