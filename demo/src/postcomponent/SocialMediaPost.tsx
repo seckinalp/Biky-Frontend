@@ -24,7 +24,7 @@ export interface SocialMediaPostClass {
     likes: number;
 }
 
-function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
+function convertToPostProps(socialMediaPost: SocialMediaPostProps, onDelete: () => void): PostProps {
   return {
     item: {
       postID: socialMediaPost.item.postID,
@@ -38,12 +38,17 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
       },
       postTime: socialMediaPost.item.postTime, // Convert Date to string
       isAnonymous: socialMediaPost.item.isAnonymous
-    }
+    },
+    handleDelete: onDelete
   };
 }
 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
-  
+  const[visible,setVisible] = useState(true);
+  const handleVisible = () => {
+    console.log("aiee")
+    setVisible(false);
+  }
   const [likeState, setLikeState] = useState({
     likeCount: props.item.likes, // Initialize like count
     liked: props.item.isLiked, // Initialize with the prop value
@@ -81,10 +86,14 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   const reloadComments = () => {
     
   }
+
+  if(!visible) {
+    return <></>
+  }
   return (
 
     <>
-    <Post item={convertToPostProps(props).item} />
+     <Post item={convertToPostProps(props, handleVisible).item} handleDelete={convertToPostProps(props, handleVisible).handleDelete } />
       <div className="post-container">
       <div className="post-actions">
         <div className="post-buttons">
@@ -95,7 +104,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
         </div>
       </div>
     </div>
-    {showComments && <Comments postID = {props.item.postID}/>}
+    {showComments && <Comments postID = {props.item.postID}/>} 
     </>
   );
 }
