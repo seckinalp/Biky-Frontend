@@ -206,7 +206,8 @@ const handleSetErrorPriceChange = () => {
     const value = event.target.value;
     setPrice(value === '' ? '' : Number(value));
   };
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {event.preventDefault
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  
     if (event.target.files) {
       const fileArray = Array.from(event.target.files);
       try {
@@ -392,6 +393,7 @@ const handleSetErrorPriceChange = () => {
 <button className='generic-btn' type="submit" onClick={handleSubmit} disabled={sending}>
       Publish!
     </button>
+    <div className="create-post-error-text-push-down">
     {attemptedToPublish && (
         postType === 'socialMedia' && !description.trim() && (
           <p className="no-input-warning">No input</p>
@@ -402,6 +404,7 @@ const handleSetErrorPriceChange = () => {
           <p className="no-input-warning">No Valid Sale Post</p>
         )
       )}
+      </div>
 </div>
 
   {/* ... */}
