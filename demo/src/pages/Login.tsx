@@ -64,8 +64,10 @@ const Login = () => {
             value={credentials.password} 
             onChange={handleInputChange} 
             required 
+            style={{ marginBottom: loginE !== '' ? '1px' : '20px' }} // Adjust the values as needed
+
           />
-          <div>{loginE}</div>
+          {loginE && <p className="error-message">{loginE}</p>} {/* Display error message if passwords do not match */}
 
           {/*
               <div className="form-options">
