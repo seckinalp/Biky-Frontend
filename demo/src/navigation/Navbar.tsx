@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+
 
 import "./Navbar.css";
 
@@ -14,9 +14,9 @@ interface NavbarProps {
   onHomeClick: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick , onCategoryFilterClick,onSettingsClick, onNotificationsClick, onProfileClick,onCreatePostClick }) => {
+const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick , onSettingsClick, onNotificationsClick, onProfileClick,onCreatePostClick }) => {
 
-  const navigate = useNavigate();
+  
 
   const handleProfileClick = () => {
     onProfileClick ();
@@ -44,9 +44,6 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
 
   const handleSearchClick = () => {
     onSearchClick ();
-  };
-  const handleFilterClick = () => {
-    onCategoryFilterClick();
   };
   return (
     <div className="navbar">
@@ -83,9 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
       </div>
       <div className="navbar__right">
         
-      <button className="navbar__button navbar__button_filter" onClick={handleFilterClick}>
-          <img className="navbar__filter" src="../../filter-button.png" alt="" />
-        </button>
+      
 
         
         <button className="navbar__button navbar__button_search" onClick={handleSearchClick}>

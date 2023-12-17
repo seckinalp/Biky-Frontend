@@ -3,6 +3,8 @@ import './CreatePost.css';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
 import { AddSale, AddSocial, FetchCategories, UploadFile } from '../logic/backend';
 import { categoryMap } from '../categoryFilterCompononet/CategoryFilter';
+import { useNavigate } from "react-router-dom";
+
 
 interface CreatePostProps {
   onClose: () => void;
@@ -67,7 +69,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const [sending, setSending] = useState(false);
   const [category, setCategory] = useState<number | undefined>(undefined);
   const [attemptedToPublish, setAttemptedToPublish] = useState(false);
-
+  const navigate = useNavigate();
   const [errorDescText, setErrorDescText] = useState("");
   const [errorPrice, setErrorPrice] = useState("");
 
@@ -100,6 +102,7 @@ const handleSetErrorPriceChange = () => {
     }
     setIsAnonymous(event.target.checked);
   };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setAttemptedToPublish(true); // Set the attemptedToPublish to true when submit is attempted
@@ -127,6 +130,7 @@ const handleSetErrorPriceChange = () => {
         type: category ? category : 0,
       });
       setSendPost(true);
+      navigate(`../../homepage`);
   };
   useEffect(() => {
     if (postType === 'sale') {
@@ -234,6 +238,7 @@ const handleSetErrorPriceChange = () => {
 
 
   const handleClose = () => {
+    navigate(`../../homepage`);
     onClose(); 
   };
   const triggerFileInput = () => {

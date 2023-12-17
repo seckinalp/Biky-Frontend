@@ -33,9 +33,8 @@ export const categoryMap: { [key: string]: number } = {
   all: -1
 };
 
-const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange }) => {
+const CategoryFilter: React.FC<CategoryFilterProps> = ({onFilterChange }) => {
  
-  const [isVisible, setIsVisible] = useState(true); // State to control visibility
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
 const [selectedFilter, setSelectedFilter] = useState<'following' | 'allFeed' | 'filter'>('allFeed');
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
@@ -94,17 +93,12 @@ const handleFilterChange = () => {
     const value = event.target.value;
     setCategory(value ? categoryMap[value] : undefined);
   };
-  const handleClose = () => {
-    onClose(); 
-    
-  };
 
-  if (!isVisible) return null;
  
   return (
     
     <div className="category-filter-container">
-    <button className="generic-close-button" onClick={handleClose}></button>
+    
     <div className="category-filter-header">Filter the Post</div>
     <div className="button-group">
       <div className='button1'> <button 

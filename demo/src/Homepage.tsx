@@ -80,7 +80,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     setShowCategoryFilter(false);
   };
   const handleCreatePostClick = () => {
-    setShowCreatePost(prev => !prev);
+    navigate(`../../create`);
     setShowProfile(false);
     setShowSettings(false);
     setShowNotifications(false);
@@ -91,7 +91,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     navigate(`../../feed`);
   }
   if(getUserCredentials().token === "") {
-    navigate("../../login");
+    navigate(`../../login`);
   }
   return (
     <div className='app'>

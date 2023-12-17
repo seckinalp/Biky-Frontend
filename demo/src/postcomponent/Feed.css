@@ -1,0 +1,16 @@
+.feed-container {
+display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.feed-filter{
+    width: 35%; /* Veya belirli bir genişlik */
+    margin: 0 auto;
+    margin-bottom: 20px;
+    
+}
+
+.feed-posts{
+    width: 53%; /* Veya belirli bir genişlik */
+    margin: 0 auto;
+}

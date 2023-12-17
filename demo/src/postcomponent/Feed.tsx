@@ -5,7 +5,7 @@ import CategoryFilter, { CategoryFilterProps, filterData } from "../categoryFilt
 import SocialMediaPosts from "./SocialMediaPosts";
 import SalePosts from "./SalePosts";
 import { GetSaleAll, GetSaleFiltered, GetSaleFollowings, GetSocialAll, GetSocialFiltered, GetSocialFollowings } from "../logic/backend";
-
+import "./Feed.css"
 
 const Feed: React.FC = () => {
     const [isSocial, setisSocial] = useState(true);
@@ -65,8 +65,16 @@ const Feed: React.FC = () => {
 
     return (
       <>
-      <CategoryFilter onClose={() => {}} onFilterChange={handleFilters} />
-      {data.length != 0 ? isSocial ? <SocialMediaPosts initialPosts={data as SocialMediaPostClass[]} />: <SalePosts initialPosts={ data as SalePostClass[]}/> : <div>Nothing to see here, unfortunately.</div>}
+      <div className="feed-container">
+        <div className="feed-filter">
+        <CategoryFilter onClose={() => {}} onFilterChange={handleFilters} />
+        </div>
+        <div className="feed-posts">
+        {data.length != 0 ? isSocial ? <SocialMediaPosts initialPosts={data as SocialMediaPostClass[]} />: <SalePosts initialPosts={ data as SalePostClass[]}/> : <div>Nothing to see here, unfortunately.</div>}
+        </div>
+      </div>
+      
+     
       </>
     );
   };
