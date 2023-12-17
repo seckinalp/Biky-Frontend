@@ -7,7 +7,7 @@
  width: 130px;
  height: 40px;
  cursor: pointer;
- background-color: #000000;
+ background-color: #171717;
  color: #ffffff;
  border: none;
  border-radius: 5px;
@@ -30,7 +30,7 @@
   0 12px 10px -3px #39a2db;
 }
 
-.close-button {
+.generic-close-button {
    
   width: 25px; /* Set a specific width */
   height: 25px; /* Set a specific height */
@@ -47,7 +47,7 @@ right: 10; /* Align to the right */
 transform: translate(50%, -50%); 
  
 }
-.close-button:before{
+.generic-close-button:before{
   content: '';
   width: 55%;
   height: 2px;
@@ -66,7 +66,7 @@ transform: translate(50%, -50%);
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-.close-button:after {
+.generic-close-button:after {
   content: '';
   width: 55%;
   height: 2px;
@@ -85,7 +85,7 @@ transform: translate(50%, -50%);
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-.close-button:after {
+.generic-close-button:after {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -97,22 +97,12 @@ transform: translate(50%, -50%);
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
-.close-button:hover:before,
-.close-button:hover:after {
+.generic-close-button:hover:before,
+.generic-close-button:hover:after {
   background: #000000;
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
-}
-body {
-  background: #a7cfdf;
-  background: -moz-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #a7cfdf), color-stop(100%, #23538a));
-  background: -webkit-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
-  background: -o-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
-  background: -ms-linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
-  background: linear-gradient(45deg, #a7cfdf 0%, #23538a 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a7cfdf', endColorstr='#23538a', GradientType=1);
 }
