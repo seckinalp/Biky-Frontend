@@ -3,34 +3,13 @@ import "./Homepage.css";
 import Navbar from "./navigation/Navbar";
 import Settings from "./settingsComponent/Settings";
 import Notifications from "./notificationComponent/Notifications";
-import Profile from "./profilecomponent/Profile";
 import CreatePost from "./createPostComponent/CreatePost";
 import CategoryFilter from "./categoryFilterCompononet/CategoryFilter";
 import SearchComponent from "./SearchComponent/SearchComponent";
 import Chat from "./ChatComponent/Chat";
 import { getUserCredentials } from "./logic/cookie";
 import Feed from "./postcomponent/Feed";
-import ProfileFeed from "./profilecomponent/ProfileFeed";
 import { useNavigate } from "react-router-dom";
-
-
-const sampleProfileData = {
-  followingsNumber: 150,
-  followersNumber: 320,
-  postNumber: 48,
-  likeNumber: 789,
-  description: 'Just a tech enthusiast and avid coder. Sharing my thoughts and projects.',
-  userID: 'user123',
-  nickname: 'coderJoe',
-  profileImage: 'path_to_profile_image.jpg' // Replace with actual path to an image
-};
-
-
-const items = [
-  { id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
-  { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
-  // ... more items
-];
 
 type HomepageProps = {
   children: ReactNode;
@@ -49,7 +28,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const [filter, setFilter] = useState({});
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
-    // Optionally close other components
     setShowCategoryFilter(false);
     setShowCreatePost(false);
     setShowNotifications(false);
@@ -155,7 +133,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
          onClose={() => setShowCategoryFilter(false)}
           onFilterChange={handleFilterChange}
         /> }
-          {showSearchComponent && <SearchComponent initialItems={items} onClose={() => setShowSearchComponent(false)} />}
+          {showSearchComponent && <SearchComponent onClose={() => setShowSearchComponent(false)} />}
 </div>
             </div>
           </div>

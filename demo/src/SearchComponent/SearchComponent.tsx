@@ -20,13 +20,12 @@ const initialItems: userSendRequest[] = [
 
 interface SearchComponentProps {
   onClose: () => void;
-  initialItems: userSendRequest[]; // Add this line to accept initialItems as a prop
 }
 
-const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems }) => {
+const SearchComponent: React.FC<SearchComponentProps> = ({ onClose }) => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredItems, setFilteredItems] = useState<userSendRequest[]>(initialItems);
+  const [filteredItems, setFilteredItems] = useState<userSendRequest[]>([]);
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
 
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
