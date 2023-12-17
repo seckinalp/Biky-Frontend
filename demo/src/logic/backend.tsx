@@ -164,6 +164,24 @@ export async function FetchProfile(userID: String) : Promise<ProfileClass> {
         return resData;
 }
 
+export async function GetUserPhoto() : Promise<string> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}User/GetUserPhoto`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    console.log(response);
+      const resData = await response.json();
+      if (!response.ok) {
+          throw new Error('Failed to fetch profile image');
+        }
+        console.log(resData);
+        return resData;
+}
+
 export async function UpdateProfile(
   nickname: string | undefined,
   profileImage: string | null | undefined,
@@ -181,7 +199,6 @@ const response = await fetch(`${siteLink}User/UpdateProfile?nickname=${safeNickn
       'Authorization': `Bearer ${token}`,
     },
   });
-  console.log(response + "aaaaaaaaa");
   if (!response.ok) {
     throw new Error('Failed to fetch profile');
   }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Settings.css';
+import { useNavigate } from 'react-router-dom';
+import { deleteUserCredentials } from '../logic/cookie';
 
 interface Props {
   onClose: () => void; // Specify the type of onClose as a function that takes no arguments and returns void
@@ -29,8 +31,9 @@ const Settings: React.FC<Props> = ({ onClose }) => {
     setStatusMessage(''); // Optionally clear any status messages
   };
   const handleLogout = () => {
-    
-    // Additional logic for logging out
+    const navigate = useNavigate();
+    deleteUserCredentials();
+    navigate("/login")
   };
 
   const handleClose = () => {

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import "./Homepage.css";
 import Navbar from "./navigation/Navbar";
 import Settings from "./settingsComponent/Settings";
@@ -17,6 +17,17 @@ type HomepageProps = {
 
 const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const checkUserCredentials = () => {
+      const userCredentials = getUserCredentials();
+      console.log("wtf")
+      if (userCredentials.token === "") {
+        navigate('/login');
+      }
+    };
+
+    checkUserCredentials();
+  }, []);
   const [showSettings, setShowSettings] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -89,9 +100,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   };
   const handleHomeClick = () => {
     navigate(`../../feed`);
-  }
-  if(getUserCredentials().token === "") {
-    navigate("../../login");
   }
   return (
     <div className='app'>

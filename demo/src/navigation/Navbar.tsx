@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import "./Navbar.css";
+import { GetUserPhoto, imageLink } from "../logic/backend";
 
 interface NavbarProps {
   onSettingsClick: () => void;
@@ -48,6 +49,22 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
   const handleFilterClick = () => {
     onCategoryFilterClick();
   };
+
+  const [photo, setPhoto] = useState("");
+
+  useEffect(() => {
+    const fetchUserPhoto = async () => {
+      try {
+        const result = await GetUserPhoto();
+        setPhoto(result);
+      } catch (error) {
+        // Handle the error if needed
+        console.error('Error fetching user photo:', error);
+      }
+    };
+
+    fetchUserPhoto();
+  }, []);
   return (
     <div className="navbar">
       <div className="navbar__rectangle"></div>
@@ -58,7 +75,7 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
         
       
         <button className="navbar__button navbar__button_profile" onClick={handleProfileClick}>
-          <img className="navbar__profile" src="../../profile.png" alt="" />
+          <img className="navbar__profile" src={photo == "" || photo == null ? "../../public/ppdefault.jpg" : `${imageLink}${photo}`} alt="" />
         </button>
         <button className="navbar__button navbar__button_home" onClick={handleHomeClick}>
           <img className="navbar__home" src="../../home-buttonn.png" alt="" />
