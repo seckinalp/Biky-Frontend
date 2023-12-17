@@ -1,4 +1,9 @@
 
+button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem; /* Adjust the font size as needed */
+  font-weight: 550;
+}
 .generic-btn-container {
   text-align: center; /* İçeriği yatay olarak ortalar */
 }
@@ -12,14 +17,15 @@
  border: none;
  border-radius: 5px;
  transition: all .3s;
- 
+ font-size: 1rem; /* Adjust the font size as needed */
+ font-weight: 550;
 }
 
 .generic-btn:hover {
  border-radius: 10px;
  transform: translateY(-5px);
- box-shadow: 10px 7px 0 -2px #f85959,
-  -10px 15px 0 -4px #39a2db;
+ box-shadow: 0px 7px 0 -2px purple,
+  0px 15px 0 -4px darkturquoise;
 }
 
 .generic-btn:active {

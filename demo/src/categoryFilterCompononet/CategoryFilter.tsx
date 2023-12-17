@@ -187,7 +187,7 @@ const handleFilterChange = () => {
         </div>
         
       )}
-      <div className='btn-container'><button className="btn" onClick={handleFilterChange}>Filter</button></div>
+      <div className='generic-btn-container'><button className="generic-btn" onClick={handleFilterChange}>Filter</button></div>
       
     </div>
   );

@@ -23,6 +23,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ data, onCategoryChange 
   };
   const renderSelect = (categories: Category[], level: number) => {
     // Determine the label based on the selected category or default text
+    
     const label = level === 0 ? 'Category:' : `${selectedCategories[level - 1]?.name} Options:`;
 
     // Only render the select if there are categories to display
@@ -45,7 +46,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ data, onCategoryChange 
           >
             <option value="">Select a Category</option>
             {categories.map((category) => (
-              <option key={category.categoryID} value={category.categoryID}>
+              <option className='option-category' key={category.categoryID} value={category.categoryID}>
                 {category.name}
               </option>
             ))}

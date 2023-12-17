@@ -70,7 +70,7 @@ const Settings: React.FC<Props> = ({ onClose }) => {
             ></textarea>
           </div>
           <div className="button-container">
-            <button className='btn' onClick={handleReportSubmit}>Submit Report</button>
+            <button className='generic-btn' onClick={handleReportSubmit}>Report!</button>
           </div>
         </div>
       ) : (

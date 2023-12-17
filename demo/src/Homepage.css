@@ -11,6 +11,10 @@
     
 }
 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .homepage__timeline {
    
     flex:9;

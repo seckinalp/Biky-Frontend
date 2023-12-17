@@ -1,7 +1,7 @@
 /* CategorySelect.css */
 .category-select-container {
-    width: 90%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 10px;
     border-radius: 8px;
     background-color: #fff;
    
@@ -9,20 +9,16 @@
   
   .category-filter-select {
     width: 100%;
-    padding: 8px 12px;
-    margin-top: 8px;
+   
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .category-select-label {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
     color: #000000;
+    font-size: 13px;
   }
   
-  .category-select-group {
-    margin-bottom: 5px;
-  }

@@ -14,7 +14,7 @@ import CategorySelect from './assets/categoryComponent/CategorySelect';
 import SalePosts from './postcomponent/SalePosts';
 import Profile from './profilecomponent/Profile';
 import Feed from './postcomponent/Feed';
-
+import './App.css'
 interface Category {
   categoryID: number;
   name: string;

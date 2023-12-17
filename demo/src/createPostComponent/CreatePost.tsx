@@ -66,6 +66,8 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const [submit, onSubmit] = useState<postData>({postType: 'sale', description: '', price: '', itemCategory : undefined, isAnonymous: false, images: [], type: 0});
   const [sending, setSending] = useState(false);
   const [category, setCategory] = useState<number | undefined>(undefined);
+  const [attemptedToPublish, setAttemptedToPublish] = useState(false);
+
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
@@ -74,18 +76,28 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    onSubmit({
-      description,
-      postType,
-      price,
-      itemCategory,
-      isAnonymous,
-      images: imagesLink,
-      type: category ? category : 0 // Include the checkbox value in the submitted data
-    });
-    setSendPost(true);
+    setAttemptedToPublish(true); // Set the attemptedToPublish to true when submit is attempted
+  
+    if (description.trim()) {
+      // Proceed with submitting the form only if there's a description
+      onSubmit({
+        description,
+        postType,
+        price,
+        itemCategory,
+        isAnonymous,
+        images: imagesLink,
+        type: category ? category : 0,
+      });
+      setSendPost(true);
+    }
   };
-
+  useEffect(() => {
+    if (description.trim().length > 0) {
+      setAttemptedToPublish(false);
+    }
+  }, [description]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -206,26 +218,38 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
         </button>
       </div>
       
-      <div className="form-group">
-  <label htmlFor="description">Description</label>
-  <div className="character-count">{description.length}/256</div>
+    
+  
+
+
+<label className="style-input">
+<div className="character-count">{description.length}/256</div>
   <textarea
+    className="style-input__field"
     id="description"
+    placeholder=" "
     value={description}
     maxLength={256}
     onChange={handleDescriptionChange}
   />
-</div>
+  <span className="style-input__label">Description</span>
+</label>
 
-<div className="form-group checkbox-group">
-  <input 
-    type="checkbox" 
-    id="anonymousCheckbox" 
-    name="anonymous"
-    checked={isAnonymous}
-    onChange={handleCheckboxChange}
-  />
-  <label htmlFor="anonymousCheckbox">Anonymous</label>
+
+<div className="checkbox-wrapper-5">
+ 
+  Anonymous  
+  
+
+  <div className="check">
+    <input 
+      id="anonymousCheckbox" 
+      type="checkbox" 
+      checked={isAnonymous} 
+      onChange={handleCheckboxChange} 
+    />
+    <label htmlFor="anonymousCheckbox"></label>
+  </div>
 </div>
         {postType === 'sale' && (
           <>
@@ -244,17 +268,19 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
       </select>
              
             </div>
-            <div className="form-group">
-              <label htmlFor="price">Price</label>
-              <input
-                type="number"
-                id="price"
-                value={price}
-                onChange={handlePriceChange}
-                min="0" // Minimum value
-                step="0.01" // Only allow integer values
-              />
-            </div>
+            <label className="style-input">
+  <input
+    className="style-input__field"
+    type="number"
+    id="price"
+    placeholder=" "
+    value={price}
+    onChange={handlePriceChange}
+    min="0"
+    step="1"
+  />
+  <span className="style-input__label">Price</span>
+</label>
              <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange}/>
           </>
         )}
@@ -298,7 +324,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
         </div>
       )}
       
-      <div className="btn-container">
+      <div className="btn-container-create">
       <button className="button" onClick={triggerFileInput}> 
   <svg className="svgIcon" viewBox="0 0 384 512">
     <path
@@ -306,7 +332,12 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
     ></path>
   </svg>
 </button>
-  <button className='btn' type="submit" disabled = {sendPost}>Publish!</button>
+<button className='generic-btn' type="submit" onClick={handleSubmit} disabled={sending}>
+      Publish!
+    </button>
+{attemptedToPublish && description.trim().length === 0 && (
+    <p className="no-input-warning">No input</p>
+  )}
 </div>
 
   {/* ... */}

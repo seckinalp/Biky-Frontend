@@ -8,12 +8,14 @@
   padding: 20px;
   position: relative; /* For absolute positioning of the close button */
   box-sizing: border-box; /* Include padding in the width and height */
+  font-weight: bold;
 }
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px; /* Add some padding at the bottom */
+  padding-bottom: 20px;
+ /* Add some padding at the bottom */
 }
 .modal-title {
   font-size: 1.5rem; /* Adjust the font size as needed */
@@ -25,26 +27,55 @@
 
 .post-type-buttons {
   display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.post-type-buttons {
+  display: flex;
   justify-content: center; /* Center the buttons */
   gap: 10px;
   margin-bottom: 20px; /* Space below the buttons */
 }
 
 .post-type-button {
-  border: 2px solid #ccc; /* Adjust border color as needed */
-  background-color: #fff;
-  border-radius: 20px; /* Rounded corners */
-  padding: 10px 20px;
+  font-size: 0.8rem; /* Larger font size */
+  height: 45px;
+  width: 100%;
   cursor: pointer;
-  outline: none;
-  margin-bottom: 10px;
+  border-radius: 0.4rem;
+  border: 0.3rem solid #000;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 0 0 #000;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  /* Ensure the text doesn't get selected on click */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+/* Toggle 'active' styling */
 .post-type-button.active {
-  border-color: #ac39e0; /* Adjust to active color as needed */
-  background-color: #ec8cec;
-  color: #000000;
+  color: #fff !important; /* White text for active button */
+  background-color: darkturquoise !important; /* Purple background for active button */
+  border-color: #000000 !important; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
 }
+
+/* Hover effect for buttons */
+.post-type-button:not(.active):hover {
+  background-color: #8a6188; /* Light grey background on hover for inactive buttons */
+}
+
+/* Styles to visually 'press' the button on click */
+.post-type-button:active {
+  box-shadow: 0 1px 0 0 #000; /* Adjust box-shadow to look like the button is pressed */
+  transform: translateY(2px); /* Move the button down slightly to simulate pressing */
+}
+
 
 .form-group {
   margin-bottom: 10px;
@@ -84,41 +115,16 @@
 .character-count {
   /* Position character count to the right */
   float: right;
-  margin-top: -25px;
+  margin-top: 2.6px;
   margin-right: 5px;
   color: #999;
- 
+ font-size: 0.8rem;
 }
 
 .modal-header h2 {
   margin: 0;
   /* Style for the title */
 }
-
-
-.checkbox-group {
-  display: flex;
-  align-items: center; /* Align the checkbox and label in the center */
-  justify-content: flex-start; /* Align items to the start (left side) */
-  margin-bottom: 10px; /* Reduce space below the checkbox group */
-}
-.checkbox-group label {
-  margin-left: 5px; /* Space between the checkbox and the label */
-}
-
-.checkbox-group input[type="checkbox"] {
-  margin: 0;
-  width: 16px; /* Small size for checkbox */
-  height: 16px; /* Small size for checkbox */
-}
-
-/* Swap the order of checkbox and label to have label on the left */
-.checkbox-group label {
-  order: -1; /* Render label before the checkbox */
-  margin-right: 5px; /* Space between the label and the checkbox */
-  margin-left: 0; /* Reset margin-left */
-}
-
 .image-preview-section {
   display: flex;
   flex-direction: column;
@@ -196,10 +202,184 @@
 }
 
 
-.btn-container {
+.btn-container-create {
   display: flex;
   justify-content: center; /* Center the buttons horizontally */
   align-items: center; /* Center the buttons vertically (if needed) */
   gap: 10px; /* Optional: adds space between the buttons */
   margin-top: 20px; /* Optional: adds space above the button container */
 }
+
+@import url("https://rsms.me/inter/inter.css");
+:root {
+  --color-light: white;
+  --color-dark: #212121;
+  --color-signal:  purple;
+  --color-background: var(--color-light);
+  --color-text: var(--color-dark);
+  --color-accent: var(--color-signal);
+  --size-bezel: 0.5rem;
+  --size-radius: 4px;
+  line-height: 1.4;
+  font-family: "Inter", sans-serif;
+  font-size: calc(0.6rem + 0.4vw);
+  color: var(--color-text);
+  background: var(--color-background);
+  font-weight: 300;
+  padding: 0 calc(var(--size-bezel) * 3);
+}
+
+.category-select{
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.style-input {
+  position: relative;
+ 
+}
+.style-input__label {
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * 0.5);
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * 0.5);
+  background: pink;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: var(--color-background);
+  transition: transform 120ms ease-in;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.style-input__field {
+  
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 1px solid black;
+  padding: calc(var(--size-bezel) * 2) var(--size-bezel);
+  color: currentColor;
+  background: transparent;
+  border-radius: var(--size-radius);
+}
+.style-input__field:not(:-moz-placeholder-shown) + .style-input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.style-input__field:not(:-ms-input-placeholder) + .style-input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.style-input__field:focus + .style-input__label, .style-input__field:not(:placeholder-shown) + .style-input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+
+
+.check{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+  .checkbox-wrapper-5 .check {
+   
+    --size: 23px;
+    
+    position: relative;
+    background: linear-gradient(90deg, darkturquoise, purple);
+    line-height: 0;
+    perspective: 400px;
+    font-size: var(--size);
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"],
+  .checkbox-wrapper-5 .check label,
+  .checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after,
+  .checkbox-wrapper-5 .check {
+    appearance: none;
+    display: inline-block;
+    border-radius: var(--size);
+    border: 0;
+    transition: .35s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+    
+  }
+
+  .checkbox-wrapper-5 .check label {
+    width: calc(2.2 * var(--size));
+    height: var(--size);
+    background: #d7d7d7;
+    overflow: hidden;
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"] {
+    position: absolute;
+    z-index: 1;
+    width: calc(.8 * var(--size));
+    height: calc(.8 * var(--size));
+    top: calc(.1 * var(--size));
+    left: calc(.1 * var(--size));
+    background: linear-gradient(45deg, #dedede, #ffffff);
+    box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+    outline: none;
+    margin: 0;
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked {
+    left: calc(1.3 * var(--size));
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label {
+    background: transparent;
+  }
+
+  .checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after {
+    content: "· ·";
+    position: absolute;
+    overflow: hidden;
+    left: calc(.15 * var(--size));
+    top: calc(.5 * var(--size));
+    height: var(--size);
+    letter-spacing: calc(-0.04 * var(--size));
+    color: #9b9b9b;
+    font-family: "Times New Roman", serif;
+    z-index: 2;
+    font-size: calc(.6 * var(--size));
+    border-radius: 0;
+    transform-origin: 0 0 calc(-0.5 * var(--size));
+    backface-visibility: hidden;
+  }
+
+  .checkbox-wrapper-5 .check label::after {
+    content: "●";
+    top: calc(.65 * var(--size));
+    left: calc(.2 * var(--size));
+    height: calc(.1 * var(--size));
+    width: calc(.35 * var(--size));
+    font-size: calc(.2 * var(--size));
+    transform-origin: 0 0 calc(-0.4 * var(--size));
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::before,
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+    left: calc(1.55 * var(--size));
+    top: calc(.4 * var(--size));
+    line-height: calc(.1 * var(--size));
+    transform: rotateY(360deg);
+  }
+
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+    height: calc(.16 * var(--size));
+    top: calc(.55 * var(--size));
+    left: calc(1.6 * var(--size));
+    font-size: calc(.6 * var(--size));
+    line-height: 0;
+  }
+
