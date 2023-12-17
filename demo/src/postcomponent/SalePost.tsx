@@ -47,6 +47,22 @@ import Comments from '../comment/Comments';
     
   
     const [showComments, setShowComments] = useState(false);
+    const getSpecialButton = () => {
+      switch (props.item.postType) {
+        case 1: // lostAndFound
+          return <button className="special-button">Lost & Found</button>;
+        case 2: // privateLesson
+          return <button className="special-button">Private Lesson</button>;
+        case 3: // secondHand
+          return <button className="special-button">Second Hand</button>;
+        case 4: // trade
+          return <button className="special-button">Trade</button>;
+        case 0: // borrow
+          return <button className="special-button">Borrow</button>;
+        default:
+          return null;
+      }
+    };
   
     const toggleComments = () => {
       setShowComments(!showComments);
@@ -60,6 +76,7 @@ import Comments from '../comment/Comments';
             <button className={`price-button`}>
             💰 <span className="price-count">{props.item.price}</span>
             </button>
+            {getSpecialButton()}
             <button className="comment-button" onClick={toggleComments}>💬 Comment</button>
           </div>
         </div>

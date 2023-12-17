@@ -12,7 +12,8 @@
 }
 
 .comment-report-container {
-  flex-basis: 50px; /* Sets a base width for the report container */
+  flex-basis: 50px;
+  position: absolute; /* Sets a base width for the report container */
   /* Adjust the width as needed or make it responsive */
 }
 

@@ -1,4 +1,6 @@
 /* Post.css */
+
+
 .username {
   max-width: 340px; /* Adjust based on your layout */
   overflow-wrap: break-word;
@@ -19,6 +21,8 @@
     border-radius: 8px;
     width: 430px; /* Adjust width as necessary */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+
   }
   
   .post-header {
@@ -282,4 +286,9 @@
 .delete-postc2:hover{
   transform: scale(1.1);
   background-color: grey;
+}
+.comment-report-container{
+  z-index: 2;
+  position: absolute;
+
 }

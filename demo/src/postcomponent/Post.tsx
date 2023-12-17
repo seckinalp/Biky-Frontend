@@ -69,6 +69,7 @@ const Post: React.FC<PostProps> = (props) => {
  
 
   return (
+    
     <div className="post-container">
       <div className="post-header">
         <img className="profile-pic" src={props.item.isAnonymous || props.item.author.profileImage == null || props.item.author.profileImage == "" ? "../../public/ppdefault.jpg" : `${imageLink}${props.item.author.profileImage}`
@@ -81,16 +82,16 @@ const Post: React.FC<PostProps> = (props) => {
           <button  className="delete-postc">🗑️</button>
 
         ) : (<button  className="delete-postc2"onClick={toggleReport}>🚩</button>)}
-          {showOptions && (
+      </div>
+            {showOptions && (
         <div className="comment-report-container">
           <Report
             item={reportItem}
             isVisable={showOptions}
             onVisibilityChange={toggleReport}
           />
-    </div>
-      )}
-      </div>
+          </div>
+        )}
       <div className="post-content">
         <p className="post-text">{props.item.contentText}</p>
         {images.length !== 0 &&(
