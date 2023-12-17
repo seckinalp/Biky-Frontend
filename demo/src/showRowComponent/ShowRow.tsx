@@ -5,8 +5,8 @@ import { imageLink } from '../logic/backend';
 
 // Update the props interface if you also want to remove username from the data structure
 interface ShowRowProps {
-  item: userSendRequest;
-  onItemClick: (id: string) => void;
+  item: userSendRequest;// User data passed to the component
+  onItemClick: (id: string) => void;// Function to handle click events on the row
 }
 
 const ShowRow: React.FC<ShowRowProps> = ({ item, onItemClick }) => {

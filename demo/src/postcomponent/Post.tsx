@@ -34,7 +34,7 @@ const Post: React.FC<PostProps> = (props) => {
     reportData: "props.item.content" // or any relevant data
   };
   const userID = getUserCredentials().userID;
-  const [showDeletePost, setshowDeletePost] = useState(props.item.author.userID === userID);
+  const [showDeletePost, setshowDeletePost] = useState(props.item.author.userID === userID);  // State for showing delete post options
   const [visible, setVisible] = useState(true);
 
 

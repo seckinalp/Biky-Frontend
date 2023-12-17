@@ -6,14 +6,14 @@ import { RegisterRequest } from '../logic/backend';
 
 
 const Register = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();// Creating a navigation function using React Router
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
     studentId: "",
-  });
+  });// Initializing state for form data
   const [error, setError] = useState('');
   const [error1, setError1] = useState('');
 
@@ -63,7 +63,7 @@ const Register = () => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
     if (name === 'email') {
-      setEmailError('');
+      setEmailError('');// Adjust according to your field names
     }
     if (name === 'confirmPassword') { // Adjust according to your field names
       setError('');

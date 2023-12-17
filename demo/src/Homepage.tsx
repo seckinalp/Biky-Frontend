@@ -11,11 +11,12 @@ import Feed from "./postcomponent/Feed";
 import { useNavigate } from "react-router-dom";
 
 type HomepageProps = {
-  children: ReactNode;
+  children: ReactNode;// Prop to accept any ReactNode as children, allowing for flexible content rendering
 };
 
 const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const navigate = useNavigate();
+    // useEffect to redirect to login if no user credentials are found
   useEffect(() => {
     const checkUserCredentials = () => {
       const userCredentials = getUserCredentials();
@@ -26,13 +27,14 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
 
     checkUserCredentials();
   }, []);
+    // useState hooks for controlling the visibility of various components
   const [showSettings, setShowSettings] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false); // State for CreatePost visibility
   const [showSearchComponent, setShowSearchComponent] = useState(false);
   const [showChatComponent, setShowChatComponent] = useState(false);
   const [showFeed, setShowFeedComponent] = useState(false);
-
+  // Handler functions to toggle visibility of components
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
     setShowNotifications(false);

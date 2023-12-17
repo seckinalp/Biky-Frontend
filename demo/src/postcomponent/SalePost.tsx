@@ -35,7 +35,8 @@ import { getUserCredentials } from '../logic/cookie';
       },
       postTime: string
   }
-  
+  // Function to convert SalePostProps to PostProps
+
   function convertToPostProps(salePost: SalePostProps,onDelete: () => void): PostProps {
     return {
       item: {

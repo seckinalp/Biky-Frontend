@@ -16,14 +16,15 @@ export interface NotificationSendRequest {
 const Notifications: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [notifications, setNotifications] = useState<NotificationSendRequest[]>([]);
-
+  // Function to handle the closing of notifications
   const handleClose = () => {
     onClose();   
   };
-
+  // Don't render if the component is not visible
   if (!isVisible) {
     return null;
   }
+    // Fetching notification data from backend
   useEffect(() => {
     const fetchData = async () => {
       try {

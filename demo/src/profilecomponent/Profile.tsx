@@ -5,10 +5,12 @@ import { getUserCredentials } from '../logic/cookie';
 import { AddFollow, CheckFollow, FetchProfile, OpenChat, RemoveFollow,  UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
 import ProfileFeed from './ProfileFeed';
+// Interface for ProfileProps
 
 export interface ProfileProps {
     item: ProfileClass,
   }
+// Interface for ProfileClass
 
   export interface ProfileClass{
     followingsNumber: number
@@ -22,18 +24,20 @@ export interface ProfileProps {
   }
   
 const Profile: React.FC = () => {
-  const[data, setData] = useState<ProfileClass>();
-  const [followersCount, setFollowersCount] = useState(0);
-  const[isFollowed, setisFollowed] = useState(true)//Backend Handled
-  const { userID : vieweuserID} = getUserCredentials();
-    const [isEditing, setIsEditing] = useState(false);
-    //const[isOwnnProfile,setisOwnProfile] = useState(false); //vieweuserID == data?.userID
-    const [loading, setLoading] = useState<boolean>(true);
-    const [reload, setReload] = useState<boolean>(true);
-    const [update, setUpdate] = useState<boolean>(false);
-    const [invalid, setInvalid] = useState<boolean>(false);
-    const { userID : paramName } = useParams();
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    // State declarations
+  const[data, setData] = useState<ProfileClass>();// Stores profile data
+  const [followersCount, setFollowersCount] = useState(0);// Stores the number of followers
+  const[isFollowed, setisFollowed] = useState(true)//// Tracks if the current user follows the profile
+  const { userID : vieweuserID} = getUserCredentials();// Retrieves the viewer's user ID
+    const [isEditing, setIsEditing] = useState(false);// Tracks if the profile is in edit mod
+    const [loading, setLoading] = useState<boolean>(true);// Tracks loading state
+    const [reload, setReload] = useState<boolean>(true);// Flag to trigger profile data reload
+    const [update, setUpdate] = useState<boolean>(false);// Flag to trigger profile update
+    const [invalid, setInvalid] = useState<boolean>(false);// Tracks if an error occurred
+    const { userID : paramName } = useParams();// Extracts userID from URL parameters
+    const [imagePreview, setImagePreview] = useState<string | null>(null);// Stores the image preview URL
+      // useEffect to fetch profile data
+
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -82,6 +86,7 @@ const Profile: React.FC = () => {
     }, [update]); 
 
   
+  // Function to handle profile data
 
     const handleData = (data: ProfileClass) => {
       setData(data);
@@ -124,12 +129,13 @@ const Profile: React.FC = () => {
         }
       }
     };
-    
+      // Function to toggle edit mode
     const toggleEdit = () => {
       if(data?.nickname && data?.description && data?.profileImage)
       setEditData({nickname :data?.nickname, description: data?.description, profileUrl: data?.profileImage}); // Reset edit data to original profile data
       setIsEditing((prev) => !prev);
     };
+      // Function to handle form submission
     const handleSubmit = async (event: React.FormEvent) => {
       //event.preventDefault();
       try {
@@ -142,13 +148,13 @@ const Profile: React.FC = () => {
         console.error("Error updating profile:", error);
       }
     };
-    
+      // Function to handle changes in edit form
     const handleEditChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
       
       setEditData({ ...editData, [name]: value });
     };
-    
+   // Function to handle follow button click   
     const handleFollowClick = async () => {
       try {
         setisFollowed(true);
@@ -161,7 +167,7 @@ const Profile: React.FC = () => {
       }
     };
     
-  
+   // Function to handle unfollow button click 
     const handleUnfollowClick = async () => {
       try {
         setisFollowed(false);
@@ -173,7 +179,7 @@ const Profile: React.FC = () => {
         console.error("Error unfollowing:", error);
       }
     };
-  
+  // Function to handle message button click  
     const handleMessageClick = () => {
       try {
         if(paramName) OpenChat(paramName);

@@ -11,19 +11,21 @@ interface ProfileFeedProps {
 }
 
 const ProfileFeed: React.FC<ProfileFeedProps> = ({ userID }) => {
+    // States to manage whether the displayed posts are social media posts or sale posts
   const [isSocial, setisSocial] = useState(true);
-  const [data, setData] = useState<SocialMediaPostClass[] | SalePostClass[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<SocialMediaPostClass[] | SalePostClass[]>([]);  // State to store the fetched posts
+  const [loading, setLoading] = useState(true);  // State to manage the loading state
     
   useEffect(() => {
+        // Fetching data depending on whether the user wants to see social or sale posts
     const fetchData = async () => {
       try {
         setLoading(true);
         if(isSocial) { 
-            const result = await GetSocialUser(userID);
+            const result = await GetSocialUser(userID);// Fetching social media posts
             setData(result);
         } else {
-            const result = await GetSaleUser(userID);
+            const result = await GetSaleUser(userID);// Fetching sale posts
             setData(result);
         }
       } catch (error) {
@@ -34,11 +36,11 @@ const ProfileFeed: React.FC<ProfileFeedProps> = ({ userID }) => {
     };
       fetchData();
   }, [isSocial]); 
-
+  // Function to show sale posts
   const toggleSale = () => {
     setisSocial(false);
   };
-
+  // Function to show social media posts
   const toggleSocial = () => {
     setisSocial(true);
   };
