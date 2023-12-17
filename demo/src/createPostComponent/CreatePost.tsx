@@ -206,7 +206,7 @@ const handleSetErrorPriceChange = () => {
     const value = event.target.value;
     setPrice(value === '' ? '' : Number(value));
   };
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {event.preventDefault
     if (event.target.files) {
       const fileArray = Array.from(event.target.files);
       try {
