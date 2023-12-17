@@ -164,7 +164,7 @@ const Register = () => {
       <div className="branding-container">
         <img src={bikyImage} alt="biky" className="biky-image" />
         <h1>Don't be an engineer,<br /> socialize with biky.</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p><strong>Tired of just posting on confession pages? Can't find something you lost at Bilkent University? Or, do you wish to socialize even when classes are in full swing? Biky is your go-to platform!</strong></p>
       </div>
     </div>
   );

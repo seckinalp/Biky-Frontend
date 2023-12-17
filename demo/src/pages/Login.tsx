@@ -60,18 +60,21 @@ const Login = () => {
             onChange={handleInputChange} 
             required 
           />
-          <div className="form-options">
-          <label className="remember-me">
-                <input type="checkbox" name="remember" />
-                <span>Remember Me</span>
-            </label>
-            <Link className="forgot-password-link" to="/forgot-password">Forgot Password?</Link>
-        </div>
+          {/*
+              <div className="form-options">
+              <Link className="forgot-password-link" to="/forgot-password">Forgot Password?</Link>
+          </div>
+
+  */}
+
           <button type="submit" className="continue-button generic-btn">CONTINUE</button>
           <div className="alternative-options">
+            {/*
             <button  type="button" onClick={() => navigate('/homepage')} className="visitor-button generic-btn">
               Be Visitor and Just Look!
             </button>
+            */}
+
             <div className="or-divider">
               <span>Or</span>
             </div>
@@ -84,7 +87,7 @@ const Login = () => {
       <div className="branding-container">
         <img src={bikyImage} alt="biky" className="biky-image" />
         <h1>Don't be an engineer,<br /> socialize with biky.</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p><strong>Tired of just posting on confession pages? Can't find something you lost at Bilkent University? Or, do you wish to socialize even when classes are in full swing? Biky is your go-to platform!</strong></p>
       </div>
       
     </div>
