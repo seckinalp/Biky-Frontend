@@ -1,6 +1,6 @@
 
 import React from 'react';
-import SocialMediaPost, { SocialMediaPostClass, SocialMediaPostProps } from './SocialMediaPost';
+import SocialMediaPost, { SocialMediaPostClass } from './SocialMediaPost';
 
 export interface SocialMediaPostsProps {
   initialPosts: SocialMediaPostClass[];

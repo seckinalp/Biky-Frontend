@@ -39,7 +39,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({onFilterChange }) => {
 const [selectedFilter, setSelectedFilter] = useState<'following' | 'allFeed' | 'filter'>('allFeed');
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
 
-  const [loading, setLoading] = useState(true);
+ 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   const [category, setCategory] = useState<number | undefined>(undefined);
@@ -50,7 +50,7 @@ const [selectedFilter, setSelectedFilter] = useState<'following' | 'allFeed' | '
 
   const [isInitialized, setIsInitialized] = useState(false);
 
-// ...
+
 const handleItemCategoryChange = (categoryId: number) => {
   setItemCategory(categoryId); // Update the state with the new category ID
 };
@@ -77,7 +77,7 @@ const handleFilterChange = () => {
       } catch (error) {
         console.error('Error fetching categories:', error);
       } finally {
-        setLoading(false);
+        
       }
       setIsInitialized(true);
     };

@@ -1,10 +1,8 @@
 // Profile.tsx
 import React, { useState, useEffect } from 'react';
 import './Profile.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/index';
 import { getUserCredentials } from '../logic/cookie';
-import { AddFollow, CheckFollow, FetchProfile, OpenChat, RemoveFollow, SendMessage, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
+import { AddFollow, CheckFollow, FetchProfile, OpenChat, RemoveFollow,  UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
 import ProfileFeed from './ProfileFeed';
 
@@ -83,9 +81,7 @@ const Profile: React.FC = () => {
       }
     }, [update]); 
 
-    const reloadComments = () => {
-      setReload(true);
-    };
+  
 
     const handleData = (data: ProfileClass) => {
       setData(data);

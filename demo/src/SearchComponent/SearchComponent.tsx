@@ -5,11 +5,7 @@ import { SearchUser, siteLink } from '../logic/backend';
 import { userSendRequest } from '../comment/Comment';
 import { useNavigate } from 'react-router-dom';
 
-interface SearchItem {
-  id: number;
-  name: string;
-  avatarUrl: string;
-}
+
 
 const initialItems: userSendRequest[] = [
   // Add initial items here

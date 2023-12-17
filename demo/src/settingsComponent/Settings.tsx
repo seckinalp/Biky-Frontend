@@ -14,10 +14,7 @@ const Settings: React.FC<Props> = ({ onClose }) => {
   const [reportMessage, setReportMessage] = useState(''); // state to store the report message
   const navigate = useNavigate();
 
-  const handleReport = () => {
-    
-    
-  };
+
   const handleReportOpen = () => {
     setIsReportVisible(true); // Show the report form
   };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SocialMediaPostClass } from "./SocialMediaPost";
 import { SalePostClass } from "./SalePost";
-import CategoryFilter, { CategoryFilterProps, filterData } from "../categoryFilterCompononet/CategoryFilter";
+import CategoryFilter, { filterData } from "../categoryFilterCompononet/CategoryFilter";
 import SocialMediaPosts from "./SocialMediaPosts";
 import SalePosts from "./SalePosts";
 import { GetSaleAll, GetSaleFiltered, GetSaleFollowings, GetSocialAll, GetSocialFiltered, GetSocialFollowings } from "../logic/backend";

@@ -63,7 +63,6 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
   const [categoryData, setCategoryData] = useState<Category[]>(initcateData);
-  const [loading, setLoading] = useState(true);
   const [sendPost, setSendPost] = useState(false);
   const [submit, onSubmit] = useState<postData>({postType: 'sale', description: '', price: '', itemCategory : undefined, isAnonymous: false, images: [], type: 0});
   const [sending, setSending] = useState(false);
@@ -163,7 +162,7 @@ const handleSetErrorPriceChange = () => {
       } catch (error) {
         console.error('Error fetching categories:', error);
       } finally {
-        setLoading(false);
+      
       }
     };
       fetchData();
@@ -183,7 +182,7 @@ const handleSetErrorPriceChange = () => {
       } catch (error) {
         console.error('Error fetching categories:', error);
       } finally {
-        setLoading(false);
+       
       }
     };
     if(sendPost) {

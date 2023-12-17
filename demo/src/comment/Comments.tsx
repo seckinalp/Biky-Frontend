@@ -1,10 +1,8 @@
 // Comments.tsx
 import React, { useEffect } from 'react';
 import { useState} from 'react';
-import Comment, { CommentProps, CommentClass } from './Comment';
+import Comment, {  CommentClass } from './Comment';
 import './Comments.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/index';
 import { AddComment, DeleteComment, FetchComment } from '../logic/backend';
 import { getUserCredentials } from '../logic/cookie';
 

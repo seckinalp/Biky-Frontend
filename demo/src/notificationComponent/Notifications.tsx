@@ -4,13 +4,7 @@ import Followed from './Followed';
 import './Notifications.css'; // Make sure this path is correct
 import { GetAllUnseen, SetAllUnseen } from '../logic/backend';
 
-interface Notification {
-  id: number;
-  time: string;
-  userName: string;
-  text: string;
-  isSeen: boolean;
-}
+
 
 export interface NotificationSendRequest {
   notificationID: string,
@@ -18,9 +12,6 @@ export interface NotificationSendRequest {
   isSeen: boolean
 }
 
-interface NotificationsProps {
-  notifications: NotificationSendRequest[];
-}
 
 const Notifications: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(true);

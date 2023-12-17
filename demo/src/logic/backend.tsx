@@ -1,6 +1,6 @@
 import { ChatSendRequest, messageSendRequest } from "../ChatComponent/ChatMessageRow";
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
-import { CommentClass, CommentProps, userSendRequest } from "../comment/Comment";
+import { CommentClass,  userSendRequest } from "../comment/Comment";
 import { NotificationSendRequest } from "../notificationComponent/Notifications";
 import { SalePostClass } from "../postcomponent/SalePost";
 import { SocialMediaPostClass, SocialMediaPostProps } from "../postcomponent/SocialMediaPost";

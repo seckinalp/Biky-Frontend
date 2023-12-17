@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css'; // Ensure this path is correct
 import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if necessary
 import '../ButtonStyle.css'; // This is the import statement for your CSS file
-import { LoginRequest , UserCredentials} from '../logic/backend';
+import { LoginRequest } from '../logic/backend';
 import { useDispatch } from 'react-redux';
 import { getUserCredentials, setUserCredentials } from '../logic/cookie';
 

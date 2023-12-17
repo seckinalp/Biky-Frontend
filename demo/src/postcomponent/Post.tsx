@@ -3,9 +3,6 @@ import React from 'react';
 import './Post.css';
 import { useState } from 'react';
 import { DeletePost, imageLink } from '../logic/backend';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/index';
-import { AddComment, FetchComment } from '../logic/backend';
 import Report from '../comment/Report'; // Import Report component here
 import { getUserCredentials } from '../logic/cookie';
 
@@ -40,14 +37,9 @@ const Post: React.FC<PostProps> = (props) => {
   const [showDeletePost, setshowDeletePost] = useState(props.item.author.userID === userID);
   const [visible, setVisible] = useState(true);
 
-  const user = {}; // Placeholder for user object from backend
 
-  // Empty function to handle report user action
-  const handleReportUser = (user: any) => {
-    // Placeholder for logic to report a user
-  };
 
-  // Empty function to handle unfollow user action
+
 
   const onDeleteClick = async () => {
     setShowOptions(prevShow => !prevShow);

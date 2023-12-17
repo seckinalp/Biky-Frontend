@@ -35,15 +35,8 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
 
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
-    
-   
     setShowNotifications(false);
-    
-   
     setShowSettings(false);
-   
-    
-    
   };
 
   const handleSettingsClick = () => {

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import SalePost, { SalePostClass } from './SalePost';
-import { SalePostProps } from './SalePost';
+
 
 export interface SalePostsProps {
   initialPosts: SalePostClass[];

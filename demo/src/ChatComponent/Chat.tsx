@@ -1,48 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './Chat.css'; // Make sure to create a corresponding CSS file
+import './Chat.css'; 
 import ChatMessages from './ChatMessages';
 import ChattingComponent from './ChattingComponent';
 import { ChatSendRequest, messageSendRequest } from './ChatMessageRow';
 import { GetAllChats, GetMessages, SendMessage } from '../logic/backend';
 
 
-const messageData = [
-  {
-    profileImage: 'url-to-image-1.jpg',
-    nickname: 'Alice Johnson',
-    lastMessage: 'Hey, are you free to talk?',
-    userID: '1',
-  },
-  {
-    profileImage: 'url-to-image-2.jpg', 
-    nickname: 'Charlie Smith', 
-    lastMessage: 'Meeting got rescheduled to 3 pm.',
-    userID: '2',
-  },
-  // ... more message data
-];
-
-const messageData2Initial = [
-  {
-      messageID: "1",
-      senderID: 'us',
-      receiverID: 'them',
-      content: "hi",
-      dateTime: "15:00",
-  },
-  {
-      messageID: "2",
-      senderID: 'them',
-      receiverID: 'us',
-      content: "hi too",
-      dateTime: "15:15",
-  },
-  // ... more message data
-];
 interface IChatProps {
   onClose: () => void;
 }
-const Chat: React.FC<IChatProps> = ({ onClose }) => {
+const Chat: React.FC<IChatProps> = () => {
   const [messages, setMessages] = useState<messageSendRequest[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [selectedUserID, setSelectedUserID] = useState<string | null>(null);
