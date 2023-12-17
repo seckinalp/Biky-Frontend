@@ -19,12 +19,17 @@ const CategorySelect: React.FC<CategorySelectProps> = ({ data, onCategoryChange 
     const newSelectedCategories = selectedCategories.slice(0, level);
     newSelectedCategories[level] = category;
     setSelectedCategories(newSelectedCategories);
-    onCategoryChange(category.categoryID);
+
+    // Check if the selected category has no children (bottom level)
+    if (!category.children || category.children.length === 0) {
+      console.log(category.categoryID);
+      onCategoryChange(category.categoryID);
+    }
   };
   const renderSelect = (categories: Category[], level: number) => {
     // Determine the label based on the selected category or default text
     
-    const label = level === 0 ? 'Category:' : `${selectedCategories[level - 1]?.name} Options:`;
+    const label = level === 0 ? 'Category (Go to bottom level to select.)' : `${selectedCategories[level - 1]?.name} Options:`;
 
     // Only render the select if there are categories to display
     if (categories.length === 0) {
