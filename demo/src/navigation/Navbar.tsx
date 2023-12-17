@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "./Navbar.css";
 import { GetUserPhoto, imageLink } from "../logic/backend";
+import { getUserCredentials } from "../logic/cookie";
 
 interface NavbarProps {
   onSettingsClick: () => void;
@@ -52,10 +53,12 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
   useEffect(() => {
     const fetchUserPhoto = async () => {
       try {
+        if(getUserCredentials().token !== "") {
         const result = await GetUserPhoto();
+        console.log(result);
         setPhoto(result);
+        }
       } catch (error) {
-        // Handle the error if needed
         console.error('Error fetching user photo:', error);
       }
     };
