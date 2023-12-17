@@ -25,7 +25,7 @@ import Comments from '../comment/Comments';
       postTime: string
   }
   
-  function convertToPostProps(salePost: SalePostProps): PostProps {
+  function convertToPostProps(salePost: SalePostProps,onDelete: () => void): PostProps {
     return {
       item: {
         postID: salePost.item.postID,
@@ -39,13 +39,18 @@ import Comments from '../comment/Comments';
         },
         postTime: salePost.item.postTime,
         isAnonymous: false,
-      }
+      },
+      handleDelete: onDelete
     };
   }
   
   const SalePost: React.FC<SalePostProps> = (props) => {
     console.log(props);
-  
+    const[visible,setVisible] = useState(true);
+    const handleVisible = () => {
+    console.log("aiee")
+    setVisible(false);
+  }
     const [showComments, setShowComments] = useState(false);
     const getSpecialButton = () => {
       switch (props.item.postType) {
@@ -67,9 +72,13 @@ import Comments from '../comment/Comments';
     const toggleComments = () => {
       setShowComments(!showComments);
     };
+
+    if(!visible) {
+      return <></>
+    }
     return (
       <>
-      <Post item={convertToPostProps(props).item}  />
+        <Post item={convertToPostProps(props, handleVisible).item} handleDelete={convertToPostProps(props, handleVisible).handleDelete } />
         <div className="post-container">
         <div className="post-actions">
           <div className="post-buttons">

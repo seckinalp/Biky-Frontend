@@ -25,6 +25,7 @@ export interface PostProps {
       postTime: string
       isAnonymous: boolean // Added isAnonymous flag 
   }
+  handleDelete: () => void;
 }
 //assuming we pass the post as props.item
 const Post: React.FC<PostProps> = (props) => {
@@ -48,16 +49,16 @@ const Post: React.FC<PostProps> = (props) => {
 
   // Empty function to handle unfollow user action
 
-
+  const onDeleteClick = async () => {
+    setShowOptions(prevShow => !prevShow);
+  };
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images: string[] = props.item.images
   ? props.item.images.map((images) => `${imageLink}${images}`)
   : [];
 
   const [showOptions, setShowOptions] = useState(false);
-  const toggleReport = () => {
-    setShowOptions(prevShow => !prevShow);
-  };
+
   const goPrev = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : images.length - 1));
   };
@@ -68,6 +69,7 @@ const Post: React.FC<PostProps> = (props) => {
 
  
   const handleDelete = () => {
+    props.handleDelete();
     setVisible(false);
     DeletePost(props.item.postID);
   }
@@ -85,14 +87,14 @@ const Post: React.FC<PostProps> = (props) => {
         {showDeletePost ?(
           <button  className="delete-postc"onClick={handleDelete}>🗑️</button>
 
-        ) : (<button  className="delete-postc2"onClick={toggleReport}>🚩</button>)}
+        ) : (<button  className="delete-postc2"onClick={onDeleteClick}>🚩</button>)}
       </div>
             {showOptions && (
         <div className="comment-report-container">
           <Report
             item={reportItem}
             isVisable={showOptions}
-            onVisibilityChange={toggleReport}
+            onVisibilityChange={onDeleteClick}
           />
           </div>
         )}
