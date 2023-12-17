@@ -46,7 +46,6 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps, onDelete: () 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   const[visible,setVisible] = useState(true);
   const handleVisible = () => {
-    console.log("aiee")
     setVisible(false);
   }
   const [likeState, setLikeState] = useState({
