@@ -621,3 +621,21 @@ if (!response.ok) {
     throw new Error('Failed to open chat');
   }
 }
+
+export async function GetCategoryName(id : Number) : Promise<string> {
+  console.log(id);
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Category/GetName?id=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+    console.log(response);
+      if (!response.ok) {
+          throw new Error('Failed to fetch category name');
+        }
+    const resData = await response.text();
+    return resData;
+}
