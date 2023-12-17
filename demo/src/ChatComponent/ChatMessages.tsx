@@ -1,10 +1,10 @@
 // ChatMessages.tsx
 import React, { useState } from 'react';
-import ChatMessageRow, { MessageRowProps } from './ChatMessageRow';
+import ChatMessageRow, { ChatSendRequest } from './ChatMessageRow';
 import './ChatMessages.css';
 
 type ChatMessagesProps = {
-    messageData: MessageRowProps[];
+    messageData: ChatSendRequest[];
     onRowClick: (userID: string) => void; // Function to handle row click
 };
 
@@ -22,13 +22,11 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messageData, onRowClick }) 
             <div className='chat-messages-list'>
                 {messageData.map((msg) => (
                     <ChatMessageRow
-                        key={msg.userID}
-                        profileImage={msg.profileImage}
-                        nickname={msg.nickname}
+                        key={msg.user.userID}
+                        user = {msg.user}
                         lastMessage={msg.lastMessage}
-                        userID={msg.userID}
-                        onClick={() => handleRowClick(msg.userID)}
-                        isSelected={msg.userID === selectedUserID} // Pass isSelected prop
+                        onClick={() => handleRowClick(msg.user.userID)}
+                        isSelected={msg.user.userID === selectedUserID} // Pass isSelected prop
                     />
                 ))}
             </div>

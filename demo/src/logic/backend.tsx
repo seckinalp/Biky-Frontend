@@ -1,3 +1,4 @@
+import { ChatSendRequest, messageSendRequest } from "../ChatComponent/ChatMessageRow";
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
 import { CommentClass, CommentProps, userSendRequest } from "../comment/Comment";
 import { SalePostClass } from "../postcomponent/SalePost";
@@ -519,10 +520,12 @@ export async function DeletePost(postID: string): Promise<void> {
 }
 
 export async function SearchUser(contains : String) : Promise<userSendRequest[]> {
+  const { token, userID } = getUserCredentials();
   const response = await fetch(`${siteLink}User/SearchUser?contains=${contains}`, {
 method: 'GET',
 headers: {
   'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`,
   //'postID': `${postID}`,
 },
 });
@@ -531,4 +534,73 @@ headers: {
       throw new Error('Failed to fetch comments');
     }
     return resData;
+}
+
+export async function GetAllChats() : Promise<ChatSendRequest[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Chat/GetAllChats`, {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`,
+  //'postID': `${postID}`,
+},
+});
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to fetch chats');
+    }
+    return resData;
+}
+
+export async function SendMessage(id : string, content : string) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Chat/Send`, {
+method: 'POST',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`,
+  //'postID': `${postID}`,
+}, body: JSON.stringify({
+  receiverID: id,
+  content: content
+})
+});
+  if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
+}
+
+export async function GetMessages(id : string) : Promise<messageSendRequest[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Chat/GetMessages`, {
+method: 'POST',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`,
+  //'postID': `${postID}`,
+}, body: JSON.stringify({
+  senderID: id
+})
+});
+const resData = await response.json();
+if (!response.ok) {
+    throw new Error('Failed to fetch messages');
+  }
+  return resData;
+}
+
+export async function OpenChat(id : string) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Chat/OpenChat?receiverID=${id}`, {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${token}`,
+  //'postID': `${postID}`,
+}, 
+});
+if (!response.ok) {
+    throw new Error('Failed to open chat');
+  }
 }

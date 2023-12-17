@@ -4,7 +4,7 @@ import './Profile.css';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
 import { getUserCredentials } from '../logic/cookie';
-import { AddFollow, CheckFollow, FetchProfile, RemoveFollow, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
+import { AddFollow, CheckFollow, FetchProfile, OpenChat, RemoveFollow, SendMessage, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
 import EditProfile from './editprofile/EditProfile';
 import ProfileFeed from './ProfileFeed';
@@ -165,9 +165,11 @@ const Profile: React.FC = () => {
     };
   
     const handleMessageClick = () => {
-      // Logic for messaging the user
-      console.log("Message button clicked");
-      // Implement your message handling logic here
+      try {
+        if(paramName) OpenChat(paramName);
+      } catch (error) {
+        console.error("Error opening chat :", error);
+      }
     };
     
   return (

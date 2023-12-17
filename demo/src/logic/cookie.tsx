@@ -21,7 +21,7 @@ import { UserCredentials } from "./backend";
   // Cookie utility functions
   function setCookie(name: string, value: string): void {
     const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + 1000 * 60 * 60 * 24);
+    expirationDate.setTime(expirationDate.getTime() + 1000 * 60 * 60 * 2);
     const expires = `expires=${expirationDate.toUTCString()}`;
     document.cookie = `${name}=${value};${expires};path=/`;
   }

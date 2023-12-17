@@ -1,29 +1,35 @@
 // ChatMessageRow.tsx
 import React from 'react';
 import './ChatMessageRow.css';
+import { userSendRequest } from '../comment/Comment';
+import { imageLink } from '../logic/backend';
 
-export type MessageRowProps = {
-    profileImage: string;
-    nickname: string;
-    lastMessage: string;
-    userID: string;
+export interface messageSendRequest {
+    messageID: string,
+    senderID: string,
+    receiverID: string,
+    content: string,
+    dateTime: string
+}
+
+export type ChatSendRequest = {
+    user: userSendRequest,
+    lastMessage: messageSendRequest;
   };
   
-  const ChatMessageRow: React.FC<MessageRowProps & { onClick: () => void, isSelected: boolean }> = ({
-    profileImage,
-    nickname,
+  const ChatMessageRow: React.FC<ChatSendRequest & { onClick: () => void, isSelected: boolean }> = ({
+    user,
     lastMessage,
-    userID,
     onClick,
     isSelected,
 }) => {
     const rowClass = isSelected ? "chat-message-row selected" : "chat-message-row";
     return (
         <div className={rowClass} onClick={onClick}>
-            <img src={profileImage} alt={`${nickname}'s profile`} className="profile-photo" />
+            <img src={user.profileImage == "" || user.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${user.profileImage}`} alt={`${user.nickname}'s profile`} className="profile-photo" />
             <div className="message-info">
-                <div className="name">{nickname}</div>
-                <div className="last-message">{lastMessage}</div>
+                <div className="name">{user.nickname}</div>
+                <div className="last-message">{lastMessage.content}</div>
             </div>
         </div>
     );
