@@ -60,29 +60,6 @@ const Chat: React.FC<IChatProps> = ({ onClose }) => {
     const fetchData = async () => {
       try {
       
-        if(selectedUserID !== null) {
-          let response = await GetMessages(selectedUserID);
-          console.log(response);
-          setMessages(response);
-        }
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 2000);
-
-    // Clean up the interval when the component is unmounted
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-      
         if(chats.length !== 0 && selectedUserID !== null) {
           let response = await GetMessages(selectedUserID);
           console.log(response);
@@ -105,7 +82,7 @@ const Chat: React.FC<IChatProps> = ({ onClose }) => {
     const fetchData = async () => {
       try {
           let response = await GetAllChats();
-          setChats(response);
+          setChats([...response].reverse());
 
       } catch (error) {
         console.error('Error fetching chats:', error);
