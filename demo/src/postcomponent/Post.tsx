@@ -37,7 +37,7 @@ const Post: React.FC<PostProps> = (props) => {
     reportData: "props.item.content" // or any relevant data
   };
   const userID = getUserCredentials().userID;
-  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == userID);//props.item.author.userID == userID
+  const [showDeletePost, setshowDeletePost] = useState(props.item.author.userID === userID);
   const [visible, setVisible] = useState(true);
 
   const user = {}; // Placeholder for user object from backend

@@ -12,10 +12,11 @@ const Settings: React.FC<Props> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(true); // state to control visibility
   const [isReportVisible, setIsReportVisible] = useState(false); // state to control report form visibility
   const [reportMessage, setReportMessage] = useState(''); // state to store the report message
+  const navigate = useNavigate();
 
   const handleReport = () => {
     
-    // Additional logic for reporting a problem
+    
   };
   const handleReportOpen = () => {
     setIsReportVisible(true); // Show the report form
@@ -31,7 +32,6 @@ const Settings: React.FC<Props> = ({ onClose }) => {
     setStatusMessage(''); // Optionally clear any status messages
   };
   const handleLogout = () => {
-    const navigate = useNavigate();
     deleteUserCredentials();
     navigate("/login")
   };
