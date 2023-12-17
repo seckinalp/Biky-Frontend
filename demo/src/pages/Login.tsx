@@ -36,8 +36,10 @@ const Login = () => {
       if(getUserCredentials().token !== "") {
       navigate('/homepage');
       }
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
     } catch (error) {
       console.error('Login failed:', error);
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
     }
   };
   
