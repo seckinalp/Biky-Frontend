@@ -30,25 +30,7 @@
     text-align: center; /* Center the title */
   }
   
-  .search-close-btn {
-    font-size: 30px; /* Adjust the font size to make the 'X' larger */
-    width: 32px; /* Set a specific width */
-    height: 32px; /* Set a specific height */
-    line-height: 32px; /* Align the 'X' vertically */
-    text-align: center; /* Align the 'X' horizontally */
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    outline: none;
-    border-radius: 50%; /* Optional: if you want a rounded button */
-    margin-left: 10px; /* To ensure some space between the title and the button */
-  }
-  
-  /* Optional: Add styles for hover effect */
-  .search-close-btn:hover {
-    color: purple;
-    background: transparent /* Slight background on hover for better UX */
-  }
+ 
   .search-body {
     padding: 10px;
   }

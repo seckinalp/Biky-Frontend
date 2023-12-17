@@ -52,13 +52,3 @@
     flex: 0.3;
 }
 
-.timeline__rectangle {
-    width: 200px;
-    height: 100px;
-    background-color: #ff0000;
-    display: none;
-  }
-  
-  .timeline__rectangle.visible {
-    display: block;
-  }

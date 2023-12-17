@@ -1,9 +1,9 @@
 
-.btn-container {
+.generic-btn-container {
   text-align: center; /* İçeriği yatay olarak ortalar */
 }
 
-.btn {
+.generic-btn {
  width: 130px;
  height: 40px;
  cursor: pointer;
@@ -15,14 +15,14 @@
  
 }
 
-.btn:hover {
+.generic-btn:hover {
  border-radius: 10px;
  transform: translateY(-5px);
  box-shadow: 10px 7px 0 -2px #f85959,
   -10px 15px 0 -4px #39a2db;
 }
 
-.btn:active {
+.generic-btn:active {
  transition: all 0.2s;
  transform: translateY(-5px);
  box-shadow: 0 2px 0 -2px #f85959,
@@ -34,43 +34,25 @@
    
   width: 25px; /* Set a specific width */
   height: 25px; /* Set a specific height */
-  
+  cursor: pointer;
   box-shadow: 0px 10 10px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   background: #000;
   position: absolute;
   display: block;
-  margin-top: 10px;
-  margin-right: 10px;
-  top: 10; /* Align to the top */
-right: 10; /* Align to the right */
+  margin-top: 20px;
+  margin-right: 20px;
+  top: 0; /* Align to the top */
+right: 0; /* Align to the right */
 transform: translate(50%, -50%); 
  
 }
-.generic-close-button:before{
-  content: '';
-  width: 55%;
-  height: 2px;
-  background: #ffffff;
-  position: absolute;
-  top: 48%;
-  left: 22%;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
+.generic-close-button:before,
 .generic-close-button:after {
-  content: '';
+  content: "";
   width: 55%;
   height: 2px;
-  background: #ffffff;
+  background: #fff;
   position: absolute;
   top: 48%;
   left: 22%;
@@ -99,7 +81,6 @@ transform: translate(50%, -50%);
 }
 .generic-close-button:hover:before,
 .generic-close-button:hover:after {
-  background: #000000;
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
