@@ -1,16 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './CreatePost.css';
 import CategorySelect from '../assets/categoryComponent/CategorySelect';
+import { AddSale, AddSocial, FetchCategories, UploadFile } from '../logic/backend';
+import { categoryMap } from '../categoryFilterCompononet/CategoryFilter';
 
 interface CreatePostProps {
   onClose: () => void;
-  onSubmit: (postData: {
-    description: string;
-    postType: 'socialMedia' | 'sale';
-    price: number | '';
-    itemCategory: number | undefined;
-    isAnonymous: boolean; // Add this line
-  }) => void;
+}
+
+interface postData {
+  description: string;
+  postType: 'socialMedia' | 'sale';
+  type: number;
+  price: number | '';
+  itemCategory: number | undefined;
+  isAnonymous: boolean; // Add this line
+  images: string[]
 }
 
 export interface Category {
@@ -19,7 +24,7 @@ export interface Category {
   children: Category[];
 }
 
-const categoryData: Category[] = [
+const initcateData: Category[] = [
   {
     categoryID: 1,
     name: "string",
@@ -44,17 +49,23 @@ const categoryData: Category[] = [
   // ... other categories
 ];
 
-const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
+const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [price, setPrice] = useState<number | ''>('');
   const [images, setImages] = useState<string[]>([]);
+  const [imagesLink, setImagesLink] = useState<string[]>([]);
   const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
   const [isVisible, setIsVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [itemCategory, setItemCategory] = useState<number | undefined>(undefined);
-
+  const [categoryData, setCategoryData] = useState<Category[]>(initcateData);
+  const [loading, setLoading] = useState(true);
+  const [sendPost, setSendPost] = useState(false);
+  const [submit, onSubmit] = useState<postData>({postType: 'sale', description: '', price: '', itemCategory : undefined, isAnonymous: false, images: [], type: 0});
+  const [sending, setSending] = useState(false);
+  const [category, setCategory] = useState<number | undefined>(undefined);
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
@@ -68,34 +79,96 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
       postType,
       price,
       itemCategory,
-      isAnonymous, // Include the checkbox value in the submitted data
+      isAnonymous,
+      images: imagesLink,
+      type: category ? category : 0 // Include the checkbox value in the submitted data
     });
+    setSendPost(true);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await FetchCategories();
+        setCategoryData(result);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+      fetchData();
+      
+  }, []); 
+
+  useEffect(() => {
+    const sendPost = async () => {
+      try {
+        setSending(true);
+        if(submit.postType === 'sale') {
+          if(submit.itemCategory && submit.price != '') await AddSale(submit.description, submit.images, submit.type, submit.itemCategory, submit.price);
+        } else if(submit.postType === 'socialMedia') {
+          await AddSocial(submit.description, submit.isAnonymous, submit.images);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if(sendPost) {
+      sendPost();
+    }
+    setSending(false);
+    setSendPost(false);
+  }, [sendPost]); 
+
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    // Update to use undefined instead of an empty string
+    const value = event.target.value;
+    setCategory(value ? categoryMap[value] : undefined);
   };
 
   const handleItemCategoryChange = (categoryId: number) => {
     setItemCategory(categoryId);
   };
 
- ;
-
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPrice(value === '' ? '' : Number(value));
   };
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const fileArray = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
+      const fileArray = Array.from(event.target.files);
+      try {
+        // Upload the last file in the array and get the image URL
+        const latestFile = fileArray[fileArray.length - 1];
+        const imageUrl = await UploadFile(latestFile);
+  
+        // Update the state with the uploaded image URL
+        setImagesLink((prevImagesLink) => [...prevImagesLink, imageUrl]);
+      } catch (error) {
+        // Handle errors, e.g., show an error message
+        console.error("Error uploading file:", error);
+      }
       setImages((prevImages) => {
-        const spaceForNewImages = 4 - prevImages.length;
-        const newImagesToAdd = fileArray.slice(0, spaceForNewImages);
+        const spaceForNewImages = 100 - prevImages.length;
+        const newImagesToAdd = fileArray.slice(0, spaceForNewImages).map((file) => URL.createObjectURL(file));
         return [...prevImages, ...newImagesToAdd];
       });
+  
       event.target.value = ""; // Clear the file input
     }
   };
+  
+  
 
   const handleDeleteImage = (index: number) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    if (imagePreviewIndex >= index && imagePreviewIndex > 0) {
+      setImagePreviewIndex(prevIndex => prevIndex - 1);
+    }
+    setImagesLink((prevImages) => prevImages.filter((_, i) => i !== index));
     if (imagePreviewIndex >= index && imagePreviewIndex > 0) {
       setImagePreviewIndex(prevIndex => prevIndex - 1);
     }
@@ -157,8 +230,18 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
         {postType === 'sale' && (
           <>
             <div className="form-group">
-            
-             
+            <select
+        className="category-select"
+        value={category === undefined ? '' : category.toString()}
+        onChange={handleCategoryChange}
+      >
+        <option value="">Select a Type</option>
+        <option value="lostAndFound">Lost and Found</option>
+        <option value="secondHand">Second Hand</option>
+        <option value="privateLesson">Private Lesson</option>
+        <option value="trade">Trade</option>
+        <option value="borrow">Borrow</option>
+      </select>
              
             </div>
             <div className="form-group">
@@ -172,7 +255,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
                 step="0.01" // Only allow integer values
               />
             </div>
-             <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange} />
+             <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange}/>
           </>
         )}
 
@@ -223,7 +306,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose, onSubmit }) => {
     ></path>
   </svg>
 </button>
-  <button className='btn' type="submit">Publish!</button>
+  <button className='btn' type="submit" disabled = {sendPost}>Publish!</button>
 </div>
 
   {/* ... */}

@@ -450,3 +450,47 @@ export async function RemoveLike(postID: String) : Promise<void> {
           throw new Error('Failed to remove like');
         }
 }
+
+export async function AddSocial(content: string, isAnonymous : boolean, images : String[], ) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  console.log(images);
+  const response = await fetch(`${siteLink}SocialMediaPost/Add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      {contentText : content,
+      images: images,
+    isAnonymous: isAnonymous}
+    )
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to add like');
+        }
+}
+
+export async function AddSale(content: string, images : String[], postType: Number, Category: Number, price: Number) : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  console.log(images);
+  const response = await fetch(`${siteLink}SocialMediaPost/Add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(
+      {contentText : content,
+         images: images,
+         postType: postType,
+         price: price,
+        category: Category}
+    )
+    });
+    
+      if (!response.ok) {
+          throw new Error('Failed to add like');
+        }
+}

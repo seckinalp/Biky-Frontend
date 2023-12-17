@@ -95,10 +95,6 @@ const Homepage: React.FC = () => {
     setShowCategoryFilter(false);
     setShowSearchComponent(false);
   };
-  const handleCreatePostSubmit = () => {
-    // Handle the submission of post data, e.g., sending it to an API or processing it
-
-  };
   return (
     <div className='app'>
       <div className='background'></div>
@@ -128,7 +124,7 @@ const Homepage: React.FC = () => {
             </div>
             <div className="timeline__middle">
          
-         {showCreatePost &&<CreatePost onClose={handleCreatePostClick} onSubmit={handleCreatePostSubmit}/>}
+         {showCreatePost &&<CreatePost onClose={handleCreatePostClick} />}
          {showChatComponent && <Chat onClose={handleChatClick} />}
             </div>
             <div className="timeline__right">

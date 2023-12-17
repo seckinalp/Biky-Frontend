@@ -24,7 +24,7 @@ export interface Category {
   children: Category[];
 }
 
-const categoryMap: { [key: string]: number } = {
+export const categoryMap: { [key: string]: number } = {
   lostAndFound: 1,
   secondHand: 3,
   privateLesson: 2,

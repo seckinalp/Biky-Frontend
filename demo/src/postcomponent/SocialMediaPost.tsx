@@ -16,7 +16,7 @@ export interface SocialMediaPostClass {
       userName: string;
       userProfileLink: string;
     };
-    imagesID: string[];
+    images: string[];
     contentText: string;
     postTime: string; // UTC time
     isLiked: boolean; // to show it is liked by viewing user
@@ -30,7 +30,7 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
       postID: socialMediaPost.item.postID,
       authorID: socialMediaPost.item.author.userID,
       contentText: socialMediaPost.item.contentText,
-      images: socialMediaPost.item.imagesID,
+      images: socialMediaPost.item.images,
       author: {
         userID: socialMediaPost.item.author.userID,
         nickname: socialMediaPost.item.author.userName,
@@ -43,7 +43,6 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
 }
 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
-  
   
   const [likeState, setLikeState] = useState({
     likeCount: props.item.likes, // Initialize like count
