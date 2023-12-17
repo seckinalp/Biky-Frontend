@@ -132,7 +132,7 @@ const handleSetErrorPriceChange = () => {
       setSendPost(true);
       setTimeout(() => {
         navigate('../../homepage');
-      }, 5000);
+      }, 500);
   };
   useEffect(() => {
     if (postType === 'sale') {
