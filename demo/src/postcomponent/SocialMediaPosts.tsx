@@ -7,7 +7,6 @@ export interface SocialMediaPostsProps {
 }
 
 const SocialMediaPosts: React.FC<SocialMediaPostsProps> = ({ initialPosts }) => {
-  console.log(initialPosts);
   return (
     <div>
       {initialPosts.map((post ,index) => (
