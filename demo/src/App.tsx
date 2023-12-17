@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import Homepage from './Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ForgotPassword from './pages/Forgot';
 import { Provider } from 'react-redux';
 import store from './store'; 
 import Profile from './profilecomponent/Profile';
@@ -20,7 +19,6 @@ return (
         <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/homepage" element={<Homepage> <Feed /></Homepage>} />
         <Route path='/profile/:userID' element={<Homepage><Profile /></Homepage>}/>
         <Route path='/feed' element={<Homepage><Feed /></Homepage>}/>

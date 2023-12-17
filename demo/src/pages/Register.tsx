@@ -98,6 +98,7 @@ const Register = () => {
   return (
     
     <div className="register-container">
+      <div className='background'></div>
       <div className="register-form">
         <h6>LETS GET STARTED BILKENTERS</h6>
         <h2>Create Account</h2>
