@@ -10,7 +10,7 @@ export interface filterData {
   maxPrice?: number;
   category?: number;
   itemCategory?: number;
-  feedType?: 'following' | 'allFeed';
+  feedType?: 'following' | 'allFeed' | 'filter';
 }
 
 export interface CategoryFilterProps {
@@ -47,7 +47,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange
   const [saleText, setSaleText] = useState('');
   const [data, setData] = useState<Category[]>([]);
 
-  const [selectedFilter, setSelectedFilter] = useState<'socialMedia' | 'sale' | 'following' | 'allFeed' | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<'socialMedia' | 'sale' | 'following' | 'allFeed' | 'filter' | null>(null);
 
 // ...
 const handleItemCategoryChange = (categoryId: number) => {
@@ -62,7 +62,8 @@ const handleFilterChange = () => {
     maxPrice,
     category,
     itemCategory,
-    feedType: selectedFilter as 'following' | 'allFeed' // Make sure this casting is safe
+    feedType: selectedFilter as 'following' | 'allFeed' | 'filter' // Make sure this casting is safe
+
   });
 };
   useEffect(() => {
@@ -122,8 +123,15 @@ const handleFilterChange = () => {
   >
     See all Feed
   </button>
+
+  <button 
+    className={`post-type-button ${selectedFilter === 'filter' ? 'active' : ''}`}
+    onClick={() => setSelectedFilter('filter')}
+  >
+    Filter
+  </button>
 </div>
-    {postType === 'socialMedia' && selectedFilter === 'allFeed' && (
+    {postType === 'socialMedia' && selectedFilter === 'filter' && (
       <input
         type="text"
         className="social-media-input"
@@ -132,7 +140,7 @@ const handleFilterChange = () => {
         onChange={(e) => setSocialMediaText(e.target.value)}
       />
     )}
-      {postType === 'sale' && selectedFilter === 'allFeed' && (
+      {postType === 'sale' && selectedFilter === 'filter' && (
         <div className="sale-options">
           <div className='contains-input'>
           <input 
