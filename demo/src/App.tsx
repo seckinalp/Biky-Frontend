@@ -17,6 +17,7 @@ return (
   <Provider store={store}>
     <Router>
         <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/homepage" element={<Homepage> <Feed /></Homepage>} />
@@ -25,6 +26,7 @@ return (
         <Route path='/create' element={<Homepage>  <CreatePost onClose={function (): void {
           throw new Error('Function not implemented.');
         } } /></Homepage>}/>
+        <Route path="/*" element={<div>404 not found</div>} />
      
         </Routes>
     </Router>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Post, { PostProps } from "./Post";
 import Comments from '../comment/Comments';
 import  { CommentProps } from '../comment/Comment';
@@ -44,6 +44,8 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps, onDelete: () 
 }
 
 const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
+  console.log(props.item.likes);
+  console.log(props.item.isLiked);
   const[visible,setVisible] = useState(true);
   const handleVisible = () => {
     setVisible(false);
@@ -85,7 +87,7 @@ const SocialMediaPost: React.FC<SocialMediaPostProps> = (props) => {
   const reloadComments = () => {
     
   }
-
+  
   if(!visible) {
     return <></>
   }

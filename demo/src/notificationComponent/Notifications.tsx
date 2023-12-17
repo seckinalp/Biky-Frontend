@@ -1,7 +1,8 @@
 // Notifications.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Followed from './Followed';
 import './Notifications.css'; // Make sure this path is correct
+import { GetAllUnseen, SetAllUnseen } from '../logic/backend';
 
 interface Notification {
   id: number;
@@ -11,12 +12,19 @@ interface Notification {
   isSeen: boolean;
 }
 
-interface NotificationsProps {
-  notifications: Notification[];
+export interface NotificationSendRequest {
+  notificationID: string,
+  content: string,
+  isSeen: boolean
 }
 
-const Notifications: React.FC<NotificationsProps & { onClose: () => void }> = ({ notifications, onClose }) => {
+interface NotificationsProps {
+  notifications: NotificationSendRequest[];
+}
+
+const Notifications: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [notifications, setNotifications] = useState<NotificationSendRequest[]>([]);
 
   const handleClose = () => {
     onClose();   
@@ -25,6 +33,21 @@ const Notifications: React.FC<NotificationsProps & { onClose: () => void }> = ({
   if (!isVisible) {
     return null;
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let result = await GetAllUnseen();
+        setNotifications([...result].reverse());
+        SetAllUnseen();
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      } finally {
+      }
+    };
+      
+      fetchData(); 
+  }, []); 
+
 
   return (
     <div className="notifications-box">
@@ -34,10 +57,8 @@ const Notifications: React.FC<NotificationsProps & { onClose: () => void }> = ({
       </div>
       {notifications.map((notification) => (
         <Followed
-          key={notification.id}
-          time={notification.time}
-          userName={notification.userName}
-          text={notification.text}
+          key={notification.notificationID}
+          text={notification.content}
           isSeen={notification.isSeen}
         />
       ))}

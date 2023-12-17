@@ -1,6 +1,7 @@
 import { ChatSendRequest, messageSendRequest } from "../ChatComponent/ChatMessageRow";
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
 import { CommentClass, CommentProps, userSendRequest } from "../comment/Comment";
+import { NotificationSendRequest } from "../notificationComponent/Notifications";
 import { SalePostClass } from "../postcomponent/SalePost";
 import { SocialMediaPostClass, SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
 import { ProfileClass } from "../profilecomponent/Profile";
@@ -623,7 +624,6 @@ if (!response.ok) {
 }
 
 export async function GetCategoryName(id : Number) : Promise<string> {
-  console.log(id);
   const { token, userID } = getUserCredentials();
   const response = await fetch(`${siteLink}Category/GetName?id=${id}`, {
     method: 'GET',
@@ -632,10 +632,39 @@ export async function GetCategoryName(id : Number) : Promise<string> {
       'Authorization': `Bearer ${token}`,
     },
     });
-    console.log(response);
       if (!response.ok) {
           throw new Error('Failed to fetch category name');
         }
     const resData = await response.text();
     return resData;
+}
+
+export async function GetAllUnseen() : Promise<NotificationSendRequest[]> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Notification/GetAll`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+      if (!response.ok) {
+          throw new Error('Failed to fetching notifications');
+        }
+    const resData = await response.json();
+    return resData;
+}
+
+export async function SetAllUnseen() : Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}Notification/SetAllSeen`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    });
+      if (!response.ok) {
+          throw new Error('Failed to set notifications seen');
+      }
 }
