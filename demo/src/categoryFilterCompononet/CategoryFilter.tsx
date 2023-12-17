@@ -93,39 +93,39 @@ const handleFilterChange = () => {
  
   return (
     <div className="category-filter-container">
-    <button className="category-generic-close-button" onClick={handleClose}></button>
+    <button className="generic-close-button" onClick={handleClose}></button>
     <div className="category-filter-header">Filter the Post</div>
-    <div className="category-button-group">
-      <div className='category-button1'> <button 
-        className={`category-post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
+    <div className="button-group">
+      <div className='button1'> <button 
+        className={`post-type-button ${postType === 'socialMedia' ? 'active' : ''}`}
         onClick={() => setPostType('socialMedia')}
       >
         Social Media Post
       </button></div>
      
       <button 
-        className={`category-post-type-button ${postType === 'sale' ? 'active' : ''}`}
+        className={`post-type-button ${postType === 'sale' ? 'active' : ''}`}
         onClick={() => setPostType('sale')}
       >
         Sale Post
       </button></div>
-      <div className="category-button-group">
-        <div className='category-button2'> <button 
-    className={`category-post-type-button ${selectedFilter === 'following' ? 'active' : ''}`}
+      <div className="button-group">
+        <div className='button2'> <button 
+    className={`post-type-button ${selectedFilter === 'following' ? 'active' : ''}`}
     onClick={() => setSelectedFilter('following')}
   >
     See Following
   </button></div>
  
   <button 
-    className={`category-post-type-button ${selectedFilter === 'allFeed' ? 'active' : ''}`}
+    className={`post-type-button ${selectedFilter === 'allFeed' ? 'active' : ''}`}
     onClick={() => setSelectedFilter('allFeed')}
   >
     See all Feed
   </button>
 
   <button 
-    className={`category-post-type-button ${selectedFilter === 'filter' ? 'active' : ''}`}
+    className={`post-type-button ${selectedFilter === 'filter' ? 'active' : ''}`}
     onClick={() => setSelectedFilter('filter')}
   >
     Filter
@@ -134,35 +134,35 @@ const handleFilterChange = () => {
     {postType === 'socialMedia' && selectedFilter === 'filter' && (
       <input
         type="text"
-        className="category-social-media-input"
+        className="social-media-input"
         placeholder="Check Post Contains a Text"
         value={socialMediaText}
         onChange={(e) => setSocialMediaText(e.target.value)}
       />
     )}
       {postType === 'sale' && selectedFilter === 'filter' && (
-        <div className="category-sale-options">
-          <div className='category-contains-input'>
+        <div className="sale-options">
+          <div className='contains-input'>
           <input 
           type="text"
-          className="category-sale-input"
+          className="sale-input"
           placeholder="Check Post Contains a Text"
           value={saleText}
           onChange={(e) => setSaleText(e.target.value)}
         />
           </div>
        
-        <div className="category-price-input-group">
+        <div className="price-input-group">
             <input
               type="number"
-              className="category-price-input"
+              className="price-input"
               placeholder="Minimum Price"
               value={minPrice}
               onChange={(e) => setMinPrice(parseInt(e.target.value.replace(/[^0-9]/g, '').replace(/^0+/, '')))}
             />
             <input
               type="number"
-              className="category-price-input"
+              className="price-input"
               placeholder="Maximum Price"
               value={maxPrice}
               onChange={(e) => setMaxPrice(parseInt(e.target.value.replace(/[^0-9]/g, '').replace(/^0+/, '')))}
@@ -188,8 +188,8 @@ const handleFilterChange = () => {
         
       )}
       <div className='generic-btn-container'><button className="generic-btn" onClick={handleFilterChange}>Filter</button></div>
+      
     </div>
-    
   );
   
 };
