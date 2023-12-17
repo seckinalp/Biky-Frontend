@@ -68,17 +68,54 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const [category, setCategory] = useState<number | undefined>(undefined);
   const [attemptedToPublish, setAttemptedToPublish] = useState(false);
 
+  const [errorDescText, setErrorDescText] = useState("");
+  const [errorPrice, setErrorPrice] = useState("");
+
+  const [anonWarn, setAnonWarn] = useState("");
+
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
   };
+
+  const handleDescErrorChange = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    if (!event.target.value.trim()) {
+        setErrorDescText("Please fill in the description.");
+    } else {
+        setErrorDescText("");
+    }
+};
+const handleSetErrorPriceChange = () => {
+  if (price === '') {
+      setErrorPrice("Please determine the price.");
+  } else {
+      setErrorPrice("");
+  }
+};
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(event.target.checked) {
+      setAnonWarn("WARNING: If you send an anonymous post, you will be unable to later delete it!");
+    } else {
+      setAnonWarn("");
+    }
     setIsAnonymous(event.target.checked);
   };
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setAttemptedToPublish(true); // Set the attemptedToPublish to true when submit is attempted
-  
-    if (description.trim()) {
+    if (postType === 'socialMedia') {
+      if (!description.trim()) {
+        setIsVisible(true); // Show error message if description is empty
+        return; // Stop further execution
+      }
+    }
+    if (postType === 'sale') {
+      if (!description.trim() || price === '' || itemCategory === undefined) {
+        setIsVisible(true); // Show error message if any field is empty
+        return; // Stop further execution
+      }
+    }
+    setIsVisible(false);
       // Proceed with submitting the form only if there's a description
       onSubmit({
         description,
@@ -90,13 +127,27 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
         type: category ? category : 0,
       });
       setSendPost(true);
-    }
   };
   useEffect(() => {
-    if (description.trim().length > 0) {
-      setAttemptedToPublish(false);
+    if (postType === 'sale') {
+      if (description.trim() || (price !== '' && price !== undefined) || (itemCategory && itemCategory !== undefined)) {
+        setAttemptedToPublish(false);
+      }
+    } else if (postType === 'socialMedia') {
+      if (description.trim()) {
+        setAttemptedToPublish(false);
+      }
     }
-  }, [description]);
+  }, [description, price, itemCategory, postType]);
+  useEffect(() => {
+    if (postType === 'sale') {
+      setIsAnonymous(false);
+    }
+  }, [postType]);
+
+  useEffect(() => {
+    setAttemptedToPublish(false);
+  }, [postType]);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -171,14 +222,9 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
       event.target.value = ""; // Clear the file input
     }
   };
-  
-  
 
   const handleDeleteImage = (index: number) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-    if (imagePreviewIndex >= index && imagePreviewIndex > 0) {
-      setImagePreviewIndex(prevIndex => prevIndex - 1);
-    }
     setImagesLink((prevImages) => prevImages.filter((_, i) => i !== index));
     if (imagePreviewIndex >= index && imagePreviewIndex > 0) {
       setImagePreviewIndex(prevIndex => prevIndex - 1);
@@ -230,26 +276,29 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
     value={description}
     maxLength={256}
     onChange={handleDescriptionChange}
+    onBlur={handleDescErrorChange}
   />
   <span className="style-input__label">Description</span>
 </label>
+<div className='error-message'>{errorDescText}</div>
 
-
-<div className="checkbox-wrapper-5">
- 
-  Anonymous  
-  
-
-  <div className="check">
-    <input 
-      id="anonymousCheckbox" 
-      type="checkbox" 
-      checked={isAnonymous} 
-      onChange={handleCheckboxChange} 
-    />
-    <label htmlFor="anonymousCheckbox"></label>
+{postType === 'socialMedia' && (
+  <>
+  <div className="checkbox-wrapper-5">
+    Anonymous
+    <div className="check">
+      <input 
+        id="anonymousCheckbox" 
+        type="checkbox" 
+        checked={isAnonymous} 
+        onChange={handleCheckboxChange} 
+      />
+      <label htmlFor="anonymousCheckbox"></label>
+    </div>
   </div>
-</div>
+  <div className='error-message'>{anonWarn}</div>
+  </>
+)}
         {postType === 'sale' && (
           <>
             <div className="form-group">
@@ -275,10 +324,12 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
     placeholder=" "
     value={price}
     onChange={handlePriceChange}
+    onBlur={handleSetErrorPriceChange}
     min="0"
     step="1"
   />
   <span className="style-input__label">Price</span>
+  <div className='error-message'>{errorPrice}</div>
 </label>
              <CategorySelect data={categoryData} onCategoryChange={handleItemCategoryChange}/>
           </>
@@ -334,9 +385,16 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
 <button className='generic-btn' type="submit" onClick={handleSubmit} disabled={sending}>
       Publish!
     </button>
-{attemptedToPublish && description.trim().length === 0 && (
-    <p className="no-input-warning">No input</p>
-  )}
+    {attemptedToPublish && (
+        postType === 'socialMedia' && !description.trim() && (
+          <p className="no-input-warning">No input</p>
+        )
+      )}
+      {attemptedToPublish && (
+        postType === 'sale' && (!description.trim() || (price === '' || price === undefined) || itemCategory === undefined) && (
+          <p className="no-input-warning">No Valid Sale Post</p>
+        )
+      )}
 </div>
 
   {/* ... */}

@@ -383,3 +383,12 @@
     line-height: 0;
   }
 
+  .error-message {
+    color: red;
+    text-align: center; /* Center the text */
+    font-size: 0.8em; /* Reduce the font size */
+    margin-top: 5px; /* Reduce the top margin */
+    margin-bottom: 5px; /* Adjust bottom margin as needed */
+  }
+
+  
