@@ -6,7 +6,6 @@ import { RootState } from '../store/index';
 import { getUserCredentials } from '../logic/cookie';
 import { AddFollow, CheckFollow, FetchProfile, OpenChat, RemoveFollow, SendMessage, UpdateProfile, UploadFile, imageLink } from '../logic/backend';
 import { useParams } from 'react-router-dom';
-import EditProfile from './editprofile/EditProfile';
 import ProfileFeed from './ProfileFeed';
 
 export interface ProfileProps {
@@ -36,7 +35,7 @@ const Profile: React.FC = () => {
     const [update, setUpdate] = useState<boolean>(false);
     const [invalid, setInvalid] = useState<boolean>(false);
     const { userID : paramName } = useParams();
-      
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -99,21 +98,37 @@ const Profile: React.FC = () => {
     }); // Temporary state for editing
     // Function to toggle editing mode
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+      // Check if files are selected and if the first file exists
       if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        // When the file has been read...
+        reader.onloadend = () => {
+          // Check if the result is a string (base64 URL)
+          if (typeof reader.result === 'string') {
+            // Set the image preview state to this base64 URL
+            setImagePreview(reader.result);
+          }
+        };
+    
+        // Read the file as a data URL (base64 string)
+        reader.readAsDataURL(file);
     
         try {
-          // Upload the file and get the image URL
+          // Upload the file and get the image URL from your backend
+          // This is where you call your UploadFile function
           const imageUrl = await UploadFile(file);
-    
-          // Update the state with the image URL
+          
+          // Update the state with the new image URL
           setEditData(prevState => ({ ...prevState, profileUrl: imageUrl }));
         } catch (error) {
-          // Handle errors, e.g., show an error message
+          // If the file upload fails, log the error and potentially handle it
           console.error("Error uploading file:", error);
         }
       }
     };
+    
     const toggleEdit = () => {
       if(data?.nickname && data?.description && data?.profileImage)
       setEditData({nickname :data?.nickname, description: data?.description, profileUrl: data?.profileImage}); // Reset edit data to original profile data
@@ -175,10 +190,11 @@ const Profile: React.FC = () => {
   return (
     <>
       {isEditing ? (
-        <form className="edit-form" onSubmit={handleSubmit}>
-            <div className="edit-profile-header">
+     
+          <form className="profile-edit-form" onSubmit={handleSubmit}>
+            <div className="profile-edit-profile-header">
                 <h2>Edit Profile</h2>
-                <button className="close-button1" onClick={toggleEdit}>×</button>
+                <button className="generic-close-button" onClick={toggleEdit}>×</button>
             </div>
             <input
                 type="text"
@@ -196,47 +212,59 @@ const Profile: React.FC = () => {
                 placeholder="New Bio"
                 maxLength={200}
             />
-            <label htmlFor="profilePhoto" className="upload-button">
-              Upload new Profile Photo
-            </label>
-              <input
-                type="file"
-                name="profilePhoto"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-            <button type="submit" onClick={() => setIsEditing(true)}>Save Changes</button>
+          
+
+            <div className="image-upload-container">
+            { imagePreview && <img src={imagePreview} alt="Profile preview" className="profile-preview-image" />}
+            </div>
+            <div className="form-buttons">
+    <label htmlFor="fileInput" className="fileInputLabel">Upload Image</label>
+    <input
+      type="file"
+      id="fileInput"
+      name="profilePhoto"
+      accept="image/*"
+      onChange={handleFileChange}
+      style={{ display: 'none' }}
+    />
+    <button type="submit" className="generic-btn1">Save!</button>
+  </div>
+
+             
+           
         </form>
+      
+        
       ) : (
-    <div className="profile-card">
-      <div className="profile-header">
+    <div className="profile-profile-card">
+      <div className="profile-profile-header">
       </div>
-      <div className="profile-info">
-      <img className="profile-avatar" src={data?.profileImage == "" || data?.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${data?.profileImage}`} alt={data?.nickname} />
-        <h1 className="profile-name">{data?.nickname}</h1>
+      <div className="profile-profile-info">
+      <img className="profile-profile-avatar" src={data?.profileImage == "" || data?.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${data?.profileImage}`} alt={data?.nickname} />
+        <h1 className="profile-profile-name">{data?.nickname}</h1>
         {data?.description && <div 
-          className="profile-bio" 
+          className="profile-profile-bio" 
           dangerouslySetInnerHTML={{  __html: data?.description.replace(/\n/g, '<br />') }}
         />}
-        <div className="profile-stats">
-          <span className="profile-stat"><strong>{data?.postNumber}</strong> Posts</span>
-          <span className="profile-stat"><strong>{data?.followingsNumber}</strong> Following</span>
-          <span className="profile-stat"><strong>{followersCount}</strong> Followers</span>
-          <span className="profile-stat"><strong>{data?.likeNumber}</strong> likeNumber</span>
+        <div className="profile-profile-stats">
+          <span className="profile-profile-stat"><strong>{data?.postNumber}</strong> Posts</span>
+          <span className="profile-profile-stat"><strong>{data?.followingsNumber}</strong> Following</span>
+          <span className="profile-profile-stat"><strong>{followersCount}</strong> Followers</span>
+          <span className="profile-profile-stat"><strong>{data?.likeNumber}</strong> likeNumber</span>
         </div>
         {
             !(data?.userID && vieweuserID == data?.userID) ? (
-            <div className="profile-button-container">
+            <div className="profile-profile-button-container">
               {!isFollowed ?(
-                <button onClick={handleFollowClick} className="profile-follow-button">Follow</button>
+                <button onClick={handleFollowClick} className="profile-profile-follow-button">Follow</button>
               ) :(
-                <button onClick={handleUnfollowClick} className="profile-unfollow-button">Unfollow</button>
+                <button onClick={handleUnfollowClick} className="profile-profile-unfollow-button">Unfollow</button>
               )
               }
-              <button onClick={handleMessageClick} className="profile-message-button">Message</button>
+              <button onClick={handleMessageClick} className="profile-profile-message-button">Message</button>
             </div>
             ) : (
-              <button className="profile-edit-button" onClick={toggleEdit}>Edit Profile</button>
+              <button className="generic-btn" onClick={toggleEdit}>Edit Profile</button>
             )
           }
       </div>

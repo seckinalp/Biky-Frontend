@@ -1,0 +1,46 @@
+
+.profile-button-container{
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    gap: 10px;
+    margin-bottom: 20px; /* Space below the buttons */
+}
+
+
+.profile-edit-button {
+    font-size: 0.8rem; /* Larger font size */
+    height: 45px;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    border: 0.3rem solid #000;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 0 0 #000;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    /* Ensure the text doesn't get selected on click */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Toggle 'active' styling */
+  .profile-edit-button.active {
+    color: #fff !important; /* White text for active button */
+    background-color: darkturquoise !important; /* Purple background for active button */
+    border-color: #000000 !important; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+  }
+  
+  /* Hover effect for buttons */
+  .profile-edit-button:not(.active):hover {
+    background-color: #8a6188; /* Light grey background on hover for inactive buttons */
+  }
+  
+  /* Styles to visually 'press' the button on click */
+  .profile-edit-button:active {
+    box-shadow: 0 1px 0 0 #000; /* Adjust box-shadow to look like the button is pressed */
+    transform: translateY(2px); /* Move the button down slightly to simulate pressing */
+  }

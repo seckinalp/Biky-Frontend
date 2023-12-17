@@ -5,7 +5,7 @@ import { SalePostClass } from '../postcomponent/SalePost';
 import { GetSaleUser, GetSocialUser } from '../logic/backend';
 import SocialMediaPosts, { SocialMediaPostsProps } from '../postcomponent/SocialMediaPosts';
 import SalePosts from '../postcomponent/SalePosts';
-
+import "./ProfileFeed.css"
 interface ProfileFeedProps {
   userID: string;
 }
@@ -45,14 +45,22 @@ const ProfileFeed: React.FC<ProfileFeedProps> = ({ userID }) => {
 
   return (
     <>
-    <div className="profile-button-container">
-      <button className="profile-edit-button" onClick={toggleSocial}>
-        Social Media Posts
-      </button>
-      <button className="profile-edit-button" onClick={toggleSale}>
-        Sale Posts
-      </button>
-    </div>
+  <div className="profile-button-container">
+    <button 
+      type="button" 
+      onClick={toggleSocial} 
+      className={`profile-edit-button ${isSocial ? 'active' : ''}`}
+    >
+      Social Media Posts
+    </button>
+    <button 
+      type="button" 
+      onClick={toggleSale} 
+      className={`profile-edit-button ${!isSocial ?  'active' : ''}`}
+    >
+      Sale Posts
+    </button>
+  </div>
     {isSocial ? <SocialMediaPosts initialPosts={data as SocialMediaPostClass[]} />: <SalePosts initialPosts={ data as SalePostClass[]}/>}
     </>
   );
