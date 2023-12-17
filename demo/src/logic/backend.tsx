@@ -474,7 +474,6 @@ export async function AddSocial(content: string, isAnonymous : boolean, images :
 
 export async function AddSale(content: string, images : String[], postType: Number, Category: Number, price: Number) : Promise<void> {
   const { token, userID } = getUserCredentials();
-  console.log(images);
   const response = await fetch(`${siteLink}SocialMediaPost/Add`, {
     method: 'POST',
     headers: {
@@ -493,4 +492,23 @@ export async function AddSale(content: string, images : String[], postType: Numb
       if (!response.ok) {
           throw new Error('Failed to add like');
         }
+}
+
+export async function DeletePost(postID: string): Promise<void> {
+  const { token, userID } = getUserCredentials();
+  const response = await fetch(`${siteLink}SocialMediaPost/Remove?postID=${postID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  const response2 = await fetch(`${siteLink}SalePost/Remove?postID=${postID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  
 }

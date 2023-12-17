@@ -15,6 +15,7 @@ import SalePosts from './postcomponent/SalePosts';
 import Profile from './profilecomponent/Profile';
 import Feed from './postcomponent/Feed';
 import './App.css'
+import ChatMessages from './ChatComponent/ChatMessages';
 interface Category {
   categoryID: number;
   name: string;
@@ -117,7 +118,7 @@ return (
         <Route path='/comments' element={<Comments postID={"bbd0a675-9c1e-46ec-b774-f2f952694dc2"}/>}/>
         <Route path='/profile/:userID' element={<Profile />}/>
         <Route path='/feed' element={<Feed />}/>
-        
+        <Route path='/chat-messages' element={<ChatMessages/>}/>
     
      
         </Routes>

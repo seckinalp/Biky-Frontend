@@ -1,0 +1,18 @@
+.chat-message-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #000000; /* Line between messages */
+    transition: background-color 0.3s; /* Smooth transition for the background color */
+    background-color: white;
+    
+  }
+  
+  .chat-message-row:hover {
+    background-color: darkturquoise; /* Color on hover */
+    cursor: pointer; /* Changes the cursor to indicate it's clickable */
+  }
+ 
+  .chat-message-row.selected {
+    background-color: rgb(2, 216, 219); /* Blue background for selected row */
+}

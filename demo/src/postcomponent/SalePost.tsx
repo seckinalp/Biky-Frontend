@@ -44,7 +44,7 @@ import Comments from '../comment/Comments';
   }
   
   const SalePost: React.FC<SalePostProps> = (props) => {
-    
+    console.log(props);
   
     const [showComments, setShowComments] = useState(false);
     const getSpecialButton = () => {

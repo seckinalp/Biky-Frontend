@@ -2,13 +2,15 @@
 import React from 'react';
 import './Post.css';
 import { useState } from 'react';
-import { imageLink } from '../logic/backend';
+import { DeletePost, imageLink } from '../logic/backend';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
 import { AddComment, FetchComment } from '../logic/backend';
 import Report from '../comment/Report'; // Import Report component here
 import { getUserCredentials } from '../logic/cookie';
 
+
+export const frontendlink = "http://localhost:5173/";
 export interface PostProps {
   item: {
       postID: string,
@@ -26,7 +28,6 @@ export interface PostProps {
 }
 //assuming we pass the post as props.item
 const Post: React.FC<PostProps> = (props) => {
-  
   const reportItem = {
     authorID: props.item.authorID,
     reportedID: props.item.postID, // it should be global userId
@@ -34,10 +35,9 @@ const Post: React.FC<PostProps> = (props) => {
     reportCategory: "Post", // Example category
     reportData: "props.item.content" // or any relevant data
   };
-  const userID = useSelector((state : RootState) => state.auth.userID);
-
-  const [showDeletePost,setshowDeletePost] = useState(false);//props.item.author.userID == userID
-
+  const userID = getUserCredentials().userID;
+  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == userID);//props.item.author.userID == userID
+  const [visible, setVisible] = useState(true);
 
   const user = {}; // Placeholder for user object from backend
 
@@ -67,19 +67,23 @@ const Post: React.FC<PostProps> = (props) => {
   };
 
  
-
+  const handleDelete = () => {
+    setVisible(false);
+    DeletePost(props.item.postID);
+  }
   return (
-    
+    visible && 
     <div className="post-container">
       <div className="post-header">
         <img className="profile-pic" src={props.item.isAnonymous || props.item.author.profileImage == null || props.item.author.profileImage == "" ? "../../public/ppdefault.jpg" : `${imageLink}${props.item.author.profileImage}`
       } alt="Profile"/>
         <div className="username-time">
-          <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.nickname}</div>
+        <div className="username">
+  {props.item.isAnonymous ? "Anonymous" : <a href={`${frontendlink}profile/${props.item.author.userID}`}>{props.item.author.nickname}</a>}</div>
           <div className="time-posted">{props.item.postTime}</div>
         </div>
         {showDeletePost ?(
-          <button  className="delete-postc">🗑️</button>
+          <button  className="delete-postc"onClick={handleDelete}>🗑️</button>
 
         ) : (<button  className="delete-postc2"onClick={toggleReport}>🚩</button>)}
       </div>
@@ -112,6 +116,7 @@ const Post: React.FC<PostProps> = (props) => {
        
       </div>
       </div>
+      
   );
 };
 

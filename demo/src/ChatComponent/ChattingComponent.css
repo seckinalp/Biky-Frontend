@@ -1,0 +1,40 @@
+/* ChattingComponent.css */
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    overflow-y: auto; 
+    background-color: #fff;
+   
+    
+        flex-grow: 1; /* This will make the chat-box div take up all available space within its parent */
+   
+  }
+  
+  .chat-message {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    display: inline-block;
+    max-width: 70%;
+  }
+  
+  .chat-message.right {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+  }
+  
+  .chat-message.left {
+    align-self: flex-start;
+    background-color: #e5e5ea;
+  }
+  
+  
+  
+  .message-timestamp {
+    font-size: 0.8em;
+    color: #666;
+    text-align: right;
+  }
+  

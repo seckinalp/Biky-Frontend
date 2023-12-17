@@ -2,6 +2,7 @@ import './Comment.css';
 import { imageLink } from '../logic/backend';
 import React, { useState } from 'react';
 import Report from './Report'; // Import Report component here
+import { frontendlink } from '../postcomponent/Post';
 
 
 
@@ -50,7 +51,7 @@ const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
     <div className="comment-item">
       <img className="comment-avatar" src={item.author.profileImage == "" || item.author.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${item.author.profileImage}`} alt={author.nickname} />
       <div className="comment-content">
-        <span className="comment-author">{author.nickname}</span>
+         <a href={`${frontendlink}profile/${item.author.userID}`}>{item.author.nickname}</a>
         <div className="time-posted">{postTime}</div>
         <span className="comment-text">{content}</span>
         {showDelete ? (

@@ -13,8 +13,8 @@ export interface SocialMediaPostClass {
     postID: string;
     author: {
       userID: string;
-      userName: string;
-      userProfileLink: string;
+      nickname: string;
+      profileImage: string;
     };
     images: string[];
     contentText: string;
@@ -33,8 +33,8 @@ function convertToPostProps(socialMediaPost: SocialMediaPostProps): PostProps {
       images: socialMediaPost.item.images,
       author: {
         userID: socialMediaPost.item.author.userID,
-        nickname: socialMediaPost.item.author.userName,
-        profileImage: socialMediaPost.item.author.userProfileLink, // No direct equivalent, set a default or handle accordingly
+        nickname: socialMediaPost.item.author.nickname,
+        profileImage: socialMediaPost.item.author.profileImage, // No direct equivalent, set a default or handle accordingly
       },
       postTime: socialMediaPost.item.postTime, // Convert Date to string
       isAnonymous: socialMediaPost.item.isAnonymous
