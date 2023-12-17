@@ -306,11 +306,11 @@ export async function GetSaleFollowings() : Promise<SalePostClass[]> {
 }
 
 export async function GetSaleFiltered(
-  min: number | null,
-  max: number | null,
-  type: number | null,
-  categoryid: number | null,
-  contains: string | null
+  min: number | undefined,
+  max: number | undefined,
+  type: number | undefined,
+  categoryid: number | undefined,
+  contains: string | undefined
 ): Promise<SalePostClass[]> {
   const { token, userID } = getUserCredentials();
 
@@ -318,27 +318,27 @@ export async function GetSaleFiltered(
   const payload: Record<string, number | string> = {};
 
   // Check and add min if it's a valid number
-  if (min !== null && !isNaN(min)) {
+  if (min && min !== null && !isNaN(min)) {
     payload.min = min;
   }
 
   // Check and add max if it's a valid number
-  if (max !== null && !isNaN(max)) {
+  if (max && max !== null && !isNaN(max)) {
     payload.max = max;
   }
 
   // Check and add type if it's a valid number
-  if (type !== null && !isNaN(type)) {
+  if (type && type !== null && !isNaN(type)) {
     payload.type = type;
   }
 
   // Check and add categoryid if it's a valid number
-  if (categoryid !== null && !isNaN(categoryid)) {
+  if (categoryid && categoryid !== null && !isNaN(categoryid)) {
     payload.categoryid = categoryid;
   }
 
   // Check and add contains if it's not null or an empty string
-  if (contains !== null && contains.trim() !== "") {
+  if (contains && contains !== null && contains.trim() !== "") {
     payload.contains = contains;
   }
 
@@ -359,7 +359,7 @@ export async function GetSaleFiltered(
   return resData;
 }
 
-export async function GetSocialAll() : Promise<SalePostClass[]> {
+export async function GetSocialAll() : Promise<SocialMediaPostClass[]> {
   const { token, userID } = getUserCredentials();
   const response = await fetch(`${siteLink}SocialMediaPost/GetAllFeed`, {
     method: 'GET',
@@ -377,7 +377,7 @@ export async function GetSocialAll() : Promise<SalePostClass[]> {
     return resData;
 }
 
-export async function GetSocialFollowings() : Promise<SalePostClass[]> {
+export async function GetSocialFollowings() : Promise<SocialMediaPostClass[]> {
   const { token, userID } = getUserCredentials();
   const response = await fetch(`${siteLink}SocialMediaPost/GetFollowingsFeed`, {
     method: 'GET',
@@ -395,7 +395,7 @@ export async function GetSocialFollowings() : Promise<SalePostClass[]> {
     return resData;
 }
 
-export async function GetSocialFiltered(contains : string) : Promise<SalePostClass[]> {
+export async function GetSocialFiltered(contains : string | undefined) : Promise<SocialMediaPostClass[]> {
   const { token, userID } = getUserCredentials();
   const response = await fetch(`${siteLink}SocialMediaPost/GetFeedByContent?contains=${contains}`, {
     method: 'GET',
