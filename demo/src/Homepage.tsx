@@ -37,7 +37,7 @@ const Homepage: React.FC = () => {
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const [showSearchComponent, setShowSearchComponent] = useState(false);
   const [showChatComponent, setShowChatComponent] = useState(false);
-
+  const [filter, setFilter] = useState({});
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
     // Optionally close other components
@@ -51,7 +51,11 @@ const Homepage: React.FC = () => {
     
     
   };
-
+  const handleFilterChange = (newFilterData: React.SetStateAction<{}>) => {
+    console.log('Filter data:', newFilterData);
+    setFilter(newFilterData);
+    // Add logic to handle the filter change
+  };
   const handleSettingsClick = () => {
     setShowSettings(prev => !prev); // Toggle the CreatePost visibility
     // Optionally close other components
@@ -128,7 +132,10 @@ const Homepage: React.FC = () => {
          {showChatComponent && <Chat onClose={handleChatClick} />}
             </div>
             <div className="timeline__right">
-       
+       {showCategoryFilter &&  <CategoryFilter
+         onClose={() => setShowCategoryFilter(false)}
+          onFilterChange={handleFilterChange}
+        /> }
           {showSearchComponent && <SearchComponent initialItems={items} onClose={() => setShowSearchComponent(false)} />}
 </div>
             </div>
