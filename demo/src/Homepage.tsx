@@ -116,6 +116,7 @@ const Homepage: React.FC = () => {
 
           <div className="homepage__timeline">
             <div className="timeline__left">
+            {showChatComponent && <Chat onClose={handleChatClick} />}
             {showSettings && <Settings onClose={() => setShowSettings(false)} />}
             {showNotifications && (
                 <Notifications 
@@ -127,9 +128,9 @@ const Homepage: React.FC = () => {
               )}
             </div>
             <div className="timeline__middle">
-         
+        
          {showCreatePost &&<CreatePost onClose={handleCreatePostClick} />}
-         {showChatComponent && <Chat onClose={handleChatClick} />}
+         
             </div>
             <div className="timeline__right">
        {showCategoryFilter &&  <CategoryFilter
