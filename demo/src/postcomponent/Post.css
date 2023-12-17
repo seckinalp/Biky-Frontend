@@ -272,3 +272,14 @@
   transform: scale(1.1);
   background-color: grey;
 }
+
+.delete-postc2{
+  padding: 3px; /* Adjust padding as needed */
+  background-color: blue;
+  margin-right: 5px;
+}
+
+.delete-postc2:hover{
+  transform: scale(1.1);
+  background-color: grey;
+}

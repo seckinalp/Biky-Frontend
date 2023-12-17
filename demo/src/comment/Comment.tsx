@@ -42,7 +42,7 @@ const Comment: React.FC<CommentProps> = ({ item , showDelete ,onDelete}) => {
     reportedID: item.postID, // it should be global userId
     reportType: 0, // You'll need to define this
     reportCategory: "Comment", // Example category
-    reportData: item.content // or any relevant data
+    reportData: "item.content" // or any relevant data
   };
 
   return (

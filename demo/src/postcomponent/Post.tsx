@@ -6,6 +6,8 @@ import { imageLink } from '../logic/backend';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
 import { AddComment, FetchComment } from '../logic/backend';
+import Report from '../comment/Report'; // Import Report component here
+import { getUserCredentials } from '../logic/cookie';
 
 export interface PostProps {
   item: {
@@ -24,9 +26,17 @@ export interface PostProps {
 }
 //assuming we pass the post as props.item
 const Post: React.FC<PostProps> = (props) => {
+  
+  const reportItem = {
+    authorID: props.item.authorID,
+    reportedID: props.item.postID, // it should be global userId
+    reportType: 0, // You'll need to define this
+    reportCategory: "Post", // Example category
+    reportData: "props.item.content" // or any relevant data
+  };
   const userID = useSelector((state : RootState) => state.auth.userID);
 
-  const [showDeletePost,setshowDeletePost] = useState(props.item.author.userID == userID);
+  const [showDeletePost,setshowDeletePost] = useState(false);//props.item.author.userID == userID
 
 
   const user = {}; // Placeholder for user object from backend
@@ -45,7 +55,7 @@ const Post: React.FC<PostProps> = (props) => {
   : [];
 
   const [showOptions, setShowOptions] = useState(false);
-  const toggleOptions = () => {
+  const toggleReport = () => {
     setShowOptions(prevShow => !prevShow);
   };
   const goPrev = () => {
@@ -67,16 +77,19 @@ const Post: React.FC<PostProps> = (props) => {
           <div className="username">{props.item.isAnonymous ? "Anonymous" : props.item.author.nickname}</div>
           <div className="time-posted">{props.item.postTime}</div>
         </div>
-        {showDeletePost && <button  className="delete-postc">🗑️</button>}
-        <div className="more-options" onClick={toggleOptions}>
-       
-          <div className="more-options-icon">...</div>
+        {showDeletePost ?(
+          <button  className="delete-postc">🗑️</button>
+
+        ) : (<button  className="delete-postc2"onClick={toggleReport}>🚩</button>)}
           {showOptions && (
-            <div className="options-panel">
-            <button className="option-button" onClick={() => handleReportUser(user)}>Report User</button>
-          </div>
-          )}
-        </div>
+        <div className="comment-report-container">
+          <Report
+            item={reportItem}
+            isVisable={showOptions}
+            onVisibilityChange={toggleReport}
+          />
+    </div>
+      )}
       </div>
       <div className="post-content">
         <p className="post-text">{props.item.contentText}</p>
