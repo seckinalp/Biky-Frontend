@@ -165,11 +165,12 @@ const handleSetErrorPriceChange = () => {
   }, []); 
 
   useEffect(() => {
-    const sendPost = async () => {
+    const senddPost = async () => {
       try {
+        console.log(submit);
         setSending(true);
         if(submit.postType === 'sale') {
-          if(submit.itemCategory && submit.price != '') await AddSale(submit.description, submit.images, submit.type, submit.itemCategory, submit.price);
+          if(submit.itemCategory !== undefined && submit.price != '') await AddSale(submit.description, submit.images, submit.type, submit.itemCategory, submit.price);
         } else if(submit.postType === 'socialMedia') {
           await AddSocial(submit.description, submit.isAnonymous, submit.images);
         }
@@ -180,7 +181,7 @@ const handleSetErrorPriceChange = () => {
       }
     };
     if(sendPost) {
-      sendPost();
+      senddPost();
     }
     setSending(false);
   }, [sendPost]); 
@@ -304,7 +305,6 @@ const handleSetErrorPriceChange = () => {
             <div className="form-group">
             <select
         className="category-select"
-        value={category === undefined ? '' : category.toString()}
         onChange={handleCategoryChange}
       >
         <option value="">Select a Type</option>

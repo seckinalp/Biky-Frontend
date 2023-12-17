@@ -30,6 +30,7 @@ export const categoryMap: { [key: string]: number } = {
   privateLesson: 2,
   trade: 4,
   borrow: 0,
+  all: -1
 };
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({ onClose, onFilterChange }) => {
@@ -171,17 +172,22 @@ const handleFilterChange = () => {
           <div className="category-select-group">
       <label>Post Type:</label>
       <select
-        className="category-select"
-        value={category === undefined ? '' : category.toString()}
-        onChange={handleCategoryChange}
-      >
-        <option value="">Select a Type</option>
-        <option value="lostAndFound">Lost and Found</option>
-        <option value="secondHand">Second Hand</option>
-        <option value="privateLesson">Private Lesson</option>
-        <option value="trade">Trade</option>
-        <option value="borrow">Borrow</option>
-      </select>
+  className="category-select"
+  onChange={handleCategoryChange}
+>
+  {category === undefined && (
+    <option value="" disabled hidden>
+      Select a Type
+    </option>
+  )}
+  <option value="all">All</option>
+  <option value="lostAndFound">Lost and Found</option>
+  <option value="secondHand">Second Hand</option>
+  <option value="privateLesson">Private Lesson</option>
+  <option value="trade">Trade</option>
+  <option value="borrow">Borrow</option>
+</select>
+
     </div>
     <CategorySelect data={data} onCategoryChange={handleItemCategoryChange} />
         </div>

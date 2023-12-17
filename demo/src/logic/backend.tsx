@@ -328,7 +328,7 @@ export async function GetSaleFiltered(
   }
 
   // Check and add type if it's a valid number
-  if (type && type !== null && !isNaN(type)) {
+  if (type && type !== null && !isNaN(type) && type >= 0) {
     payload.type = type;
   }
 
@@ -473,8 +473,13 @@ export async function AddSocial(content: string, isAnonymous : boolean, images :
 }
 
 export async function AddSale(content: string, images : String[], postType: Number, Category: Number, price: Number) : Promise<void> {
+ console.log(content)
+ console.log(images)
+ console.log(postType)
+ console.log(Category)
+ console.log(price)
   const { token, userID } = getUserCredentials();
-  const response = await fetch(`${siteLink}SocialMediaPost/Add`, {
+  const response = await fetch(`${siteLink}SalePost/Add`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

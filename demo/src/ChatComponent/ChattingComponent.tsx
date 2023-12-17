@@ -1,6 +1,6 @@
 // ChattingComponent.tsx
 import React from 'react';
-import './ChattingComponent.css'; // Make sure to create this CSS file
+import './ChattingComponent.css';
 export interface IMessage {
   messageID: number;
   senderID: string;
