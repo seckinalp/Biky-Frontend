@@ -132,7 +132,6 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
       sendPost();
     }
     setSending(false);
-    setSendPost(false);
   }, [sendPost]); 
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

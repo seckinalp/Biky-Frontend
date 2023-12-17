@@ -73,16 +73,16 @@
     margin-bottom: 10px; /* Add some space between the buttons */
   }
   
-  .button1{
+  .category-button1{
     margin-right: 7px;
   }
-  .button2{
+  .category-button2{
     margin-right: 7px;
   }
   .category-filter-button:hover {
     background-color: #0056b3;
   }
-  .button-group {
+  .category-button-group {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -92,61 +92,61 @@
 
   
   /* Add some space at the top of the second button group if needed */
-  .button-group + .button-group {
+  .category-button-group + .button-group {
     margin-top: 10px;
     
   }
   
   /* You might want to add styles for hover states as well */
-  .filter-button:hover {
+  .category-filter-button:hover {
     background-color: #0056b3; /* Hover background */
     border-color: #0056b3; /* Hover border color */
   }
-  .post-type-button.active {
+  .category-post-type-button.active {
     background-color: #007bff; /* Active button color */
     color: white;
   }
-  .sale-options {
+  .category-sale-options {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     font-weight: bold;
   }
   
-  .sale-options input[type="text"] {
+  .category-sale-options input[type="text"] {
     margin-right: 10px; /* Adds gap between the price input fields */
   }
   
-  .sale-options input[type="text"]:last-child {
+  .category-sale-options input[type="text"]:last-child {
     margin-right: 0; /* Removes margin from the last input field */
   }
   
-  .sale-options select {
+  .category-sale-options select {
     margin-left: 10px; /* Adds gap between the last input field and the select box */
   }
-  .price-input-group {
+  .category-price-input-group {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
     
     
   }
-  .price-input {
+  .category-price-input {
     max-width: 110px;
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  .price-input-group input[type="text"] {
+  .category-price-input-group input[type="text"] {
     flex: 1; /* Input fields take up equal space */
     margin-right: 5px; /* Space between input fields */
    
   }
   
-  .price-input-group input[type="text"]:last-child {
+  .category-price-input-group input[type="text"]:last-child {
     margin-right: 0; /* No space after the last input field */
   }
 
-  .social-media-input{
+  .category-social-media-input{
   width: 92%;
   padding: 10px;
   margin-bottom: 10px; /* Add some space below the input field */
@@ -154,7 +154,7 @@
   border-radius: 4px;
 }
 
-.sale-input {
+.category-sale-input {
   width: 92%;
   padding: 10px;
   margin-bottom: 10px; /* Add some space below the input field */
