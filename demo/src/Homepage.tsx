@@ -59,7 +59,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     // Optionally close other components
 
     setShowNotifications(false);
-    
+    setShowChatComponent(false);
   };
   const handleSearchClick = () => {
     setShowSearchComponent(prev => !prev); // Toggle the SearchComponent visibility
@@ -80,6 +80,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   const handleNotificationsClick = () => {
     setShowNotifications(prev => !prev);
     setShowSettings(false);
+    setShowChatComponent(false);
   };
   const handleProfileClick = () => {
     navigate(`../../../profile/${getUserCredentials().userID}`);

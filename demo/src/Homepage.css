@@ -6,18 +6,27 @@
 
 .homepage__nav {
     margin-bottom: 10px;
-       flex: 1;
+    position: fixed; /* Fixed position to keep it at the top */
+  top: 0; /* Align to the top edge */
+  left: 0; /* Align to the left edge */
+  width: 100%; /* Span the full width */
+  z-index: 10; /* High z-index to stay on top */
+
   
     
 }
 
 body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .homepage__timeline {
-    margin-top: 10px;
-    flex:9;
+    padding-top: 100px; /* Height of the navbar + desired margin */
+    display: flex;
+    flex-direction: row;
+    flex: 9; /* Use flex to allocate space for the main content */
+    margin-top: 0;
     
 }
 .background {
@@ -45,6 +54,10 @@ body {
    
 }
 .timeline__left {
+    position: sticky;
+    top: 300; /* Adjust this value based on the height of your navbar */
+    height: calc(100vh - 60px); /* Adjust the 60px to the height of your navbar */
+    overflow-y: auto;
     flex: 0.3;
 }
 
