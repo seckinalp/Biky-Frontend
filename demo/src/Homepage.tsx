@@ -4,7 +4,6 @@ import Navbar from "./navigation/Navbar";
 import Settings from "./settingsComponent/Settings";
 import Notifications from "./notificationComponent/Notifications";
 import CreatePost from "./createPostComponent/CreatePost";
-import CategoryFilter from "./categoryFilterCompononet/CategoryFilter";
 import SearchComponent from "./SearchComponent/SearchComponent";
 import Chat from "./ChatComponent/Chat";
 import { getUserCredentials } from "./logic/cookie";
@@ -29,13 +28,11 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   }, []);
   const [showSettings, setShowSettings] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
   const [showCreatePost, setShowCreatePost] = useState(false); // State for CreatePost visibility
-  const [showCategoryFilter, setShowCategoryFilter] = useState(false);
   const [showSearchComponent, setShowSearchComponent] = useState(false);
   const [showChatComponent, setShowChatComponent] = useState(false);
   const [showFeed, setShowFeedComponent] = useState(false);
-  const [filter, setFilter] = useState({});
+
   const handleChatClick = () => {
     setShowChatComponent(prev => !prev); // Toggle the CreatePost visibility
     
@@ -48,10 +45,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     
     
   };
-  const handleFilterChange = (newFilterData: React.SetStateAction<{}>) => {
-    setFilter(newFilterData);
-    // Add logic to handle the filter change
-  };
+
   const handleSettingsClick = () => {
     setShowSettings(prev => !prev); // Toggle the CreatePost visibility
     // Optionally close other components
@@ -68,12 +62,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     
   };
 
-  const handleCategoryFilterClick = () => {
-    setShowCategoryFilter(prev => !prev);
-    setShowProfile(false);
-     setShowCreatePost(false);
-     setShowSearchComponent(false);
-  };
   const handleNotificationsClick = () => {
     setShowNotifications(prev => !prev);
     setShowSettings(false);
@@ -81,19 +69,18 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   };
   const handleProfileClick = () => {
     navigate(`../../../profile/${getUserCredentials().userID}`);
-    setShowProfile(prev => !prev);
+
     // Optionally close the other components
     setShowSettings(false);
     setShowNotifications(false);
     setShowCreatePost(false);
-    setShowCategoryFilter(false);
+
   };
   const handleCreatePostClick = () => {
     navigate(`../../create`);
-    setShowProfile(false);
     setShowSettings(false);
     setShowNotifications(false);
-    setShowCategoryFilter(false);
+ 
     setShowSearchComponent(false);
   };
   const handleHomeClick = () => {
@@ -108,7 +95,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
           <div className="homepage__nav">
 
           <Navbar onSettingsClick={handleSettingsClick}
-      onNotificationsClick={handleNotificationsClick} onProfileClick= {handleProfileClick} onCreatePostClick={handleCreatePostClick} onCategoryFilterClick={handleCategoryFilterClick}
+      onNotificationsClick={handleNotificationsClick} onProfileClick= {handleProfileClick} onCreatePostClick={handleCreatePostClick} 
       onSearchClick={handleSearchClick} onChatClick={handleChatClick} onHomeClick={handleHomeClick}
         />
 
@@ -121,9 +108,7 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
             {showNotifications && (
                 <Notifications 
                   onClose={() => setShowNotifications(false)} 
-                  notifications={[  { id: 1, time: '9:01 am', userName: 'Ahmet', text: 'followed you.', isSeen: false },
-                  { id: 2, time: '9:03 am', userName: 'Ayşe', text: 'liked your post.', isSeen: true },
-                  { id: 3, time: '9:07 am', userName: 'Mehmet', text: 'commented: Great work!', isSeen: false },]}
+
                 />
               )}
             </div>
@@ -135,10 +120,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
          
             </div>
             <div className="timeline__right">
-       {showCategoryFilter &&  <CategoryFilter
-         onClose={() => setShowCategoryFilter(false)}
-          onFilterChange={handleFilterChange}
-        /> }
           {showSearchComponent && <SearchComponent onClose={() => setShowSearchComponent(false)} />}
 </div>
             </div>

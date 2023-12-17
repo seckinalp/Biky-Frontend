@@ -5,7 +5,6 @@ import bikyImage from '../assets/bikyimage.png'; // Adjust the import path if ne
 import '../ButtonStyle.css'; // This is the import statement for your CSS file
 import { LoginRequest , UserCredentials} from '../logic/backend';
 import { useDispatch } from 'react-redux';
-import { setTokenAndUserId } from '../store';
 import { getUserCredentials, setUserCredentials } from '../logic/cookie';
 
 

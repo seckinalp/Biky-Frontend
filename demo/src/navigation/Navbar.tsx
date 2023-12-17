@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+
 
 import "./Navbar.css";
 import { GetUserPhoto, imageLink } from "../logic/backend";
@@ -10,7 +10,6 @@ interface NavbarProps {
   onNotificationsClick :() => void;
   onProfileClick: () => void; 
   onCreatePostClick: () => void;
-  onCategoryFilterClick:() => void;
   onSearchClick :() =>void;
   onChatClick: () => void;
   onHomeClick: () => void;
