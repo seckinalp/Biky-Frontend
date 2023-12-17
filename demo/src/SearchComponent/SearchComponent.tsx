@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './SearchComponent.css'; // Make sure the path is correct
 import ShowRow from '../showRowComponent/ShowRow'; 
+import { SearchUser, siteLink } from '../logic/backend';
+import { userSendRequest } from '../comment/Comment';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchItem {
   id: number;
@@ -8,42 +11,46 @@ interface SearchItem {
   avatarUrl: string;
 }
 
-const initialItems: SearchItem[] = [
+const initialItems: userSendRequest[] = [
   // Add initial items here
-  { id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
-  { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },
+  /*{ id: 1, name: 'Marc Zuckerberg', avatarUrl: 'path/to/avatar1.png' },
+  { id: 2, name: 'Elon Musk', avatarUrl: 'path/to/avatar2.png' },*/
   // More items...
 ];
 
 interface SearchComponentProps {
   onClose: () => void;
-  initialItems: SearchItem[]; // Add this line to accept initialItems as a prop
+  initialItems: userSendRequest[]; // Add this line to accept initialItems as a prop
 }
 
 const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems }) => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredItems, setFilteredItems] = useState<SearchItem[]>(initialItems);
+  const [filteredItems, setFilteredItems] = useState<userSendRequest[]>(initialItems);
   const [isVisible, setIsVisible] = useState(true); // State to control visibility
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSearchQuery(query);
-  
+
     if (!query) {
       setFilteredItems(initialItems);
       return;
     }
-  
-    // Sadece isimlerin başlangıcında arama yap
-    const matchedItems = initialItems.filter((item) =>
-      item.name.toLowerCase().startsWith(query.toLowerCase())
-    );
-  
+
+    // Introduce a delay of 300 milliseconds (adjust as needed)
+    await delay(300);
+
+    const matchedItems = await SearchUser(query);
     setFilteredItems(matchedItems);
   };
 
-  const handleItemClick = (itemId: number) => {
+
+  const handleItemClick = (itemId: string) => {
     console.log('Item clicked:', itemId);
+    navigate(`../../../profile/${itemId}`);
     // Implement further logic as needed
   };
 
@@ -71,7 +78,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ onClose, initialItems
           <div className="search-results">
             {filteredItems.map((item) => (
               <ShowRow
-                key={item.id}
+                key={item.userID}
                 item={item}
                 onItemClick={handleItemClick}
               />

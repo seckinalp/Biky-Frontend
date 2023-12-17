@@ -1,5 +1,5 @@
 import { Category } from "../categoryFilterCompononet/CategoryFilter";
-import { CommentClass, CommentProps } from "../comment/Comment";
+import { CommentClass, CommentProps, userSendRequest } from "../comment/Comment";
 import { SalePostClass } from "../postcomponent/SalePost";
 import { SocialMediaPostClass, SocialMediaPostProps } from "../postcomponent/SocialMediaPost";
 import { ProfileClass } from "../profilecomponent/Profile";
@@ -511,4 +511,19 @@ export async function DeletePost(postID: string): Promise<void> {
     },
   });
   
+}
+
+export async function SearchUser(contains : String) : Promise<userSendRequest[]> {
+  const response = await fetch(`${siteLink}User/SearchUser?contains=${contains}`, {
+method: 'GET',
+headers: {
+  'Content-Type': 'application/json',
+  //'postID': `${postID}`,
+},
+});
+  const resData = await response.json();
+  if (!response.ok) {
+      throw new Error('Failed to fetch comments');
+    }
+    return resData;
 }

@@ -44,9 +44,10 @@ const Profile: React.FC = () => {
             console.log("Reloaded");
           const result = await FetchProfile(paramName);
           handleData(result);
-          if(data) setFollowersCount(data?.followersNumber);
+          if(result?.followersNumber) setFollowersCount(result.followersNumber);
+          console.log(data?.followersNumber + "dshfs")
           const f = await CheckFollow(paramName);
-          setisFollowed(!f);
+          setisFollowed(f);
         }
         } catch (error) {
           console.error('Error fetching profile:', error);
@@ -142,13 +143,10 @@ const Profile: React.FC = () => {
       try {
         setisFollowed(true);
     
-        // Assuming AddFollow returns a promise
         if(data) await AddFollow(data?.userID);
     
         setFollowersCount(prevCount => prevCount + 1); // Increment followers count
-        // You might want to make an API call here
       } catch (error) {
-        // Handle errors, e.g., show an error message
         console.error("Error following:", error);
       }
     };
@@ -158,15 +156,10 @@ const Profile: React.FC = () => {
       try {
         setisFollowed(false);
         
-        // Assuming there's an asynchronous operation (e.g., an API call), use await
-        // If it's not asynchronous, you might not need the await keyword
-        // Example: await SomeAsyncOperation();
         if(data) await RemoveFollow(data?.userID);
         
         setFollowersCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
-        // You might want to make an API call here
       } catch (error) {
-        // Handle errors, e.g., show an error message
         console.error("Error unfollowing:", error);
       }
     };

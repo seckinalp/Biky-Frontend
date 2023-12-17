@@ -1,22 +1,20 @@
 import React from 'react';
 import './ShowRow.css';
+import { userSendRequest } from '../comment/Comment';
+import { imageLink } from '../logic/backend';
 
 // Update the props interface if you also want to remove username from the data structure
 interface ShowRowProps {
-  item: {
-    id: number;
-    name: string;
-    avatarUrl: string;
-  };
-  onItemClick: (id: number) => void;
+  item: userSendRequest;
+  onItemClick: (id: string) => void;
 }
 
 const ShowRow: React.FC<ShowRowProps> = ({ item, onItemClick }) => {
   return (
-    <div className="show-row" onClick={() => onItemClick(item.id)}>
-      <img src={item.avatarUrl} alt={item.name} className="show-row-avatar" />
+    <div className="show-row" onClick={() => onItemClick(item.userID)}>
+      <img src={item?.profileImage == "" || item?.profileImage == null ? "../../public/ppdefault.jpg" : `${imageLink}${item?.profileImage}`} alt={item.nickname} className="show-row-avatar" />
       <div className="show-row-info">
-        <div className="show-row-name">{item.name}</div>
+        <div className="show-row-name">{item.nickname}</div>
       </div>
     </div>
   );

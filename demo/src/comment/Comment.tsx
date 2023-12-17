@@ -12,15 +12,17 @@ export interface CommentProps {
   onDelete: () => void;
 }
 
+export interface userSendRequest {
+  userID: string;
+  nickname: string;
+  profileImage: string;
+};
+
 export interface CommentClass {
   commentID: string;
     postID: string;
     authorID: string;
-    author: {
-      userID: string;
-      nickname: string;
-      profileImage: string;
-    };
+    author: userSendRequest;
     content: string;
     postTime: string //UTC time
 }
