@@ -20,7 +20,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
   useEffect(() => {
     const checkUserCredentials = () => {
       const userCredentials = getUserCredentials();
-      console.log("wtf")
       if (userCredentials.token === "") {
         navigate('/login');
       }
@@ -50,7 +49,6 @@ const Homepage: React.FC<HomepageProps> = ({ children }) => {
     
   };
   const handleFilterChange = (newFilterData: React.SetStateAction<{}>) => {
-    console.log('Filter data:', newFilterData);
     setFilter(newFilterData);
     // Add logic to handle the filter change
   };
