@@ -55,7 +55,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onClose}) => {
   const [description, setDescription] = useState<string>('');
   const [postType, setPostType] = useState<'socialMedia' | 'sale'>('socialMedia');
   const [isAnonymous, setIsAnonymous] = useState(false);
-  const [price, setPrice] = useState<number | ''>('');
+  const [price, setPrice] = useState<number | ''>(0);
   const [images, setImages] = useState<string[]>([]);
   const [imagesLink, setImagesLink] = useState<string[]>([]);
   const [imagePreviewIndex, setImagePreviewIndex] = useState<number>(0);
@@ -118,6 +118,7 @@ const handleSetErrorPriceChange = () => {
       }
     }
     setIsVisible(false);
+    console.log(images);
       // Proceed with submitting the form only if there's a description
       onSubmit({
         description,
@@ -175,7 +176,8 @@ const handleSetErrorPriceChange = () => {
         console.log(submit);
         setSending(true);
         if(submit.postType === 'sale') {
-          if(submit.itemCategory !== undefined && submit.price != '') await AddSale(submit.description, submit.images, submit.type, submit.itemCategory, submit.price);
+          if(submit.itemCategory !== undefined && submit.price !== '') {
+            await AddSale(submit.description, submit.images, submit.type, submit.itemCategory, submit.price);}
         } else if(submit.postType === 'socialMedia') {
           await AddSocial(submit.description, submit.isAnonymous, submit.images);
         }
@@ -225,7 +227,6 @@ const handleSetErrorPriceChange = () => {
         const newImagesToAdd = fileArray.slice(0, spaceForNewImages).map((file) => URL.createObjectURL(file));
         return [...prevImages, ...newImagesToAdd];
       });
-  
       event.target.value = ""; // Clear the file input
     }
   };
@@ -324,17 +325,19 @@ const handleSetErrorPriceChange = () => {
              
             </div>
             <label className="style-input">
-  <input
-    className="style-input__field"
-    type="number"
-    id="price"
-    placeholder=" "
-    value={price}
-    onChange={handlePriceChange}
-    onBlur={handleSetErrorPriceChange}
-    min="0"
-    step="1"
-  />
+            <input
+  className="style-input__field"
+  type="number"
+  id="price"
+  placeholder=" "
+  value={price}
+  onChange={handlePriceChange}
+  onBlur={handleSetErrorPriceChange}
+  min="0"
+  step="1"
+  defaultValue={0} // Set the initial value here
+/>
+
   <span className="style-input__label">Price</span>
   <div className='error-message'>{errorPrice}</div>
 </label>

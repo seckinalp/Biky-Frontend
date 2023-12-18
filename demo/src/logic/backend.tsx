@@ -508,13 +508,13 @@ export async function AddSale(content: string, images : String[], postType: Numb
       {contentText : content,
          images: images,
          postType: postType,
-         price: price,
+         price: "" + price,
         category: Category}
     )
     });
     
       if (!response.ok) {
-          throw new Error('Failed to add like');
+          throw new Error('Failed to add sale');
         }
 }
 
