@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import { GetUserPhoto, imageLink } from "../logic/backend";
 import { getUserCredentials } from "../logic/cookie";
-
+// Props interface for Navbar
 interface NavbarProps {
   onSettingsClick: () => void;
   onNotificationsClick :() => void;
@@ -46,9 +46,9 @@ const Navbar: React.FC<NavbarProps> = ({onHomeClick, onChatClick, onSearchClick 
   const handleSearchClick = () => {
     onSearchClick ();
   };
-
+  // State for storing user photo
   const [photo, setPhoto] = useState("");
-
+  // Effect to fetch user photo on component mount
   useEffect(() => {
     const fetchUserPhoto = async () => {
       try {

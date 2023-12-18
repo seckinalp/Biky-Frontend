@@ -6,7 +6,7 @@ import SalePost, { SalePostClass } from './SalePost';
 export interface SalePostsProps {
   initialPosts: SalePostClass[];
 }
-
+//convert salepost to salepostprops initial posts will be displayed
 const SalePosts: React.FC<SalePostsProps> = ({ initialPosts }) => {
   return (
     <div>

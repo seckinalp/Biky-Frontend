@@ -24,7 +24,7 @@ export interface SocialMediaPostClass {
     isAnonymous: boolean;
     likes: number;
 }
-
+// Function to convert SocialMediaPostProps to PostProps
 function convertToPostProps(socialMediaPost: SocialMediaPostProps, onDelete: () => void): PostProps {
   return {
     item: {

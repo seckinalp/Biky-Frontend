@@ -9,13 +9,14 @@ import { getUserCredentials, setUserCredentials } from '../logic/cookie';
 
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();// Creating a navigation function using React Router
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
-  });
-  const dispatch = useDispatch();
-  const [loginE, setLoginE] = useState("");
+  });// Initializing state for user credentials
+  const dispatch = useDispatch();// Initializing Redux dispatch function
+  const [loginE, setLoginE] = useState("");// Initializing state for login error message
+  // Function to handle input changes (updating email and password)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -23,22 +24,23 @@ const Login = () => {
       ...prevCredentials,
       [name]: value
     }));
-    setLoginE("");
+    setLoginE("");// Clearing any previous error message
   };
+  // Function to handle the login form submission
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   
     try {
-      const userAuth = await LoginRequest(credentials.email, credentials.password);
-      setUserCredentials(userAuth);
+      const userAuth = await LoginRequest(credentials.email, credentials.password);      // Attempt to perform the login request
+      setUserCredentials(userAuth);      // Set user credentials if login is successful
       if(getUserCredentials().token !== "") {
       navigate('/homepage');
       }
-      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")      // Display an error message if login fails
     } catch (error) {
       console.error('Login failed:', error);
-      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")
+      setLoginE("Failed to login! Invalid nickname or passsword. (or both!)")      // Display an error message if login fails
     }
   };
   

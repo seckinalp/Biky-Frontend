@@ -14,11 +14,11 @@ const Settings: React.FC<Props> = ({ onClose }) => {
   const [reportMessage, setReportMessage] = useState(''); // state to store the report message
   const navigate = useNavigate();
 
-
+  // Handler to show the report form
   const handleReportOpen = () => {
     setIsReportVisible(true); // Show the report form
   };
-  const handleReportSubmit = () => {
+  const handleReportSubmit = () => {  // Handler for submitting the report
     
     setReportMessage(''); // Clear the report message
     setIsReportVisible(false); // Hide the report form
@@ -32,9 +32,9 @@ const Settings: React.FC<Props> = ({ onClose }) => {
     deleteUserCredentials();
     navigate("/login")
   };
-
+  // Handler for closing the settings component
   const handleClose = () => {
-    onClose();
+    onClose();// Invoke the passed onClose function
     setIsVisible(false); // When the button is clicked, set the visibility to false
   };
 

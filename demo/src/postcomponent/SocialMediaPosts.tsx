@@ -6,6 +6,7 @@ export interface SocialMediaPostsProps {
   initialPosts: SocialMediaPostClass[];
 }
 
+//Map through the initialPosts array and render each SocialMediaPost
 const SocialMediaPosts: React.FC<SocialMediaPostsProps> = ({ initialPosts }) => {
   return (
     <div>

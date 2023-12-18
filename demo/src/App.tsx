@@ -9,7 +9,7 @@ import Profile from './profilecomponent/Profile';
 import Feed from './postcomponent/Feed';
 import './App.css'
 import CreatePost from './createPostComponent/CreatePost';
-
+  // Wrapping the application in a Redux Provider to make the store available to all components
 const App = () => {
   
 return (
