@@ -44,7 +44,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({ onClose }) => {
 
   // Handler for clicking on a search result item
   const handleItemClick = (itemId: string) => {
+    // Add a query parameter with a unique key
     navigate(`../../../profile/${itemId}`);
+    window.location.reload();
   };
   // Handler for close button click
   const handleCloseClick = () => {
